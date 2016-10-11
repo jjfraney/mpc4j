@@ -1,6 +1,7 @@
 package org.jjfflyboy.mpc4j;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.stream.Stream;
 
 /**
@@ -14,6 +15,9 @@ public class MpdSample {
         run(new Ping());
         run(new Update());
         run(new SetVol(30));
+        run(new MixRampDB(new BigDecimal("-17.1")));
+        run(new MixRampDelay(20));
+        run(new MixRampDelay());
         run(new Crossfade(3));
         run(new Status());
 
