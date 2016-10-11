@@ -22,9 +22,14 @@ public class MpdSample {
         run(new MixRampDelay(20));
         run(new MixRampDelay());
         run(new Repeat(ON));
+        run(new Repeat(OFF));
         run(new Random(OFF));
         run(new Single(ON));
+        run(new Single(OFF));
         run(new Crossfade(3));
+        run(new ReplayGainMode(ReplayGainMode.Mode.AUTO));
+        run(new ReplayGainStatus());
+        run(new ReplayGainMode(ReplayGainMode.Mode.OFF));
         run(new Status());
 
         Status.Response r = mpc.send(new Status());

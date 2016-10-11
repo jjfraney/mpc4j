@@ -85,30 +85,6 @@ public class Status implements Command<Status.Response> {
             return getIntegerValue("xfade");
         }
 
-        /**
-         * @param name
-         * @return an Optional for the value of the field referenced by 'name'
-         */
-        private Optional<String> findFieldValue(String name) {
-            final String search = name + ": ";
-            return Stream.of(getResponseLines())
-                    .filter((x) -> x.startsWith(search))
-                    .findFirst()
-                    .map(f -> f.substring(search.length()));
-        }
-        private Optional<Integer> getIntegerValue(String fieldName) {
-            return findFieldValue(fieldName).map((s) -> Integer.decode(s));
-        }
-        private Optional<Toggle> getToggleValue(String fieldName) {
-            return findFieldValue(fieldName).map(s -> Toggle.decode(s));
-        }
-        private Optional<BigDecimal> getBigDecimalValue(String fieldName) {
-            return findFieldValue(fieldName).map(s -> new BigDecimal(s));
-        }
-        private Optional<String> getStringValue(String fieldName) {
-            return findFieldValue(fieldName);
-        }
-
         Response(String[] responseLines) {
             super(responseLines);
         }
