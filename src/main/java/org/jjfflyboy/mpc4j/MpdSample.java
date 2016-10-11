@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.stream.Stream;
 
+import static org.jjfflyboy.mpc4j.Toggle.OFF;
+import static org.jjfflyboy.mpc4j.Toggle.ON;
+
 /**
  * @author jfraney
  */
@@ -18,6 +21,9 @@ public class MpdSample {
         run(new MixRampDB(new BigDecimal("-17.1")));
         run(new MixRampDelay(20));
         run(new MixRampDelay());
+        run(new Repeat(ON));
+        run(new Random(OFF));
+        run(new Single(ON));
         run(new Crossfade(3));
         run(new Status());
 

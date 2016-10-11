@@ -4,15 +4,22 @@ package org.jjfflyboy.mpc4j;
  * @author jfraney
  */
 public enum Toggle {
-    ON, OFF;
+    ON("1"), OFF("0");
 
-    public static Toggle decode(String value) {
-        if("0".equals(value)) {
+    final private String code;
+    Toggle(String code) {
+        this.code = code;
+    }
+    public static Toggle decode(String code) {
+        if(OFF.code.equals(code)) {
             return OFF;
-        } else if("1".equals(value)) {
+        } else if(ON.code.equals(code)) {
             return ON;
         } else {
-            throw new RuntimeException("Unknown value: " + value);
+            throw new RuntimeException("Unknown value: " + code);
         }
+    }
+    public String encode() {
+        return code;
     }
 }
