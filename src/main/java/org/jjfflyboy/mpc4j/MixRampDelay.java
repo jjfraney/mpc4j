@@ -3,7 +3,7 @@ package org.jjfflyboy.mpc4j;
 /**
  * @author jfraney
  */
-public class MixRampDelay implements Command<MixRampDelay.Response> {
+public class MixRampDelay extends Simple {
     final private Integer mixRampDelay;
 
     /**
@@ -24,16 +24,5 @@ public class MixRampDelay implements Command<MixRampDelay.Response> {
     @Override
     public String text() {
         return "mixrampdelay " + ((mixRampDelay == null) ? "nan" : mixRampDelay.toString());
-    }
-
-    @Override
-    public Response response(String[] responseLines) {
-        return new Response(responseLines);
-    }
-
-    public static class Response extends AbstractCommandResponse {
-        Response(String[] responseLines) {
-            super(responseLines);
-        }
     }
 }

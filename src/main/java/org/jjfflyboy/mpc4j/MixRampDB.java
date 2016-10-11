@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 /**
  * @author jfraney
  */
-public class MixRampDB implements Command<MixRampDB.Response> {
+public class MixRampDB extends Simple {
     private BigDecimal mixRampDB;
 
     public MixRampDB(BigDecimal mixRampDB) {
@@ -15,16 +15,5 @@ public class MixRampDB implements Command<MixRampDB.Response> {
     @Override
     public String text() {
         return "mixrampdb " + mixRampDB.toString();
-    }
-
-    @Override
-    public Response response(String[] responseLines) {
-        return new Response(responseLines);
-    }
-
-    public static class Response extends AbstractCommandResponse {
-        Response(String[] responseLines) {
-            super(responseLines);
-        }
     }
 }

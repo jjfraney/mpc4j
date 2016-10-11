@@ -67,7 +67,7 @@ The usage of the Command and Response would be:
 
 ```java
     SetVol setVol = new SetVol();
-    SetVol.Response setVolResponse = .....send(setVol);
+    Simple.Response setVolResponse = .....send(setVol);
     boolean success = setVolResponse.isOk();
 ```
     

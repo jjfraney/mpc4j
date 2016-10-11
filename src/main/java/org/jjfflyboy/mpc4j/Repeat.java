@@ -3,7 +3,7 @@ package org.jjfflyboy.mpc4j;
 /**
  * @author jfraney
  */
-public class Repeat implements Command<Repeat.Response> {
+public class Repeat extends Simple {
     final private Toggle toggle;
 
     public Repeat(Toggle toggle) {
@@ -13,16 +13,5 @@ public class Repeat implements Command<Repeat.Response> {
     @Override
     public String text() {
         return "repeat " + toggle.encode();
-    }
-
-    @Override
-    public Response response(String[] responseLines) {
-        return new Response(responseLines);
-    }
-
-    public static class Response extends AbstractCommandResponse {
-        Response(String[] responseLines) {
-            super(responseLines);
-        }
     }
 }

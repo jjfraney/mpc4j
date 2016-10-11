@@ -3,7 +3,7 @@ package org.jjfflyboy.mpc4j;
 /**
  * @author jfraney
  */
-public class Single implements Command<Single.Response> {
+public class Single extends Simple {
     final private Toggle toggle;
 
     public Single(Toggle toggle) {
@@ -13,16 +13,5 @@ public class Single implements Command<Single.Response> {
     @Override
     public String text() {
         return "single " + toggle.encode();
-    }
-
-    @Override
-    public Response response(String[] responseLines) {
-        return new Response(responseLines);
-    }
-
-    public static class Response extends AbstractCommandResponse {
-        Response(String[] responseLines) {
-            super(responseLines);
-        }
     }
 }

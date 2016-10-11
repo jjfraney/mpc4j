@@ -13,7 +13,7 @@ public class Status implements Command<Status.Response> {
         return "status";
     }
 
-    public static class Response extends AbstractCommandResponse {
+    public static class Response extends AbstractContentResponse {
         // according to mpd source code: src/command/PlayerCommands.cxx
 
         public Optional<Integer> getVolume() {

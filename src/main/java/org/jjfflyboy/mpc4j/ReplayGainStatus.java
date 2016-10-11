@@ -1,6 +1,5 @@
 package org.jjfflyboy.mpc4j;
 
-import java.math.BigDecimal;
 import java.util.Optional;
 
 /**
@@ -17,7 +16,7 @@ public class ReplayGainStatus implements Command<ReplayGainStatus.Response> {
         return new Response(responseLines);
     }
 
-    public static class Response extends AbstractCommandResponse {
+    public static class Response extends AbstractContentResponse {
         Response(String[] responseLines) {
             super(responseLines);
         }
