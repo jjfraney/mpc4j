@@ -1,6 +1,8 @@
 package org.jjfflyboy.mpc4j;
 
 import java.math.BigDecimal;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -28,13 +30,19 @@ public abstract class AbstractContentResponse extends Simple.Response {
     protected Optional<Integer> getIntegerValue(String fieldName) {
         return findFieldValue(fieldName).map((s) -> Integer.decode(s));
     }
-
+    protected Optional<Long> getLongValue(String fieldName) {
+        return findFieldValue(fieldName).map((s) -> Long.decode(s));
+    }
     protected Optional<Toggle> getToggleValue(String fieldName) {
         return findFieldValue(fieldName).map(s -> Toggle.decode(s));
     }
 
     protected Optional<BigDecimal> getBigDecimalValue(String fieldName) {
         return findFieldValue(fieldName).map(s -> new BigDecimal(s));
+    }
+
+    protected Optional<ZonedDateTime> getZonedDateTimeValue(String name) {
+        return findFieldValue(name).map(s -> ZonedDateTime.parse(s, DateTimeFormatter.ISO_ZONED_DATE_TIME));
     }
 
     protected Optional<String> getStringValue(String fieldName) {

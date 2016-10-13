@@ -15,22 +15,29 @@ public class MpdSample {
 
     public static void main(String [] args) throws IOException {
 
+
+        //sendIdle();
+
+        runStatusQueryCommands();
+
         run(new Ping());
         run(new Update());
-        run(new SetVol(30));
-        run(new MixRampDB(new BigDecimal("-17.1")));
+
+        run(new Crossfade(3));
         run(new MixRampDelay(20));
         run(new MixRampDelay());
+        run(new MixRampDB(new BigDecimal("-17.1")));
+        run(new Random(OFF));
+
         run(new Repeat(ON));
         run(new Repeat(OFF));
-        run(new Random(OFF));
+        run(new SetVol(30));
         run(new Single(ON));
         run(new Single(OFF));
-        run(new Crossfade(3));
         run(new ReplayGainMode(ReplayGainMode.Mode.AUTO));
         run(new ReplayGainStatus());
         run(new ReplayGainMode(ReplayGainMode.Mode.OFF));
-        run(new Status());
+
 
         Status.Response r = mpc.send(new Status());
 
@@ -42,6 +49,21 @@ public class MpdSample {
 
         //run(new Update());
     }
+
+    private static void runStatusQueryCommands() throws IOException {
+        run(new ClearError());
+        run(new CurrentSong());
+        CurrentSong.Response csr = mpc.send(new CurrentSong());
+        System.out.println("last modified: " + csr.getLastModified());
+        run(new Status());
+        run(new Stats());
+    }
+
+    private static void sendIdle() throws IOException {
+        Idle.Response ir = mpc.send(new Idle(Idle.Subsystem.OPTIONS, Idle.Subsystem.MIXER));
+        System.out.println("what changed? " + ir.getChanged().get());
+    }
+
     private static Command.Response run(Command command) throws IOException {
         Command.Response response = mpc.send(command);
         System.out.println(command.getClass().getSimpleName() + " isOk? ...." + response.isOk());
