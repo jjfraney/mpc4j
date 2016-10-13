@@ -25,6 +25,9 @@ public class MpdSample {
 
         runPlaybackOptions();
 
+        run(new Next());
+        run(new Previous());
+
 
         Status.Response r = mpc.send(new Status());
 

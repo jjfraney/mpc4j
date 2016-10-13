@@ -23,4 +23,8 @@ public class ToggleTest {
     public void single() {
         Assert.assertEquals("wrong command", "single 1", new Single(ON).text());
     }
+    @Test
+    public void pause() {
+        Assert.assertEquals("wrong command", "pause 1", new Pause(ON).text());
+    }
 }
