@@ -23,6 +23,21 @@ public class MpdSample {
         run(new Ping());
         run(new Update());
 
+        runPlaybackOptions();
+
+
+        Status.Response r = mpc.send(new Status());
+
+        System.out.println("volume=" + r.getVolume().orElse(-1));
+        System.out.println("mix ramp db: " + r.getMixRampDb().orElse(null));
+        System.out.println("error=" + r.getError().orElse("no error"));
+
+        //mpc.idle(e -> { Stream.of(e).forEach(System.out::println); return true; });
+    }
+
+    private static void runPlaybackOptions() throws IOException {
+        run(new Consume(ON));
+        run(new Consume(OFF));
         run(new Crossfade(3));
         run(new MixRampDelay(20));
         run(new MixRampDelay());
@@ -37,17 +52,6 @@ public class MpdSample {
         run(new ReplayGainMode(ReplayGainMode.Mode.AUTO));
         run(new ReplayGainStatus());
         run(new ReplayGainMode(ReplayGainMode.Mode.OFF));
-
-
-        Status.Response r = mpc.send(new Status());
-
-        System.out.println("volume=" + r.getVolume().orElse(-1));
-        System.out.println("mix ramp db: " + r.getMixRampDb().orElse(null));
-        System.out.println("error=" + r.getError().orElse("no error"));
-
-        //mpc.idle(e -> { Stream.of(e).forEach(System.out::println); return true; });
-
-        //run(new Update());
     }
 
     private static void runStatusQueryCommands() throws IOException {
@@ -66,8 +70,8 @@ public class MpdSample {
 
     private static Command.Response run(Command command) throws IOException {
         Command.Response response = mpc.send(command);
-        System.out.println(command.getClass().getSimpleName() + " isOk? ...." + response.isOk());
-        Stream.of(response.getResponseLines()).forEach(System.out::println);
+        System.out.println("command: '" + command.text() + "' isOk? ...." + response.isOk());
+        Stream.of(response.getResponseLines()).map(s -> "\t" + s).forEach(System.out::println);
         return response;
     }
 }
