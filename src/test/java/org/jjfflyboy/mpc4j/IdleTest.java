@@ -23,6 +23,6 @@ public class IdleTest {
     public void response() {
         String [] textResponse = new String[] {"changed: options", "OK"};
         Idle.Response response = command.response(textResponse);
-        Assert.assertEquals("response could not parse \"changed\"", "options", response.getChanged().get());
+        Assert.assertEquals("response could not parse \"changed\"", Idle.Subsystem.OPTIONS, response.getChanged().get());
     }
 }
