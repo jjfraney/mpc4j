@@ -3,7 +3,7 @@ package org.jjfflyboy.mpc4j;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.*;
 
 /**
  * @author jfraney
@@ -11,10 +11,10 @@ import static org.junit.Assert.*;
 public class MixRampDelayTest {
     @Test
     public void text() {
-        Assert.assertEquals("wrong command", "mixrampdelay 10", new MixRampDelay(10).text());
+        assertThat(new MixRampDelay(10).text()).as("wrong command").isEqualTo("mixrampdelay 10");
     }
     @Test
     public void textNan() {
-        Assert.assertEquals("wrong command", "mixrampdelay nan", new MixRampDelay().text());
+        assertThat(new MixRampDelay().text()).as("wrong command").isEqualTo("mixrampdelay nan");
     }
 }

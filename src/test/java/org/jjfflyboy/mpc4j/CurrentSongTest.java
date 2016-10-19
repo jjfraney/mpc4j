@@ -1,12 +1,11 @@
 package org.jjfflyboy.mpc4j;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.*;
 
 /**
  * @author jfraney
@@ -14,7 +13,7 @@ import static org.junit.Assert.*;
 public class CurrentSongTest {
     @Test
     public void text() {
-        Assert.assertEquals("wrong command", "currentsong", new CurrentSong().text());
+        assertThat(new CurrentSong().text()).as("wrong command").isEqualTo("currentsong");
     }
 
     @Test
@@ -29,11 +28,11 @@ public class CurrentSongTest {
                 "file: " + file
 
         });
-        Assert.assertEquals("wrong ", 99, r.getTime().get().intValue());
-        Assert.assertEquals("wrong ", file, r.getFile().get());
-        Assert.assertEquals("wrong ", 10, r.getId().get().intValue());
-        Assert.assertEquals("wrong ", now, r.getLastModified().get());
-        Assert.assertEquals("wrong ", 23, r.getPosition().get().intValue());
+        assertThat(r.getTime().get().intValue()).as("wrong ").isEqualTo(99);
+        assertThat(r.getFile().get()).as("wrong ").isEqualTo(file);
+        assertThat(r.getId().get().intValue()).as("wrong ").isEqualTo(10);
+        assertThat(r.getLastModified().get()).as("wrong ").isEqualTo(now);
+        assertThat(r.getPosition().get().intValue()).as("wrong ").isEqualTo(23);
     }
 
 }

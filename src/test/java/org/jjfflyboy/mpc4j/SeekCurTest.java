@@ -5,6 +5,8 @@ import org.junit.Test;
 
 import java.math.BigDecimal;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 /**
  * @author jfraney
  */
@@ -12,14 +14,14 @@ public class SeekCurTest {
 
     @Test
     public void textBigDecimal() {
-        Assert.assertEquals("wrong command", "seekcur 30.3", new SeekCur(new BigDecimal("30.3")).text());
+        assertThat(new SeekCur(new BigDecimal("30.3")).text()).as("wrong command").isEqualTo("seekcur 30.3");
     }
     @Test
     public void textInteger() {
-        Assert.assertEquals("wrong command", "seekcur 20", new SeekCur(Integer.valueOf(20)).text());
+        assertThat(new SeekCur(Integer.valueOf(20)).text()).as("wrong command").isEqualTo("seekcur 20");
     }
     @Test
     public void textFloat() {
-        Assert.assertEquals("wrong command", "seekcur 1.2", new SeekCur(Float.valueOf("1.2")).text());
+        assertThat(new SeekCur(Float.valueOf("1.2")).text()).as("wrong command").isEqualTo("seekcur 1.2");
     }
 }

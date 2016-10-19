@@ -3,7 +3,7 @@ package org.jjfflyboy.mpc4j;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.*;
 
 /**
  * @author jfraney
@@ -11,6 +11,6 @@ import static org.junit.Assert.*;
 public class ReplayGainModeTest {
     @Test
     public void text() {
-        Assert.assertEquals("wrong command", "replay_gain_mode auto", new ReplayGainMode(ReplayGainMode.Mode.AUTO).text());
+        assertThat(new ReplayGainMode(ReplayGainMode.Mode.AUTO).text()).as("wrong command").isEqualTo("replay_gain_mode auto");
     }
 }

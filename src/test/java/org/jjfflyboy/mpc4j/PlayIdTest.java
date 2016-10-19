@@ -3,6 +3,8 @@ package org.jjfflyboy.mpc4j;
 import org.junit.Assert;
 import org.junit.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 /**
  * @author jfraney
  */
@@ -10,10 +12,10 @@ public class PlayIdTest {
 
     @Test
     public void textDefault() {
-        Assert.assertEquals("wrong command", "playid", new PlayId().text());
+        assertThat(new PlayId().text()).as("wrong command").isEqualTo("playid");
     }
     @Test
     public void textSongPos() {
-        Assert.assertEquals("wrong command", "playid 10", new PlayId(10).text());
+        assertThat(new PlayId(10).text()).as("wrong command").isEqualTo("playid 10");
     }
 }

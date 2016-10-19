@@ -1,10 +1,9 @@
 package org.jjfflyboy.mpc4j;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.*;
 
 /**
  * @author jfraney
@@ -12,11 +11,12 @@ import static org.junit.Assert.*;
 public class CrossfadeTest {
     @Test
     public void textDefault() {
-        Assert.assertEquals("wrong text", "crossfade 0", new Crossfade().text());
+
+        assertThat(new Crossfade().text()).as("wrong text").isEqualTo("crossfade 0");
     }
     @Test
     public void textByTen() {
-        Assert.assertEquals("wrong text", "crossfade 10", new Crossfade(10).text());
+        assertThat(new Crossfade(10).text()).as("wrong text").isEqualTo("crossfade 10");
     }
 
 }

@@ -7,7 +7,7 @@ import org.junit.Test;
 import java.math.BigDecimal;
 import java.util.Optional;
 
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.*;
 
 /**
  * @author jfraney
@@ -21,7 +21,7 @@ public class StatusTest {
 
     @Test
     public void text()  {
-        Assert.assertEquals("wrong command", "status", command.text());
+        assertThat(command.text()).as("wrong command").isEqualTo("status");
     }
 
     @Test
@@ -50,27 +50,27 @@ public class StatusTest {
                 "xfade: 99"
         };
         Status.Response response = command.response(responseText);
-        Assert.assertEquals("wrong parse", "anyAudio", response.getAudio().get());
-        Assert.assertEquals("wrong parse", 5500, response.getBitRate().get().intValue());
-        Assert.assertEquals("wrong parse", Toggle.ON, response.getConsume().get());
-        Assert.assertEquals("wrong parse", "any Error", response.getError().get());
-        Assert.assertEquals("wrong parse", new BigDecimal("5.5"), response.getElapsed().get());
-        Assert.assertEquals("wrong parse", new BigDecimal("9.900"), response.getMixRampDb().get());
-        Assert.assertEquals("wrong parse", new BigDecimal("10.3"), response.getMixRampDelay().get());
-        Assert.assertEquals("wrong parse", 40, response.getNextSong().get().intValue());
-        Assert.assertEquals("wrong parse", 41, response.getNextSongId().get().intValue());
-        Assert.assertEquals("wrong parse", 60, response.getPlaylist().get().intValue());
-        Assert.assertEquals("wrong parse", 61, response.getPlaylistLength().get().intValue());
-        Assert.assertEquals("wrong parse", Toggle.OFF, response.getRandom().get());
-        Assert.assertEquals("wrong parse", Toggle.ON, response.getRepeat().get());
-        Assert.assertEquals("wrong parse", Toggle.OFF, response.getSingle().get());
-        Assert.assertEquals("wrong parse", "any state", response.getState().get());
-        Assert.assertEquals("wrong parse", 5, response.getSong().get().intValue());
-        Assert.assertEquals("wrong parse", 3, response.getSongId().get().intValue());
-        Assert.assertEquals("wrong parse", "any time", response.getTime().get());
-        Assert.assertEquals("wrong parse", 70, response.getUpdatingDb().get().intValue());
-        Assert.assertEquals("wrong parse", 30, response.getVolume().get().intValue());
-        Assert.assertEquals("wrong parse", 99, response.getXfade().get().intValue());
-        Assert.assertEquals("untested property", 21, response.getResponseLines().length);
+        assertThat(response.getAudio().get()).as("wrong parse").isEqualTo("anyAudio");
+        assertThat(response.getBitRate().get().intValue()).as("wrong parse").isEqualTo(5500);
+        assertThat(response.getConsume().get()).as("wrong parse").isEqualTo(Toggle.ON);
+        assertThat(response.getError().get()).as("wrong parse").isEqualTo("any Error");
+        assertThat(response.getElapsed().get()).as("wrong parse").isEqualTo(new BigDecimal("5.5"));
+        assertThat(response.getMixRampDb().get()).as("wrong parse").isEqualTo(new BigDecimal("9.900"));
+        assertThat(response.getMixRampDelay().get()).as("wrong parse").isEqualTo(new BigDecimal("10.3"));
+        assertThat(response.getNextSong().get().intValue()).as("wrong parse").isEqualTo(40);
+        assertThat(response.getNextSongId().get().intValue()).as("wrong parse").isEqualTo(41);
+        assertThat(response.getPlaylist().get().intValue()).as("wrong parse").isEqualTo(60);
+        assertThat(response.getPlaylistLength().get().intValue()).as("wrong parse").isEqualTo(61);
+        assertThat(response.getRandom().get()).as("wrong parse").isEqualTo(Toggle.OFF);
+        assertThat(response.getRepeat().get()).as("wrong parse").isEqualTo(Toggle.ON);
+        assertThat(response.getSingle().get()).as("wrong parse").isEqualTo(Toggle.OFF);
+        assertThat(response.getState().get()).as("wrong parse").isEqualTo("any state");
+        assertThat(response.getSong().get().intValue()).as("wrong parse").isEqualTo(5);
+        assertThat(response.getSongId().get().intValue()).as("wrong parse").isEqualTo(3);
+        assertThat(response.getTime().get()).as("wrong parse").isEqualTo("any time");
+        assertThat(response.getUpdatingDb().get().intValue()).as("wrong parse").isEqualTo(70);
+        assertThat(response.getVolume().get().intValue()).as("wrong parse").isEqualTo(30);
+        assertThat(response.getXfade().get().intValue()).as("wrong parse").isEqualTo(99);
+        assertThat(response.getResponseLines().length).as("untested property").isEqualTo(21);
     }
 }

@@ -6,13 +6,15 @@ import org.junit.Test;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 /**
  * @author jfraney
  */
 public class StatsTest {
     @Test
     public void text() {
-        Assert.assertEquals("wrong command", "stats", new Stats().text());
+        assertThat(new Stats().text()).as("wrong command").isEqualTo("stats");
     }
 
     @Test
@@ -27,13 +29,13 @@ public class StatsTest {
                 "db_update: 900"
 
         });
-        Assert.assertEquals("wrong ", 10, r.getUptime().get().intValue());
-        Assert.assertEquals("wrong ", 20, r.getPlaytime().get().intValue());
-        Assert.assertEquals("wrong ", 30, r.getArtists().get().intValue());
-        Assert.assertEquals("wrong ", 40, r.getAlbums().get().intValue());
-        Assert.assertEquals("wrong ", 50, r.getSongs().get().intValue());
-        Assert.assertEquals("wrong ", 600, r.getDbPlaytime().get().intValue());
-        Assert.assertEquals("wrong ", 900L, r.getDbUpdate().get().longValue());
+        assertThat(r.getUptime().get().intValue()).as("wrong ").isEqualTo(10);
+        assertThat(r.getPlaytime().get().intValue()).as("wrong ").isEqualTo(20);
+        assertThat(r.getArtists().get().intValue()).as("wrong ").isEqualTo(30);
+        assertThat(r.getAlbums().get().intValue()).as("wrong ").isEqualTo(40);
+        assertThat(r.getSongs().get().intValue()).as("wrong ").isEqualTo(50);
+        assertThat(r.getDbPlaytime().get().intValue()).as("wrong ").isEqualTo(600);
+        assertThat(r.getDbUpdate().get().longValue()).as("wrong ").isEqualTo(900L);
     }
 
 }

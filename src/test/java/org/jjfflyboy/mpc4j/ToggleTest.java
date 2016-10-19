@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import static org.jjfflyboy.mpc4j.Toggle.OFF;
 import static org.jjfflyboy.mpc4j.Toggle.ON;
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.*;
 
 /**
  * @author jfraney
@@ -13,18 +13,18 @@ import static org.junit.Assert.*;
 public class ToggleTest {
     @Test
     public void random() {
-        Assert.assertEquals("wrong command", "random 0", new Random(OFF).text());
+        assertThat(new Random(OFF).text()).as("wrong command").isEqualTo("random 0");
     }
     @Test
     public void repeat() {
-        Assert.assertEquals("wrong command", "repeat 1", new Repeat(ON).text());
+        assertThat(new Repeat(ON).text()).as("wrong command").isEqualTo("repeat 1");
     }
     @Test
     public void single() {
-        Assert.assertEquals("wrong command", "single 1", new Single(ON).text());
+        assertThat(new Single(ON).text()).as("wrong command").isEqualTo("single 1");
     }
     @Test
     public void pause() {
-        Assert.assertEquals("wrong command", "pause 1", new Pause(ON).text());
+        assertThat(new Pause(ON).text()).as("wrong command").isEqualTo("pause 1");
     }
 }

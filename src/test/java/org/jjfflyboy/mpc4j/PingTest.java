@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.*;
 
 /**
  * @author jfraney
@@ -18,13 +18,13 @@ public class PingTest {
 
     @Test
     public void text() {
-        Assert.assertEquals("not a ping command", "ping", command.text());
+        assertThat(command.text()).as("not a ping command").isEqualTo("ping");
     }
 
     @Test
     public void response() {
         String [] textResponse = new String[] {"OK"};
         Ping.Response response = command.response(textResponse);
-        Assert.assertTrue("response could not parse \"OK\"", response.isOk());
+        assertThat(response.isOk()).as("response could not parse \"OK\"").isTrue();
     }
 }

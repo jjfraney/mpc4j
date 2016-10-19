@@ -1,8 +1,9 @@
 package org.jjfflyboy.mpc4j;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author jfraney
@@ -16,13 +17,13 @@ public class IdleTest {
 
     @Test
     public void text() {
-        Assert.assertEquals("wrong command", "idle", command.text());
+        assertThat(command.text()).as("wrong command").isEqualTo("idle");
     }
 
     @Test
     public void response() {
         String [] textResponse = new String[] {"changed: options", "OK"};
         Idle.Response response = command.response(textResponse);
-        Assert.assertEquals("response could not parse \"changed\"", Idle.Subsystem.OPTIONS, response.getChanged().get());
+        assertThat(response.getChanged().get()).as("response could not parse \"changed\"").isEqualTo(Idle.Subsystem.OPTIONS);
     }
 }
