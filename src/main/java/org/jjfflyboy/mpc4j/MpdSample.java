@@ -25,8 +25,7 @@ public class MpdSample {
 
         runPlaybackOptions();
 
-        run(new Next());
-        run(new Previous());
+        runPlaybackControlCommands();
 
 
         Status.Response r = mpc.send(new Status());
@@ -36,6 +35,17 @@ public class MpdSample {
         System.out.println("error=" + r.getError().orElse("no error"));
 
         //mpc.idle(e -> { Stream.of(e).forEach(System.out::println); return true; });
+    }
+
+    private static void runPlaybackControlCommands() throws IOException {
+        run(new Play());
+        run(new Pause(ON));
+        run(new Pause(OFF));
+        run(new Stop());
+        run(new Next());
+        run(new Previous());
+        run(new Seek(0, 2.2f));
+        run(new Stop());
     }
 
     private static void runPlaybackOptions() throws IOException {
