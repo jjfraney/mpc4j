@@ -1,13 +1,15 @@
 FROM alpine:3.4
 MAINTAINER jjfraney@gmail.com
 
+ENV MPD_VERSION 0.19.15-r2
+
 ARG user=mpd
 ARG group=audio
 
 RUN apk -q update \
     && apk -q --no-progress add alsa-lib \
     && apk -q --no-progress add alsa-utils \
-    && apk -q --no-progress add mpd \
+    && apk -q --no-progress add mpd="$MPD_VERSION" \
     && rm -rf /var/cache/apk/*
 
 # suitable for alpine container on ubuntu
