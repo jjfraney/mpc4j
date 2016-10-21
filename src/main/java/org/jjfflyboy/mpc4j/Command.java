@@ -1,6 +1,8 @@
 package org.jjfflyboy.mpc4j;
 
 
+import java.util.Optional;
+
 /**
  * A command and response of the MPD protocol.
  * <p>
@@ -31,8 +33,28 @@ interface Command<R extends Command.Response> {
      * Response of this command.
      */
     interface Response {
+        /**
+         * returns all the lines of the response
+         * @return
+         */
         String[] getResponseLines();
 
+        /**
+         * @return true if last line of the response starts with OK
+         */
         boolean isOk();
+
+        /**
+         * parse the last line as if it were an ACK.
+         * @return either the Ack object as below, or, if unable to parse the last line, null.
+         */
+        Optional<Ack> getAck();
+
+        interface Ack {
+            Integer getError();
+            Integer getCommandListNum();
+            String getCurrentCommand();
+            String getMessageText();
+        }
     }
 }
