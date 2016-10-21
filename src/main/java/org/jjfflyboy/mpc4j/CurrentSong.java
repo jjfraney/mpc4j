@@ -12,7 +12,7 @@ public class CurrentSong implements Command<CurrentSong.Response> {
         return "currentsong";
     }
 
-    public static class Response extends AbstractContentResponse {
+    public static class Response extends Simple.Response {
         public Optional<String> getFile() {
             return getStringValue("file");
         }

@@ -15,7 +15,7 @@ public abstract class Info implements Command<Info.Response> {
         return new Response(responseLines);
     }
 
-    public static class Response extends AbstractContentResponse {
+    public static class Response extends Simple.Response {
 
         Response(String[] responseLines) {
             super(responseLines);

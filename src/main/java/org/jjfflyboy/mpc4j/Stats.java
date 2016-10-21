@@ -12,7 +12,7 @@ public class Stats implements Command<Stats.Response> {
         return "stats";
     }
 
-    public static class Response extends AbstractContentResponse {
+    public static class Response extends Simple.Response {
         public Optional<Integer> getUptime() {return getIntegerValue("uptime");}
         public Optional<Integer> getPlaytime() {return getIntegerValue("playtime");}
         public Optional<Integer> getArtists() {return getIntegerValue("artists");}

@@ -10,12 +10,12 @@ public abstract class Simple implements Command<Simple.Response> {
     public Response response(String[] responseLines) {
         return new Response(responseLines);
     }
-    public static class Response implements Command.Response {
+    public static class Response extends ResponseContent implements Command.Response {
         final private boolean ok;
-        final private String[] responseLines;
 
         Response(String[] responseLines) {
-            this.responseLines = responseLines;
+            super(responseLines);
+
             boolean responseOk = false;
             if(responseLines.length > 0) {
 
@@ -31,9 +31,5 @@ public abstract class Simple implements Command<Simple.Response> {
             return ok;
         }
 
-        @Override
-        public String[] getResponseLines() {
-            return responseLines;
-        }
     }
 }

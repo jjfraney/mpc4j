@@ -40,7 +40,7 @@ public class Idle implements Command<Idle.Response> {
     }
 
 
-    public static class Response extends AbstractContentResponse {
+    public static class Response extends Simple.Response {
 
         public Optional<Subsystem> getChanged() {
             return getStringValue("changed").map(s->Subsystem.decode(s));
