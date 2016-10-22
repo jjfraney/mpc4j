@@ -2,7 +2,6 @@ package org.jjfflyboy.mpc4j;
 
 import org.junit.Test;
 
-import java.time.ZonedDateTime;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -18,7 +17,7 @@ public class LsInfoTest {
 
     @Test
     public void response() {
-        LsInfo.Response r = new LsInfo().response(new String[] {
+        SongSearchResponse r = new LsInfo().response(new String[] {
                 "file: aaa.ogg",
                 "Last-Modified: 2016-10-19T00:33:30Z",
                 "Time: 100",
@@ -31,7 +30,7 @@ public class LsInfoTest {
                 "OK"
         });
         assertThat(r.isOk()).as("no parse").isTrue();
-        List<Info.Response.Song> songs = r.getSongs();
+        List<SongSearchResponse.Song> songs = r.getSongs();
         assertThat(songs.size()).as("song count").isEqualTo(3);
 
         assertThat(songs.get(0).getFile().get()).as("song file name").isEqualTo("aaa.ogg");

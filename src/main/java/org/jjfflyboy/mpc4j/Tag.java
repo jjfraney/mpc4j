@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 /**
  * @author jfraney
  */
-public enum Tag {
+public enum Tag implements Find.Type {
     ARTIST,
     ARTIST_SORT,
     ALBUM,

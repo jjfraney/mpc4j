@@ -26,14 +26,14 @@ public class LsInfoIT {
     @Test
     @RunAsClient
     public void test() throws IOException {
-        LsInfo.Response r = mpc.send(new LsInfo());
+        SongSearchResponse r = mpc.send(new LsInfo());
 
         assertThat(r.isOk()).isTrue();
 
         assertThat(r.getSongs().size()).isEqualTo(3);
 
-        List<Info.Response.Song> songs = r.getSongs();
-        Info.Response.Song song = songs.stream().filter(s -> s.getFile().get().equals("w1.ogg")).findAny().get();
+        List<SongSearchResponse.Song> songs = r.getSongs();
+        SongSearchResponse.Song song = songs.stream().filter(s -> s.getFile().get().equals("w1.ogg")).findAny().get();
         assertThat(song.getLastModified().get()).isEqualTo("2016-10-21T21:06:03Z");
         assertThat(song.getTag(Tag.ARTIST).get()).isEqualTo("Joe Mpc4J");
 
