@@ -34,6 +34,7 @@ public abstract class Info implements Command<Info.Response> {
             public Optional<ZonedDateTime> getLastModified() {
                 return getZonedDateTimeValue("Last-Modified");
             }
+            public Optional<String> getTag(Tag tag) {return getStringValue(tag.toSongLabel());}
         }
 
         public List<Song> getSongs() {
