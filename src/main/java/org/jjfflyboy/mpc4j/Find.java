@@ -18,15 +18,11 @@ import java.util.stream.Collectors;
  * @author jfraney
  */
 public class Find extends AbstractSongSearch {
-    interface Type {
-        /**
-         * convert the type to string as it would appear in mpd command.
-         * @return
-         */
-        String toParameter();
+
+    interface Type extends Criteria.Type {
     }
 
-    public enum Special implements Type {
+    public enum Special implements Find.Type {
         ANY, FILE, BASE, MODIFIED_SINCE;
 
         @Override
@@ -40,17 +36,17 @@ public class Find extends AbstractSongSearch {
         }
     }
 
-    private final Map<Type, String> criteria;
+    private final Criteria criteria;
 
     /**
      * a command of form: 'find {TYPE} "{WHAT}"'
      * @param type
      * @param what
      */
-    public Find(Type type, String what) {
-        Map<Type, String> m = new HashMap<>();
+    public Find(Find.Type type, String what) {
+        Map<Criteria.Type, String> m = new HashMap<>();
         m.put(type, what);
-        criteria = Collections.unmodifiableMap(m);
+        criteria = new Criteria(m);
     }
 
     /**
@@ -58,40 +54,16 @@ public class Find extends AbstractSongSearch {
      * The arguments appear according to the ordering rule of the map.
      * @param parameters ordered or unordered map: (type, what).
      */
-    public Find(Map<Type, String> parameters) {
-        criteria = Collections.unmodifiableMap(parameters);
+    public Find(Map<Find.Type, String> parameters) {
+        criteria = new Criteria(parameters);
     }
 
     @Override
     public String text() {
-        return "find " + flatten(getCriteria());
+        return "find " + getCriteria().toParameters();
     }
 
-    protected Map<Type, String> getCriteria() {
+    protected Criteria getCriteria() {
         return criteria;
-    }
-
-    /**
-     * flattens the map to: "type what [....]"
-     * @param map
-     * @return
-     */
-    protected String flatten(Map<? extends Type, String> map) {
-        String result = map
-                .entrySet()
-                .stream()
-                .map(this::flatten)
-                .collect(Collectors.joining(" "));
-        return result;
-
-    }
-    private String flatten(Map.Entry<? extends Type, String> e) {
-        return new StringBuilder()
-                .append(e.getKey().toParameter())
-                .append(" ")
-                .append('"')
-                .append(e.getValue())
-                .append('"')
-                .toString();
     }
 }

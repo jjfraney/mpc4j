@@ -14,7 +14,7 @@ public class SearchAddPl extends Find {
      * @param type
      * @param what
      */
-    public SearchAddPl(String playlistName, Type type, String what) {
+    public SearchAddPl(String playlistName, Find.Type type, String what) {
         super(type, what);
         if(playlistName == null) {
             throw new RuntimeException("playlistName cannot be null");
@@ -27,7 +27,7 @@ public class SearchAddPl extends Find {
      * The arguments appear according to the ordering rule of the map.
      * @param parameters ordered or unordered map: (type, what).
      */
-    public SearchAddPl(String playlistName, Map<Type, String> parameters) {
+    public SearchAddPl(String playlistName, Map<Find.Type, String> parameters) {
         super(parameters);
         if(playlistName == null) {
             throw new RuntimeException("playlistName cannot be null");
@@ -37,6 +37,6 @@ public class SearchAddPl extends Find {
 
     @Override
     public String text() {
-        return "searchaddpl " + playlistName + " " + flatten(getCriteria());
+        return "searchaddpl " + playlistName + " " + getCriteria().toParameters();
     }
 }

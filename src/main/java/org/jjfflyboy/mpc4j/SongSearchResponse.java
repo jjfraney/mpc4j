@@ -1,8 +1,6 @@
 package org.jjfflyboy.mpc4j;
 
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,7 +21,7 @@ public class SongSearchResponse extends Simple.Response {
         /**
          * @param responseLines limited to a single song
          */
-        private Song(String[] responseLines) {
+        public Song(String[] responseLines) {
             super(responseLines);
         }
 
@@ -50,25 +48,6 @@ public class SongSearchResponse extends Simple.Response {
      * @return a list of the 'songs' identified in the response.
      */
     public List<Song> getSongs() {
-        List<Song> result = new ArrayList<>();
-
-        // identify the indices that isolate each song, by 'file:' line
-        List<Integer> fileIndices = new ArrayList<>();
-        for (int i = 0; i < getResponseLines().length; i++) {
-            if (getResponseLines()[i].startsWith("file:")) {
-                fileIndices.add(i);
-            }
-        }
-
-        // create a Song for each set of lines between the indices
-        for (int i = 0; i < fileIndices.size(); i++) {
-            Integer startIndex = fileIndices.get(i);
-            Integer endIndex = fileIndices.size() > i + 1 ? fileIndices.get(i + 1) : getResponseLines().length - 1;
-
-            String[] responseLinesForSong = Arrays.copyOfRange(getResponseLines(), startIndex, endIndex);
-            Song song = new Song(responseLinesForSong);
-            result.add(song);
-        }
-        return result;
+        return getSubResponse(Song.class);
     }
 }

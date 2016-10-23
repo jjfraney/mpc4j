@@ -12,7 +12,7 @@ public class Search extends Find {
      * @param type
      * @param what
      */
-    public Search(Type type, String what) {
+    public Search(Find.Type type, String what) {
         super(type, what);
     }
 
@@ -21,12 +21,12 @@ public class Search extends Find {
      * The arguments appear according to the ordering rule of the map.
      * @param parameters ordered or unordered map: (type, what).
      */
-    public Search(Map<Type, String> parameters) {
+    public Search(Map<Find.Type, String> parameters) {
         super(parameters);
     }
 
     @Override
     public String text() {
-        return "search " + flatten(getCriteria());
+        return "search " + getCriteria().toParameters();
     }
 }
