@@ -1,9 +1,6 @@
 package org.jjfflyboy.mpc4j;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.List;
 
 /**
  * Support the find command.
@@ -44,18 +41,19 @@ public class Find extends AbstractSongSearch {
      * @param what
      */
     public Find(Find.Type type, String what) {
-        Map<Criteria.Type, String> m = new HashMap<>();
-        m.put(type, what);
-        criteria = new Criteria(m);
+        Criteria.Term term = new Criteria.Term(type, what);
+        criteria = new Criteria(term);
     }
 
     /**
      * a command of form: 'find {TYPE} "{WHAT}" [...]'.
-     * The arguments appear according to the ordering rule of the map.
-     * @param parameters ordered or unordered map: (type, what).
+     * @param terms array of terms: {TYPE} {WHAT}.
      */
-    public Find(Map<Find.Type, String> parameters) {
-        criteria = new Criteria(parameters);
+    public Find(Criteria.Term... terms) {
+        criteria = new Criteria(terms);
+    }
+    public Find(List<Criteria.Term> terms) {
+        criteria = new Criteria(terms);
     }
 
     @Override

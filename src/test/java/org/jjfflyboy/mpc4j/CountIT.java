@@ -22,9 +22,7 @@ public class CountIT {
     }
     @Test
     public void textCountWithGroup() throws IOException {
-        Map<Count.Type, String> q = new HashMap<>();
-        q.put(Tag.ARTIST, "Joe Mpc4J");
-        Count cmd = new Count(q, Tag.TITLE);
+        Count cmd = new Count(Tag.ARTIST, "Joe Mpc4J", Tag.TITLE);
 
         Count.Response r = mpc.send(cmd);
         assertThat(r.isOk()).isTrue();

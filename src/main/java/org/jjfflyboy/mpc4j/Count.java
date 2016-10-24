@@ -1,6 +1,5 @@
 package org.jjfflyboy.mpc4j;
 
-import java.time.ZonedDateTime;
 import java.util.*;
 
 /**
@@ -15,25 +14,32 @@ public class Count extends Simple {
     private final Tag group;
 
     public Count(Count.Type type, String needle) {
-        Map<Count.Type, String> map = new HashMap<>();
-        map.put(type,needle);
-        criteria = new Criteria(map);
+        criteria = new Criteria(new Criteria.Term(type, needle));
         group = null;
     }
-    public Count(Map<Count.Type, String> map) {
-        criteria = new Criteria(map);
+    public Count(List<Criteria.Term> terms) {
+        criteria = new Criteria(terms);
+        group = null;
+    }
+    public Count(Criteria.Term... terms) {
+        criteria = new Criteria(terms);
         group = null;
     }
 
     public Count(Count.Type type, String needle, Tag group) {
-        Map<Count.Type, String> map = new HashMap<>();
-        map.put(type,needle);
-        criteria = new Criteria(map);
+        criteria = new Criteria(new Criteria.Term(type, needle));
         this.group = group;
     }
-    public Count(Map<Count.Type, String> map, Tag group) {
-        criteria = new Criteria(map);
+    public Count(List<Criteria.Term> terms, Tag group) {
+        criteria = new Criteria(terms);
         this.group = group;
+    }
+    public Count(Criteria.Term[] terms, Tag group) {
+        criteria = new Criteria(terms);
+        this.group = group;
+    }
+    public Count(Tag group, Criteria.Term... terms) {
+        this(terms, group);
     }
 
     @Override

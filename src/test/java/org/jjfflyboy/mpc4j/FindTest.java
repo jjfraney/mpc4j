@@ -2,9 +2,6 @@ package org.jjfflyboy.mpc4j;
 
 import org.junit.Test;
 
-import java.util.Map;
-import java.util.TreeMap;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -25,10 +22,11 @@ public class FindTest {
 
     @Test
     public void findCriteria() {
-        Map<Find.Type, String> criteria = new TreeMap<>();
-        criteria.put(Tag.ARTIST, "bob dylan");
-        criteria.put(Tag.GENRE, "acid rock");
-        String text = new Find(criteria).text();
+        Criteria.Term[] terms = {
+                new Criteria.Term(Tag.ARTIST, "bob dylan"),
+                new Criteria.Term(Tag.GENRE, "acid rock")
+        };
+        String text = new Find(terms).text();
         assertThat(text).as("multiple criteria").isEqualTo(("find artist \"bob dylan\" genre \"acid rock\""));
     }
 

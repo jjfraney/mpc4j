@@ -1,6 +1,6 @@
 package org.jjfflyboy.mpc4j;
 
-import java.util.Map;
+import java.util.List;
 
 /**
  * @author jfraney
@@ -18,11 +18,13 @@ public class SearchAdd extends Find {
 
     /**
      * a command of form: 'searchadd {TYPE} "{WHAT}" [...]'.
-     * The arguments appear according to the ordering rule of the map.
-     * @param parameters ordered or unordered map: (type, what).
+     * @param terms list of (type, what).
      */
-    public SearchAdd(Map<Find.Type, String> parameters) {
-        super(parameters);
+    public SearchAdd(List<Criteria.Term> terms) {
+        super(terms);
+    }
+    public SearchAdd(Criteria.Term... terms) {
+        super(terms);
     }
 
     @Override

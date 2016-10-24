@@ -1,7 +1,8 @@
 package org.jjfflyboy.mpc4j;
 
+import java.util.Arrays;
 import java.util.Collections;
-import java.util.Map;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -18,30 +19,56 @@ public class Criteria {
         String toParameter();
     }
 
-    private final Map<Criteria.Type, String> criteria;
+    /**
+     * specifies a 'term': type-what, tag-needle or filtertype-filterwhat pair
+     * of 'find'/'search', 'count', or 'list' commands (respectively).
+     * The type-what form is common among database queries in the mpd protocol,
+     * though they use different names.  The names may be different but the
+     * purpose remains.  Each specifies some real or virtual tag and a value
+     * to match exactly or as a pattern.
+     * The prevalent terms, type-what, are used here.
+     */
+    public static class Term {
+        private final Type type;
+        private final String what;
+        protected Term(Type type, String what) {
+            this.type = type;
+            this.what = what;
+        }
+        public Type getType() {
+            return type;
+        }
+        public String getWhat() {
+            return what;
+        }
+    }
 
-    public Criteria(Map<? extends Type, String> criteria) {
-        this.criteria = Collections.unmodifiableMap(criteria);
+    private final List<? extends Term> terms;
+
+    public Criteria(List<? extends Term> terms) {
+        this.terms = Collections.unmodifiableList(terms);
+    }
+    public Criteria(Term... terms) {
+        this.terms = Collections.unmodifiableList(Arrays.asList(terms));
     }
 
     /**
      * flattens the criteria to: "type what [....]"
      */
     public String toParameters() {
-        String result = criteria
-                .entrySet()
+        String result = terms
                 .stream()
                 .map(this::flatten)
                 .collect(Collectors.joining(" "));
         return result;
 
     }
-    private String flatten(Map.Entry<? extends Criteria.Type, String> e) {
+    private String flatten(Term term) {
         return new StringBuilder()
-                .append(e.getKey().toParameter())
+                .append(term.getType().toParameter())
                 .append(" ")
                 .append('"')
-                .append(e.getValue())
+                .append(term.getWhat())
                 .append('"')
                 .toString();
     }
