@@ -21,10 +21,10 @@ public class Search extends Find {
      * The arguments appear according to the ordering rule of the map.
      * @param terms ordered or unordered map: (type, what).
      */
-    public Search(List<Criteria.Term> terms) {
+    public Search(List<Find.Term> terms) {
         super(terms);
     }
-    public Search(Criteria.Term... terms) {
+    public Search(Find.Term... terms) {
         super(terms);
     }
 

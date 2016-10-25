@@ -22,9 +22,9 @@ public class FindTest {
 
     @Test
     public void findCriteria() {
-        Criteria.Term[] terms = {
-                new Criteria.Term(Tag.ARTIST, "bob dylan"),
-                new Criteria.Term(Tag.GENRE, "acid rock")
+        Find.Term[] terms = {
+                new Find.Term(Tag.ARTIST, "bob dylan"),
+                new Find.Term(Tag.GENRE, "acid rock")
         };
         String text = new Find(terms).text();
         assertThat(text).as("multiple criteria").isEqualTo(("find artist \"bob dylan\" genre \"acid rock\""));

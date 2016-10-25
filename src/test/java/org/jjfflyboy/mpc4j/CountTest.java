@@ -17,9 +17,9 @@ public class CountTest {
 
     @Test
     public void textComplex() {
-        Criteria.Term[] terms = {
-                new Criteria.Term(Tag.ARTIST, "bob dylan"),
-                new Criteria.Term(Tag.TITLE, "stones")
+        Count.Term[] terms = {
+                new Count.Term(Tag.ARTIST, "bob dylan"),
+                new Count.Term(Tag.TITLE, "stones")
         };
         Count cmd = new Count(terms, Tag.TITLE);
         assertThat(cmd.text()).isEqualTo("count artist \"bob dylan\" title \"stones\" group title");

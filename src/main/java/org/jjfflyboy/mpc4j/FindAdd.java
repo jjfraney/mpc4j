@@ -21,10 +21,10 @@ public class FindAdd extends Find {
      * The arguments appear according to the ordering rule of the map.
      * @param terms list of : (type, what).
      */
-    public FindAdd(List<Criteria.Term> terms) {
+    public FindAdd(List<Find.Term> terms) {
         super(terms);
     }
-    public FindAdd(Criteria.Term... terms) {
+    public FindAdd(Find.Term... terms) {
         super(terms);
     }
     @Override

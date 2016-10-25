@@ -7,38 +7,48 @@ import java.util.*;
  */
 public class Count extends Simple {
 
+    /**
+     * The domain for the TAG parameter of 'count' command.
+     */
     interface Type extends Criteria.Type {
+    }
+
+    public static class Term extends Criteria.Term {
+
+        protected Term(Criteria.Type type, String what) {
+            super(type, what);
+        }
     }
 
     private final Criteria criteria;
     private final Tag group;
 
     public Count(Count.Type type, String needle) {
-        criteria = new Criteria(new Criteria.Term(type, needle));
+        criteria = new Criteria(new Count.Term(type, needle));
         group = null;
     }
-    public Count(List<Criteria.Term> terms) {
+    public Count(List<Count.Term> terms) {
         criteria = new Criteria(terms);
         group = null;
     }
-    public Count(Criteria.Term... terms) {
+    public Count(Count.Term... terms) {
         criteria = new Criteria(terms);
         group = null;
     }
 
     public Count(Count.Type type, String needle, Tag group) {
-        criteria = new Criteria(new Criteria.Term(type, needle));
+        criteria = new Criteria(new Count.Term(type, needle));
         this.group = group;
     }
-    public Count(List<Criteria.Term> terms, Tag group) {
+    public Count(List<Count.Term> terms, Tag group) {
         criteria = new Criteria(terms);
         this.group = group;
     }
-    public Count(Criteria.Term[] terms, Tag group) {
+    public Count(Count.Term[] terms, Tag group) {
         criteria = new Criteria(terms);
         this.group = group;
     }
-    public Count(Tag group, Criteria.Term... terms) {
+    public Count(Tag group, Count.Term... terms) {
         this(terms, group);
     }
 

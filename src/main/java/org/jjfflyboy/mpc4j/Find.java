@@ -19,6 +19,13 @@ public class Find extends AbstractSongSearch {
     interface Type extends Criteria.Type {
     }
 
+    public static class Term extends Criteria.Term {
+
+        protected Term(Criteria.Type type, String what) {
+            super(type, what);
+        }
+    }
+
     public enum Special implements Find.Type {
         ANY, FILE, BASE, MODIFIED_SINCE;
 
@@ -41,7 +48,7 @@ public class Find extends AbstractSongSearch {
      * @param what
      */
     public Find(Find.Type type, String what) {
-        Criteria.Term term = new Criteria.Term(type, what);
+        Find.Term term = new Find.Term(type, what);
         criteria = new Criteria(term);
     }
 
@@ -49,10 +56,10 @@ public class Find extends AbstractSongSearch {
      * a command of form: 'find {TYPE} "{WHAT}" [...]'.
      * @param terms array of terms: {TYPE} {WHAT}.
      */
-    public Find(Criteria.Term... terms) {
+    public Find(Find.Term... terms) {
         criteria = new Criteria(terms);
     }
-    public Find(List<Criteria.Term> terms) {
+    public Find(List<Find.Term> terms) {
         criteria = new Criteria(terms);
     }
 

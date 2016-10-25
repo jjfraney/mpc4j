@@ -20,10 +20,10 @@ public class SearchAdd extends Find {
      * a command of form: 'searchadd {TYPE} "{WHAT}" [...]'.
      * @param terms list of (type, what).
      */
-    public SearchAdd(List<Criteria.Term> terms) {
+    public SearchAdd(List<Find.Term> terms) {
         super(terms);
     }
-    public SearchAdd(Criteria.Term... terms) {
+    public SearchAdd(Find.Term... terms) {
         super(terms);
     }
 

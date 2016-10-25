@@ -28,7 +28,7 @@ public class SearchAddPl extends Find {
      * @param playlistName
      * @param terms list of (type, what).
      */
-    public SearchAddPl(String playlistName, List<Criteria.Term> terms) {
+    public SearchAddPl(String playlistName, List<Find.Term> terms) {
         super(terms);
         if(playlistName == null) {
             throw new RuntimeException("playlistName cannot be null");
@@ -36,7 +36,7 @@ public class SearchAddPl extends Find {
         this.playlistName = playlistName;
     }
 
-    public SearchAddPl(String playlistName, Criteria.Term... terms) {
+    public SearchAddPl(String playlistName, Find.Term... terms) {
         this(playlistName, Arrays.asList(terms));
     }
 

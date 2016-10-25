@@ -6,29 +6,33 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * This class provides parameters for find and derivatives.
+ * This class models a filter in use by some database commands.
+ * A filter is a pair: a field name and a value.
+ * MPD will return data to match the value of the specified field name.
+ * <p>
+ *     The MPD document for the 'find' command identifies the
+ *     filter's field name as 'TYPE' and the value name as 'WHAT'.
+ *     This class adopts that terminology.
+ * </p>
  * @author jfraney
  */
 public class Criteria {
 
+    /**
+     * The field name of a filter-like parameter.
+     */
     interface Type {
         /**
-         * convert the type to string as it would appear in mpd command.
+         * convert the name to string as it would appear in mpd command.
          * @return
          */
         String toParameter();
     }
 
     /**
-     * specifies a 'term': type-what, tag-needle or filtertype-filterwhat pair
-     * of 'find'/'search', 'count', or 'list' commands (respectively).
-     * The type-what form is common among database queries in the mpd protocol,
-     * though they use different names.  The names may be different but the
-     * purpose remains.  Each specifies some real or virtual tag and a value
-     * to match exactly or as a pattern.
-     * The prevalent terms, type-what, are used here.
+     * a 'field-value' pair to specify a filter-like parameter.
      */
-    public static class Term {
+    public abstract static class Term {
         private final Type type;
         private final String what;
         protected Term(Type type, String what) {
@@ -53,7 +57,7 @@ public class Criteria {
     }
 
     /**
-     * flattens the criteria to: "type what [....]"
+     * convert the filter pairs to a string as would appear on the command.
      */
     public String toParameters() {
         String result = terms
