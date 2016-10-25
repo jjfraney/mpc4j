@@ -9,27 +9,30 @@ public class Search extends Find {
 
     /**
      * a command of form: 'search {TYPE} "{WHAT}"
-     * @param type
-     * @param what
+     * @param type name of field to match
+     * @param what value to match
      */
-    public Search(Find.Type type, String what) {
+    public Search(Type type, String what) {
         super(type, what);
     }
 
     /**
-     * a command of form: 'searc {TYPE} "{WHAT}" [...]'.
-     * The arguments appear according to the ordering rule of the map.
-     * @param terms ordered or unordered map: (type, what).
+     * a command of form: 'search {TYPE} "{WHAT}" [...]'.
+     * @param filters array of TYPE-WHAT filter pairs.
      */
-    public Search(List<Find.Term> terms) {
-        super(terms);
+    public Search(List<Filter> filters) {
+        super(filters);
     }
-    public Search(Find.Term... terms) {
-        super(terms);
+    /**
+     * a command of form: 'search {TYPE} "{WHAT}" [...]'.
+     * @param filters array of TYPE-WHAT filter pairs.
+     */
+    public Search(Filter... filters) {
+        super(filters);
     }
 
     @Override
     public String text() {
-        return "search " + getCriteria().toParameters();
+        return "search " + getFilters().toParameters();
     }
 }

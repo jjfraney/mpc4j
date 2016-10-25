@@ -9,26 +9,29 @@ public class FindAdd extends Find {
 
     /**
      * a command of form: 'findadd {TYPE} "{WHAT}"
-     * @param type
-     * @param what
+     * @param type name of field to match
+     * @param what value to match
      */
-    public FindAdd(Find.Type type, String what) {
+    public FindAdd(Type type, String what) {
         super(type, what);
     }
 
     /**
      * a command of form: 'findadd {TYPE} "{WHAT}" [...]'.
-     * The arguments appear according to the ordering rule of the map.
-     * @param terms list of : (type, what).
+     * @param filters array of TYPE-WHAT filter pairs.
      */
-    public FindAdd(List<Find.Term> terms) {
-        super(terms);
+    public FindAdd(List<Filter> filters) {
+        super(filters);
     }
-    public FindAdd(Find.Term... terms) {
-        super(terms);
+    /**
+     * a command of form: 'findadd {TYPE} "{WHAT}" [...]'.
+     * @param filters array of TYPE-WHAT filter pairs.
+     */
+    public FindAdd(Filter... filters) {
+        super(filters);
     }
     @Override
     public String text() {
-        return "findadd " + getCriteria().toParameters();
+        return "findadd " + getFilters().toParameters();
     }
 }

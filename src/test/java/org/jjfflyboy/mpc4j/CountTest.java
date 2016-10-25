@@ -17,11 +17,11 @@ public class CountTest {
 
     @Test
     public void textComplex() {
-        Count.Term[] terms = {
-                new Count.Term(Tag.ARTIST, "bob dylan"),
-                new Count.Term(Tag.TITLE, "stones")
+        Count.Filter[] filters = {
+                new Count.Filter(Tag.ARTIST, "bob dylan"),
+                new Count.Filter(Tag.TITLE, "stones")
         };
-        Count cmd = new Count(terms, Tag.TITLE);
+        Count cmd = new Count(filters, Tag.TITLE);
         assertThat(cmd.text()).isEqualTo("count artist \"bob dylan\" title \"stones\" group title");
     }
 }

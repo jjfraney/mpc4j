@@ -16,17 +16,27 @@ import java.util.List;
  */
 public class Find extends AbstractSongSearch {
 
-    interface Type extends Criteria.Type {
+    /**
+     * the find (and others) field-name parameter.
+     * Currently, either a TAG or a special type.
+     */
+    interface Type extends Filters.Field {
     }
 
-    public static class Term extends Criteria.Term {
+    public static class Filter extends Filters.Filter {
 
-        protected Term(Criteria.Type type, String what) {
+        protected Filter(Find.Type type, String what) {
             super(type, what);
         }
     }
 
-    public enum Special implements Find.Type {
+    // find's TYPE may be a TAG or a special type.
+    // observe that enum Tag implements Find.Type.
+
+    /**
+     * find's TYPE may be one of these.
+     */
+    public enum Special implements Type {
         ANY, FILE, BASE, MODIFIED_SINCE;
 
         @Override
@@ -40,35 +50,39 @@ public class Find extends AbstractSongSearch {
         }
     }
 
-    private final Criteria criteria;
+    private final Filters filters;
 
     /**
      * a command of form: 'find {TYPE} "{WHAT}"'
-     * @param type
-     * @param what
+     * @param type name of field to match
+     * @param what value to match
      */
-    public Find(Find.Type type, String what) {
-        Find.Term term = new Find.Term(type, what);
-        criteria = new Criteria(term);
+    public Find(Type type, String what) {
+        Filter filter = new Filter(type, what);
+        filters = new Filters(filter);
     }
 
     /**
      * a command of form: 'find {TYPE} "{WHAT}" [...]'.
-     * @param terms array of terms: {TYPE} {WHAT}.
+     * @param filters array of TYPE-WHAT filter pairs.
      */
-    public Find(Find.Term... terms) {
-        criteria = new Criteria(terms);
+    public Find(Filter... filters) {
+        this.filters = new Filters(filters);
     }
-    public Find(List<Find.Term> terms) {
-        criteria = new Criteria(terms);
+    /**
+     * a command of form: 'find {TYPE} "{WHAT}" [...]'.
+     * @param filters array of TYPE-WHAT filter pairs.
+     */
+    public Find(List<Filter> filters) {
+        this.filters = new Filters(filters);
     }
 
     @Override
     public String text() {
-        return "find " + getCriteria().toParameters();
+        return "find " + getFilters().toParameters();
     }
 
-    protected Criteria getCriteria() {
-        return criteria;
+    protected Filters getFilters() {
+        return filters;
     }
 }

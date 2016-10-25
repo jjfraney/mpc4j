@@ -12,10 +12,10 @@ public class SearchAddPl extends Find {
 
     /**
      * a command of form: 'searchaddpl {Name} {TYPE} "{WHAT}"
-     * @param type
-     * @param what
+     * @param type name of field to match
+     * @param what value to match
      */
-    public SearchAddPl(String playlistName, Find.Type type, String what) {
+    public SearchAddPl(String playlistName, Type type, String what) {
         super(type, what);
         if(playlistName == null) {
             throw new RuntimeException("playlistName cannot be null");
@@ -26,22 +26,27 @@ public class SearchAddPl extends Find {
     /**
      * a command of form: 'searchaddpl {NAME} {TYPE} "{WHAT}" [...]'.
      * @param playlistName
-     * @param terms list of (type, what).
+     * @param filters array of TYPE-WHAT filter pairs.
      */
-    public SearchAddPl(String playlistName, List<Find.Term> terms) {
-        super(terms);
+    public SearchAddPl(String playlistName, List<Filter> filters) {
+        super(filters);
         if(playlistName == null) {
             throw new RuntimeException("playlistName cannot be null");
         }
         this.playlistName = playlistName;
     }
 
-    public SearchAddPl(String playlistName, Find.Term... terms) {
-        this(playlistName, Arrays.asList(terms));
+    /**
+     * a command of form: 'searchaddpl {NAME} {TYPE} "{WHAT}" [...]'.
+     * @param playlistName
+     * @param filters array of TYPE-WHAT filter pairs.
+     */
+    public SearchAddPl(String playlistName, Filter... filters) {
+        this(playlistName, Arrays.asList(filters));
     }
 
     @Override
     public String text() {
-        return "searchaddpl " + playlistName + " " + getCriteria().toParameters();
+        return "searchaddpl " + playlistName + " " + getFilters().toParameters();
     }
 }

@@ -9,26 +9,30 @@ public class SearchAdd extends Find {
 
     /**
      * a command of form: 'searchadd {TYPE} "{WHAT}"
-     * @param type
-     * @param what
+     * @param type name of field to match
+     * @param what value to match
      */
-    public SearchAdd(Find.Type type, String what) {
+    public SearchAdd(Type type, String what) {
         super(type, what);
     }
 
     /**
      * a command of form: 'searchadd {TYPE} "{WHAT}" [...]'.
-     * @param terms list of (type, what).
+     * @param filters array of TYPE-WHAT filter pairs.
      */
-    public SearchAdd(List<Find.Term> terms) {
-        super(terms);
+    public SearchAdd(List<Filter> filters) {
+        super(filters);
     }
-    public SearchAdd(Find.Term... terms) {
-        super(terms);
+    /**
+     * a command of form: 'searchadd {TYPE} "{WHAT}" [...]'.
+     * @param filters array of TYPE-WHAT filter pairs.
+     */
+    public SearchAdd(Filter... filters) {
+        super(filters);
     }
 
     @Override
     public String text() {
-        return "searchadd " + getCriteria().toParameters();
+        return "searchadd " + getFilters().toParameters();
     }
 }

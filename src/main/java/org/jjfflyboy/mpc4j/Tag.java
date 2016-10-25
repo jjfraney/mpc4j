@@ -4,9 +4,13 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 /**
+ * The tags implemented by MPD.
+ * <p>
+ *     A Tag is also a TYPE for the find command, and a TAG for the count command.
+ * </p>
  * @author jfraney
  */
-public enum Tag implements Find.Type, Count.Type {
+public enum Tag implements Find.Type, Count.Tag {
     ARTIST,
     ARTIST_SORT,
     ALBUM,
@@ -38,7 +42,7 @@ public enum Tag implements Find.Type, Count.Type {
     Tag() {
         // convert Tag's name (CAPS and underscores) to camelCase
         String [] tokens = name().split("_");
-        this.songLabel = Arrays.stream(tokens).map(Tag::capitalize).collect(Collectors.joining(""));
+        this.songLabel = Arrays.stream(tokens).map(org.jjfflyboy.mpc4j.Tag::capitalize).collect(Collectors.joining(""));
         this.parameter = this.songLabel.toLowerCase();
     }
 
