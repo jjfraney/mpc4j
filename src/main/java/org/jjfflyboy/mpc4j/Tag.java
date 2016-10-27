@@ -6,11 +6,12 @@ import java.util.stream.Collectors;
 /**
  * The tags implemented by MPD.
  * <p>
- *     A Tag is also a TYPE for the find command, and a TAG for the count command.
+ *     A Tag is also a TYPE for the find command, and a TAG for the count command,
+ *     and a GROUPTYPE for the list command.
  * </p>
  * @author jfraney
  */
-public enum Tag implements Find.Type, Count.Tag {
+public enum Tag implements Find.Type, Count.Tag, List.Type {
     ARTIST,
     ARTIST_SORT,
     ALBUM,
