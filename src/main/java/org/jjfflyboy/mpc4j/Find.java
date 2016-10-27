@@ -69,13 +69,6 @@ public class Find extends AbstractSongSearch {
     public Find(Filter... filters) {
         this.filters = new Filters(filters);
     }
-    /**
-     * a command of form: 'find {TYPE} "{WHAT}" [...]'.
-     * @param filters array of TYPE-WHAT filter pairs.
-     */
-    public Find(List<? extends Filter> filters) {
-        this.filters = new Filters(filters);
-    }
 
     @Override
     public String text() {

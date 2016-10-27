@@ -28,21 +28,9 @@ public class SearchAddPl extends Find {
      * @param playlistName
      * @param filters array of TYPE-WHAT filter pairs.
      */
-    public SearchAddPl(String playlistName, List<Filter> filters) {
-        super(filters);
-        if(playlistName == null) {
-            throw new RuntimeException("playlistName cannot be null");
-        }
-        this.playlistName = playlistName;
-    }
-
-    /**
-     * a command of form: 'searchaddpl {NAME} {TYPE} "{WHAT}" [...]'.
-     * @param playlistName
-     * @param filters array of TYPE-WHAT filter pairs.
-     */
     public SearchAddPl(String playlistName, Filter... filters) {
-        this(playlistName, Arrays.asList(filters));
+        super(filters);
+        this.playlistName = playlistName;
     }
 
     @Override

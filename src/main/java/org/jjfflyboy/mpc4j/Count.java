@@ -36,14 +36,6 @@ public class Count extends Simple {
     }
     /**
      * a command of form: 'count {TAG} "{NEEDLE}" [...]'.
-     * @param filters list of TYPE-WHAT filter pairs.
-     */
-    public Count(List<Filter> filters) {
-        this.filters = new Filters(filters);
-        group = null;
-    }
-    /**
-     * a command of form: 'count {TAG} "{NEEDLE}" [...]'.
      * @param filters array of TYPE-WHAT filter pairs.
      */
     public Count(Filter... filters) {
@@ -59,16 +51,6 @@ public class Count extends Simple {
      */
     public Count(Tag tag, String needle, org.jjfflyboy.mpc4j.Tag group) {
         filters = new Filters(new Filter(tag, needle));
-        this.group = group;
-    }
-
-    /**
-     *
-     * @param filters list of TYPE-WHAT filter pairs.
-     * @param group optional value to group results by, null if none.
-     */
-    public Count(List<Filter> filters, org.jjfflyboy.mpc4j.Tag group) {
-        this.filters = new Filters(filters);
         this.group = group;
     }
 

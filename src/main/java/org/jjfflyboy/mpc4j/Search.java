@@ -20,13 +20,6 @@ public class Search extends Find {
      * a command of form: 'search {TYPE} "{WHAT}" [...]'.
      * @param filters array of TYPE-WHAT filter pairs.
      */
-    public Search(List<Filter> filters) {
-        super(filters);
-    }
-    /**
-     * a command of form: 'search {TYPE} "{WHAT}" [...]'.
-     * @param filters array of TYPE-WHAT filter pairs.
-     */
     public Search(Filter... filters) {
         super(filters);
     }

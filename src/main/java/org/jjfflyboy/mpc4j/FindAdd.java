@@ -20,13 +20,6 @@ public class FindAdd extends Find {
      * a command of form: 'findadd {TYPE} "{WHAT}" [...]'.
      * @param filters array of TYPE-WHAT filter pairs.
      */
-    public FindAdd(List<Filter> filters) {
-        super(filters);
-    }
-    /**
-     * a command of form: 'findadd {TYPE} "{WHAT}" [...]'.
-     * @param filters array of TYPE-WHAT filter pairs.
-     */
     public FindAdd(Filter... filters) {
         super(filters);
     }

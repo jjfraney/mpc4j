@@ -1,8 +1,6 @@
 package org.jjfflyboy.mpc4j;
 
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -42,21 +40,17 @@ public class Filters {
         }
     }
 
-    private final List<? extends Filter> filters;
+    private final Filter[] filters;
 
-    public Filters(List<? extends Filter> filters) {
-        this.filters = Collections.unmodifiableList(filters);
-    }
     public Filters(Filter... filters) {
-        this.filters = Collections.unmodifiableList(Arrays.asList(filters));
+        this.filters = filters;
     }
 
     /**
      * convert the filter pairs to a string as would appear on the command.
      */
     public String toParameters() {
-        String result = filters
-                .stream()
+        String result = Arrays.stream(filters)
                 .map(this::flatten)
                 .collect(Collectors.joining(" "));
         return result;
