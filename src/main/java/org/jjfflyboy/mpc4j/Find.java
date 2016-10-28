@@ -1,7 +1,5 @@
 package org.jjfflyboy.mpc4j;
 
-import java.util.List;
-
 /**
  * Support the find command.
  * <p>
@@ -14,7 +12,7 @@ import java.util.List;
  * </p>
  * @author jfraney
  */
-public class Find extends AbstractSongSearch {
+public class Find implements Command<DatabaseSongInfoResponse> {
 
     /**
      * the find (and others) field-name parameter.
@@ -70,12 +68,17 @@ public class Find extends AbstractSongSearch {
         this.filters = new Filters(filters);
     }
 
+    protected Filters getFilters() {
+        return filters;
+    }
+
     @Override
     public String text() {
         return "find " + getFilters().toParameters();
     }
 
-    protected Filters getFilters() {
-        return filters;
+    @Override
+    public DatabaseSongInfoResponse response(String[] responseLines) {
+        return new DatabaseSongInfoResponse(responseLines);
     }
 }

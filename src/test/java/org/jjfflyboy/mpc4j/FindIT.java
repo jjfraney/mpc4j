@@ -26,31 +26,31 @@ public class FindIT {
     @Test
     @RunAsClient
     public void test() throws IOException {
-        SongSearchResponse r = mpc.send(new Find(Tag.TITLE, "W2 Song"));
+        DatabaseSongInfoResponse r = mpc.send(new Find(Tag.TITLE, "W2 Song"));
 
         assertThat(r.isOk()).isTrue();
 
-        assertThat(r.getSongs().size()).isEqualTo(1);
+        assertThat(r.getSongInfo().size()).isEqualTo(1);
 
-        List<SongSearchResponse.Song> songs = r.getSongs();
-        SongSearchResponse.Song song = songs.stream().filter(s -> s.getFile().get().equals("w2.ogg")).findAny().get();
-        assertThat(song.getLastModified().get()).isEqualTo("2016-10-21T21:07:11Z");
-        assertThat(song.getTag(Tag.ARTIST).get()).isEqualTo("Joe Mpc4J");
+        List<DatabaseSongInfoResponse.DatabaseSongInfo> songs = r.getSongInfo();
+        DatabaseSongInfoResponse.DatabaseSongInfo songInfo = songs.stream().filter(s -> s.getFile().get().equals("w2.ogg")).findAny().get();
+        assertThat(songInfo.getLastModified().get()).isEqualTo("2016-10-21T21:07:11Z");
+        assertThat(songInfo.getTag(Tag.ARTIST).get()).isEqualTo("Joe Mpc4J");
 
     }
     @Test
     @RunAsClient
     public void testWithAny() throws IOException {
-        SongSearchResponse r = mpc.send(new Find(Find.Special.ANY, "W2 Song"));
+        DatabaseSongInfoResponse r = mpc.send(new Find(Find.Special.ANY, "W2 Song"));
 
         assertThat(r.isOk()).isTrue();
 
-        assertThat(r.getSongs().size()).isEqualTo(1);
+        assertThat(r.getSongInfo().size()).isEqualTo(1);
 
-        List<SongSearchResponse.Song> songs = r.getSongs();
-        SongSearchResponse.Song song = songs.stream().filter(s -> s.getFile().get().equals("w2.ogg")).findAny().get();
-        assertThat(song.getLastModified().get()).isEqualTo("2016-10-21T21:07:11Z");
-        assertThat(song.getTag(Tag.ARTIST).get()).isEqualTo("Joe Mpc4J");
+        List<DatabaseSongInfoResponse.DatabaseSongInfo> songs = r.getSongInfo();
+        DatabaseSongInfoResponse.DatabaseSongInfo songInfo = songs.stream().filter(s -> s.getFile().get().equals("w2.ogg")).findAny().get();
+        assertThat(songInfo.getLastModified().get()).isEqualTo("2016-10-21T21:07:11Z");
+        assertThat(songInfo.getTag(Tag.ARTIST).get()).isEqualTo("Joe Mpc4J");
 
     }
 

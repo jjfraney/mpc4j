@@ -17,7 +17,7 @@ public class LsInfoTest {
 
     @Test
     public void response() {
-        SongSearchResponse r = new LsInfo().response(new String[] {
+        DatabaseSongInfoResponse r = new LsInfo().response(new String[] {
                 "file: aaa.ogg",
                 "Last-Modified: 2016-10-19T00:33:30Z",
                 "Time: 100",
@@ -30,7 +30,7 @@ public class LsInfoTest {
                 "OK"
         });
         assertThat(r.isOk()).as("no parse").isTrue();
-        List<SongSearchResponse.Song> songs = r.getSongs();
+        List<DatabaseSongInfoResponse.DatabaseSongInfo> songs = r.getSongInfo();
         assertThat(songs.size()).as("song count").isEqualTo(3);
 
         assertThat(songs.get(0).getFile().get()).as("song file name").isEqualTo("aaa.ogg");
