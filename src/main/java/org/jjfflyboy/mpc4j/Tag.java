@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
  * </p>
  * @author jfraney
  */
-public enum Tag implements Find.Type, Count.Tag, List.Type {
+public enum Tag implements Find.Type, Count.Tag, List.Type, PlaylistFind.Tag {
     ARTIST,
     ARTIST_SORT,
     ALBUM,
