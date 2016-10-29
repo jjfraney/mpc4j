@@ -5,12 +5,15 @@ import java.util.Optional;
 /**
  * @Author jfraney
  */
-public class ReplayGainStatus implements Command<ReplayGainStatus.Response> {
-    @Override
-    public String text() {
-        return "replay_gain_status";
+public class ReplayGainStatus extends Simple {
+    public ReplayGainStatus() {
+        super();
     }
 
+    @Override
+    protected String command() {
+        return "replay_gain_status";
+    }
     @Override
     public ReplayGainStatus.Response response(String[] responseLines) {
         return new Response(responseLines);

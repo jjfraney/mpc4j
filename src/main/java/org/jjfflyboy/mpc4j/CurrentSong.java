@@ -6,10 +6,10 @@ import java.util.Optional;
 /**
  * @author jfraney
  */
-public class CurrentSong implements Command<CurrentSong.Response> {
-    @Override
-    public String text() {
-        return "currentsong";
+public class CurrentSong extends Simple {
+
+    public CurrentSong() {
+        super();
     }
 
     public static class Response extends Simple.Response {

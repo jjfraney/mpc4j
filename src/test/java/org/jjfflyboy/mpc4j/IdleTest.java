@@ -21,6 +21,12 @@ public class IdleTest {
     }
 
     @Test
+    public void textWithMultipleSubsystems() {
+        String text = new Idle(Idle.Subsystem.MIXER, Idle.Subsystem.OPTIONS, Idle.Subsystem.DATABASE).text();
+        assertThat(text).isEqualTo("idle mixer options database");
+    }
+
+    @Test
     public void response() {
         String [] textResponse = new String[] {"changed: options", "OK"};
         Idle.Response response = command.response(textResponse);

@@ -23,8 +23,4 @@ public class FindAdd extends Find {
     public FindAdd(Filter... filters) {
         super(filters);
     }
-    @Override
-    public String text() {
-        return "findadd " + getFilters().toParameters();
-    }
 }

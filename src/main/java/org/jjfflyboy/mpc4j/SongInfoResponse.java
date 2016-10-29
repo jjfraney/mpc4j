@@ -33,10 +33,10 @@ public abstract class SongInfoResponse extends Simple.Response {
         }
 
         /**
-         * @return the value in the response line: 'Range'
+         * @return the value in the response line: 'RangeParameter'
          */
         public Optional<String> getRange() {
-            return getStringValue("Range");
+            return getStringValue("RangeParameter");
         }
 
         /**

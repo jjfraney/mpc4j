@@ -7,8 +7,8 @@ import java.util.stream.Stream;
 /**
  * @Author jfraney
  */
-public class Idle implements Command<Idle.Response> {
-    public enum Subsystem {
+public class Idle extends Simple {
+    public enum Subsystem implements Parameter {
         DATABASE, UPDATE, STORED_PLAYLIST, PLAYLIST, PLAYER, MIXER, OUTPUT, OPTIONS, STICKER, SUBSCRIPTION, MESSAGE;
 
         public static Subsystem decode(String v) {
@@ -17,21 +17,13 @@ public class Idle implements Command<Idle.Response> {
         public String encode() {
             return name().toLowerCase();
         }
+
+        @Override
+        public String toParameter() {return encode();}
     }
 
-    private final Subsystem[] subsystems;
     public Idle(Subsystem ... subsystems) {
-        this.subsystems = subsystems;
-    }
-
-    @Override
-    public String text() {
-        String args = Stream.of(subsystems).map(s -> s.encode()).collect(Collectors.joining(" "));
-        if(args.length() > 0) {
-            return "idle " + args;
-        } else {
-            return "idle";
-        }
+        super(subsystems);
     }
 
     @Override

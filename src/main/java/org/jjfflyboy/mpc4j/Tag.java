@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
  * </p>
  * @author jfraney
  */
-public enum Tag implements Find.Type, Count.Tag, List.Type, PlaylistFind.Tag {
+public enum Tag implements Parameter, Find.Type, Count.Tag, List.Type, PlaylistFind.Tag {
     ARTIST,
     ARTIST_SORT,
     ALBUM,
@@ -68,6 +68,7 @@ public enum Tag implements Find.Type, Count.Tag, List.Type, PlaylistFind.Tag {
     /**
      * @return the tag as it would appear as a command parameter
      */
+    @Override
     public String toParameter() {
         return parameter;
     }

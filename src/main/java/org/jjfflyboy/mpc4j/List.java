@@ -1,10 +1,6 @@
 package org.jjfflyboy.mpc4j;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Optional;
 import java.util.function.Consumer;
-import java.util.stream.Collectors;
 
 /**
  * Represents the 'list' command.  A list command's form is:
@@ -12,15 +8,15 @@ import java.util.stream.Collectors;
  *
  * @author jfraney
  */
-public class List implements Command<List.Response> {
+public class List extends Simple {
 
     /**
      * TYPE: can be any tag or 'file'.
      */
-    interface Type {
-        String toParameter();
+    interface Type extends Parameter {
         String toSongLabel();
     }
+
     public enum Special implements List.Type {
         FILE;
 
@@ -36,20 +32,12 @@ public class List implements Command<List.Response> {
     /**
      * any tag or 'file'.
      */
-    private final List.Type type;
-
     public static class Filter extends Filters.Filter {
 
         protected Filter(Find.Type type, String what) {
             super(type, what);
         }
     }
-    private final Filters filters;
-
-    /**
-     * any tag
-     */
-    private final Tag [] groupTypes;
 
     private static List.Filter[] NO_FILTERS = new List.Filter[0];
     private static Tag [] NO_GROUPTYPES = new Tag [0];
@@ -59,9 +47,7 @@ public class List implements Command<List.Response> {
      * @param type the 'type' to list
      */
     public List(final List.Type type) {
-        this.filters = new Filters(NO_FILTERS);
-        this.type = type;
-        this.groupTypes = NO_GROUPTYPES;
+        super(type);
     }
 
     /**
@@ -70,9 +56,7 @@ public class List implements Command<List.Response> {
      * @param filters filters to apply
      */
     public List(List.Type type, List.Filter ... filters) {
-        this.filters = new Filters(filters);
-        this.type = type;
-        this.groupTypes = NO_GROUPTYPES;
+        super(type, new Filters(filters));
     }
 
     /**
@@ -81,9 +65,7 @@ public class List implements Command<List.Response> {
      * @param groupTypes tags to group by
      */
     public List(List.Type type, Tag ... groupTypes) {
-        this.filters = new Filters(NO_FILTERS);
-        this.type = type;
-        this.groupTypes = groupTypes;
+        super(type, new GroupParameter(groupTypes));
     }
 
     /**
@@ -93,24 +75,7 @@ public class List implements Command<List.Response> {
      * @param groupTypes tags to group by
      */
     public List(List.Type type, List.Filter[] filters, Tag[] groupTypes) {
-        this.filters = new Filters(filters);
-        this.type = type;
-        this.groupTypes = groupTypes;
-    }
-    @Override
-    public String text() {
-        StringBuilder sb = new StringBuilder()
-                .append("list ")
-                .append(type.toParameter());
-        String filtersString = this.filters.toParameters();
-        if(filtersString.length() > 0) {
-            sb.append(" ").append(filtersString);
-        }
-        if(groupTypes.length > 0) {
-            String groupsString = Arrays.stream(groupTypes).map(g-> "group " + g.toParameter()).collect(Collectors.joining(" "));
-            sb.append(" ").append(groupsString);
-        }
-        return sb.toString();
+        super(type, new Filters(filters), new GroupParameter(groupTypes));
     }
 
     @Override
@@ -133,7 +98,7 @@ public class List implements Command<List.Response> {
     public static class Builder {
 
         private final List.Type type;
-        private Filter[] filters;
+        private Filter[] filters ;
         private Tag [] groupTypes;
 
         private Builder(List.Type type) {

@@ -3,14 +3,9 @@ package org.jjfflyboy.mpc4j;
 /**
  * @author jfraney
  */
-public class PlChanges implements Command<QueuedSongInfoResponse> {
-    private final Integer version;
+public class PlChanges extends Simple {
     public PlChanges(Integer version) {
-        this.version = version;
-    }
-    @Override
-    public String text() {
-        return "plchanges " + version;
+        super(adapt(version));
     }
 
     @Override

@@ -3,12 +3,11 @@ package org.jjfflyboy.mpc4j;
 /**
  * @author jfraney
  */
-public class LsInfo implements Command<DatabaseSongInfoResponse> {
-    @Override
-    public String text() {
-        return "lsinfo";
-    }
+public class LsInfo extends Simple {
 
+    public LsInfo() {
+        super();
+    }
     @Override
     public DatabaseSongInfoResponse response(String[] responseLines) {
         return new DatabaseSongInfoResponse(responseLines);

@@ -10,6 +10,7 @@ public class AddTest {
 
     @Test
     public void addWithUri() {
+        Add a = new Add("some/path");
         String text = new Add("some/path").text();
         assertThat(text).isEqualTo("add some/path");
     }

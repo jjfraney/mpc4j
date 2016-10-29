@@ -33,8 +33,4 @@ public class SearchAddPl extends Find {
         this.playlistName = playlistName;
     }
 
-    @Override
-    public String text() {
-        return "searchaddpl " + playlistName + " " + getFilters().toParameters();
-    }
 }

@@ -6,10 +6,9 @@ import java.util.Optional;
 /**
  * @author jfraney
  */
-public class Stats implements Command<Stats.Response> {
-    @Override
-    public String text() {
-        return "stats";
+public class Stats extends Simple {
+    public Stats() {
+        super();
     }
 
     public static class Response extends Simple.Response {

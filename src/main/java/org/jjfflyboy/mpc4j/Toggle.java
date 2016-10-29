@@ -3,7 +3,7 @@ package org.jjfflyboy.mpc4j;
 /**
  * @author jfraney
  */
-public enum Toggle {
+public enum Toggle implements Parameter {
     ON("1"), OFF("0");
 
     final private String code;
@@ -22,4 +22,7 @@ public enum Toggle {
     public String encode() {
         return code;
     }
+
+    @Override
+    public String toParameter() {return encode();}
 }

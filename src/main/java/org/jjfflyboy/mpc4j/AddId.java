@@ -6,28 +6,11 @@ import java.util.Optional;
  * @author jfraney
  */
 public class AddId extends Simple {
-    private final String uri;
-    private final Integer pos;
     public AddId(String uri) {
-        this.uri = uri;
-        this.pos = null;
+        super(adapt(uri));
     }
     public AddId(String uri, Integer pos) {
-        this.uri = uri;
-        this.pos = pos;
-    }
-
-    @Override
-    public String text() {
-        StringBuilder sb = new StringBuilder()
-                .append("addid")
-                .append(" ")
-                .append(uri)
-                ;
-        if(pos != null) {
-            sb.append(" ").append(pos);
-        }
-        return sb.toString();
+        super(adapt(uri), adapt(pos));
     }
 
     @Override

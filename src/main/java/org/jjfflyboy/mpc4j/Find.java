@@ -12,7 +12,7 @@ package org.jjfflyboy.mpc4j;
  * </p>
  * @author jfraney
  */
-public class Find implements Command<DatabaseSongInfoResponse> {
+public class Find extends Simple {
 
     /**
      * the find (and others) field-name parameter.
@@ -48,16 +48,13 @@ public class Find implements Command<DatabaseSongInfoResponse> {
         }
     }
 
-    private final Filters filters;
-
     /**
      * a command of form: 'find {TYPE} "{WHAT}"'
      * @param type name of field to match
      * @param what value to match
      */
     public Find(Type type, String what) {
-        Filter filter = new Filter(type, what);
-        filters = new Filters(filter);
+        super(new Filter(type, what));
     }
 
     /**
@@ -65,16 +62,7 @@ public class Find implements Command<DatabaseSongInfoResponse> {
      * @param filters array of TYPE-WHAT filter pairs.
      */
     public Find(Filter... filters) {
-        this.filters = new Filters(filters);
-    }
-
-    protected Filters getFilters() {
-        return filters;
-    }
-
-    @Override
-    public String text() {
-        return "find " + getFilters().toParameters();
+        super(new Filters(filters));
     }
 
     @Override

@@ -3,7 +3,7 @@ package org.jjfflyboy.mpc4j;
 /**
  * @author jfraney
  */
-public class PlaylistFind implements Command<QueuedSongInfoResponse> {
+public class PlaylistFind extends Simple {
     interface Tag extends Filters.Field {
     }
     public static class Filter extends Filters.Filter {
@@ -12,17 +12,8 @@ public class PlaylistFind implements Command<QueuedSongInfoResponse> {
         }
     }
 
-    private final Filters filters;
-
     public PlaylistFind(PlaylistFind.Tag tag, String needle) {
-        filters = new Filters(new Filter(tag, needle));
-    }
-    protected Filters getFilters() {
-        return filters;
-    }
-    @Override
-    public String text() {
-        return "playlistfind " + getFilters().toParameters();
+        super(new Filters(new Filter(tag, needle)));
     }
 
     @Override

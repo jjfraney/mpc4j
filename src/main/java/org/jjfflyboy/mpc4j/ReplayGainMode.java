@@ -5,7 +5,7 @@ package org.jjfflyboy.mpc4j;
  */
 public class ReplayGainMode extends Simple {
     // I don't like the name "ReplayGainMode.Mode"....just following the protocol here.
-    public enum Mode {
+    public enum Mode implements Parameter {
         OFF, TRACK, ALBUM, AUTO;
         public static Mode decode(String value) {
             return valueOf(value.toUpperCase());
@@ -13,15 +13,19 @@ public class ReplayGainMode extends Simple {
         public String encode() {
             return name().toLowerCase();
         }
-    }
-    final private Mode mode;
+        public String toString() {return encode();}
 
-    public ReplayGainMode(Mode mode) {
-        this.mode = mode;
+        @Override
+        public String toParameter() {
+            return encode();
+        }
     }
 
     @Override
-    public String text() {
-        return "replay_gain_mode " + mode.encode();
+    protected String command() {
+        return "replay_gain_mode";
+    }
+    public ReplayGainMode(Mode mode) {
+        super(mode);
     }
 }

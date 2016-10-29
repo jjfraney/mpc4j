@@ -5,16 +5,11 @@ import java.util.Optional;
 /**
  * @author jfraney
  */
-public class PlChangesPosId implements Command<PlChangesPosId.Response> {
+public class PlChangesPosId extends Simple {
 
 
-    private final Integer version;
     public PlChangesPosId(Integer version) {
-        this.version = version;
-    }
-    @Override
-    public String text() {
-        return "plchangesposid " + version;
+        super(adapt(version));
     }
 
     @Override
