@@ -2,18 +2,17 @@ package org.jjfflyboy.mpc4j;
 
 import java.math.BigDecimal;
 import java.util.Optional;
-import java.util.stream.Stream;
 
 /**
  * @author jfraney
  */
-public class Status implements Command<Status.Response> {
-    @Override
-    public String text() {
-        return "status";
+public class Status extends AbstractCommand<Status.Response> {
+
+    public Status() {
+        super();
     }
 
-    public static class Response extends Simple.Response {
+    public static class Response extends SimpleResponse {
         // according to mpd source code: src/command/PlayerCommands.cxx
 
         public Optional<Integer> getVolume() {

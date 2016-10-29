@@ -3,7 +3,7 @@ package org.jjfflyboy.mpc4j;
 /**
  * @author jfraney
  */
-public class LsInfo extends Simple {
+public class LsInfo extends AbstractCommand<DatabaseSongInfoResponse> {
 
     public LsInfo() {
         super();

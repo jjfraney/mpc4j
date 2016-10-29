@@ -6,13 +6,13 @@ import java.util.Optional;
 /**
  * @author jfraney
  */
-public class CurrentSong extends Simple {
+public class CurrentSong extends AbstractCommand<CurrentSong.Response> {
 
     public CurrentSong() {
         super();
     }
 
-    public static class Response extends Simple.Response {
+    public static class Response extends SimpleResponse {
         public Optional<String> getFile() {
             return getStringValue("file");
         }

@@ -5,7 +5,7 @@ import java.util.Optional;
 /**
  * @author jfraney
  */
-public class PlChangesPosId extends Simple {
+public class PlChangesPosId extends AbstractCommand<PlChangesPosId.Response> {
 
 
     public PlChangesPosId(Integer version) {
@@ -17,7 +17,7 @@ public class PlChangesPosId extends Simple {
         return new Response(responseLines);
     }
 
-    public class Response extends Simple.Response {
+    public class Response extends SimpleResponse {
         Response(String[] responseLines) {
             super(responseLines);
         }

@@ -7,7 +7,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.io.IOException;
-import java.lang.annotation.Repeatable;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -30,8 +29,8 @@ public class PlaybackControlIT {
         Play playCommand = new Play();
         Stop stopCommand = new Stop();
 
-        Play.Response playResponse = mpc.send(playCommand);
-        Stop.Response stopResponse = mpc.send(stopCommand);
+        SimpleResponse playResponse = mpc.send(playCommand);
+        SimpleResponse stopResponse = mpc.send(stopCommand);
 
         assertThat(playResponse.isOk()).as("play starts").isTrue();
         assertThat(stopResponse.isOk()).as("play stopped").isTrue();

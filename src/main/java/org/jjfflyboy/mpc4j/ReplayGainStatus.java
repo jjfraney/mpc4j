@@ -5,7 +5,7 @@ import java.util.Optional;
 /**
  * @Author jfraney
  */
-public class ReplayGainStatus extends Simple {
+public class ReplayGainStatus extends AbstractCommand<ReplayGainStatus.Response> {
     public ReplayGainStatus() {
         super();
     }
@@ -19,7 +19,7 @@ public class ReplayGainStatus extends Simple {
         return new Response(responseLines);
     }
 
-    public static class Response extends Simple.Response {
+    public static class Response extends SimpleResponse {
         Response(String[] responseLines) {
             super(responseLines);
         }

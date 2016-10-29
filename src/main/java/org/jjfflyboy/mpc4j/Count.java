@@ -7,7 +7,7 @@ import java.util.Optional;
 /**
  * @author jfraney
  */
-public class Count extends Simple {
+public class Count extends AbstractCommand<Count.Response> {
 
     /**
      * The domain for the TAG parameter of 'count' command.
@@ -76,7 +76,7 @@ public class Count extends Simple {
         return new Response(responseLines);
     }
 
-    public class Response extends Simple.Response {
+    public class Response extends SimpleResponse {
         Response(String[] responseLines) {
             super(responseLines);
         }

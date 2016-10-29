@@ -1,17 +1,16 @@
 package org.jjfflyboy.mpc4j;
 
-import java.time.ZonedDateTime;
 import java.util.Optional;
 
 /**
  * @author jfraney
  */
-public class Stats extends Simple {
+public class Stats extends AbstractCommand<Stats.Response> {
     public Stats() {
         super();
     }
 
-    public static class Response extends Simple.Response {
+    public static class Response extends SimpleResponse {
         public Optional<Integer> getUptime() {return getIntegerValue("uptime");}
         public Optional<Integer> getPlaytime() {return getIntegerValue("playtime");}
         public Optional<Integer> getArtists() {return getIntegerValue("artists");}

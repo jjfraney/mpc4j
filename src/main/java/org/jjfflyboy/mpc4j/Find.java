@@ -12,7 +12,7 @@ package org.jjfflyboy.mpc4j;
  * </p>
  * @author jfraney
  */
-public class Find extends Simple {
+public class Find extends AbstractCommand<DatabaseSongInfoResponse> {
 
     /**
      * the find (and others) field-name parameter.

@@ -1,13 +1,11 @@
 package org.jjfflyboy.mpc4j;
 
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * @Author jfraney
  */
-public class Idle extends Simple {
+public class Idle extends AbstractCommand<Idle.Response> {
     public enum Subsystem implements Parameter {
         DATABASE, UPDATE, STORED_PLAYLIST, PLAYLIST, PLAYER, MIXER, OUTPUT, OPTIONS, STICKER, SUBSCRIPTION, MESSAGE;
 
@@ -32,7 +30,7 @@ public class Idle extends Simple {
     }
 
 
-    public static class Response extends Simple.Response {
+    public static class Response extends SimpleResponse {
 
         public Optional<Subsystem> getChanged() {
             return getStringValue("changed").map(s->Subsystem.decode(s));

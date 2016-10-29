@@ -3,7 +3,7 @@ package org.jjfflyboy.mpc4j;
 /**
  * @author jfraney
  */
-public class PlaylistFind extends Simple {
+public class PlaylistFind extends AbstractCommand<QueuedSongInfoResponse> {
     interface Tag extends Filters.Field {
     }
     public static class Filter extends Filters.Filter {

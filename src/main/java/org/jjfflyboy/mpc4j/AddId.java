@@ -17,7 +17,7 @@ public class AddId extends Simple {
     public Response response(String[] responseLines) {
         return new Response(responseLines);
     }
-    public static class Response extends Simple.Response {
+    public static class Response extends SimpleResponse {
         public Response(String [] responseLines) {
             super(responseLines);
         }

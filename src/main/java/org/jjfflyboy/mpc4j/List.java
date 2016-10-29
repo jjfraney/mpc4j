@@ -8,7 +8,7 @@ import java.util.function.Consumer;
  *
  * @author jfraney
  */
-public class List extends Simple {
+public class List extends AbstractCommand<List.Response> {
 
     /**
      * TYPE: can be any tag or 'file'.
@@ -83,7 +83,7 @@ public class List extends Simple {
         return new Response(responseLines);
     }
 
-    public class Response extends Simple.Response {
+    public class Response extends SimpleResponse {
         Response(String[] responseLines) {
             super(responseLines);
         }

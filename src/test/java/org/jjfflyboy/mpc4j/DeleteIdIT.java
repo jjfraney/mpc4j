@@ -22,7 +22,7 @@ public class DeleteIdIT {
     public void delete() throws IOException {
         AddId.Response addResponse = mpc.send(new AddId("w1.ogg"));
         Integer id = addResponse.getId().get();
-        DeleteId.Response deleteResponse = mpc.send(new DeleteId(id));
+        SimpleResponse deleteResponse = mpc.send(new DeleteId(id));
         assertThat(deleteResponse.isOk()).isTrue();
     }
 }

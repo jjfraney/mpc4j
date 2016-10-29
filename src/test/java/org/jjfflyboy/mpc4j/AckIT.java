@@ -5,7 +5,6 @@ import org.jboss.arquillian.junit.Arquillian;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import sun.java2d.pipe.SpanShapeRenderer;
 
 import java.io.IOException;
 
@@ -33,7 +32,7 @@ public class AckIT {
     @Test
     @RunAsClient
     public void testBadCommand() throws IOException {
-        Simple.Response r = mpc.send(new BadCommand());
+        SimpleResponse r = mpc.send(new BadCommand());
         assertThat(r.isOk()).as("bad command should fail").isEqualTo(false);
         assertThat(r.getAck()).as("ack should be response").isPresent();
 

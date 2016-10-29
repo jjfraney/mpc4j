@@ -20,7 +20,7 @@ public class ClearIT {
 
     @Test
     public void clear() throws IOException {
-        Simple.Response r = mpc.send(new Clear());
+        SimpleResponse r = mpc.send(new Clear());
         assertThat(r.isOk()).isTrue();
     }
 }
