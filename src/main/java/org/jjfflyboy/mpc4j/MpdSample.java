@@ -70,8 +70,9 @@ public class MpdSample {
     private static void runStatusQueryCommands() throws IOException {
         run(new ClearError());
         run(new CurrentSong());
-        CurrentSong.Response csr = mpc.send(new CurrentSong());
-        System.out.println("last modified: " + csr.getLastModified());
+        QueuedSongInfoResponse csr = mpc.send(new CurrentSong());
+        QueuedSongInfoResponse.QueuedSongInfo info =  csr.getSongInfo().get(0);
+        System.out.println("last modified: " + info.getLastModified());
         run(new Status());
         run(new Stats());
     }

@@ -3,6 +3,8 @@ package org.jjfflyboy.mpc4j;
 import java.util.Optional;
 
 /**
+ * replay_gain_status command from
+ * <a href='https://www.musicpd.org/doc/protocol/playback_option_commands.html'>MPD Playback option commands.</a>
  * @Author jfraney
  */
 public class ReplayGainStatus extends AbstractCommand<ReplayGainStatus.Response> {
@@ -19,16 +21,19 @@ public class ReplayGainStatus extends AbstractCommand<ReplayGainStatus.Response>
         return new Response(responseLines);
     }
 
+    /**
+     * access to data in response to replay_gain_status
+     */
     public static class Response extends SimpleResponse {
         Response(String[] responseLines) {
             super(responseLines);
         }
 
+        /**
+         * @return value of 'replay_gain_mode: ' line
+         */
         public Optional<ReplayGainMode.Mode> getReplayGainMode() {
-            return getModeValue("replay_gain_mode");
-        }
-        protected Optional<ReplayGainMode.Mode> getModeValue(String fieldName) {
-            return findFieldValue(fieldName).map(s -> ReplayGainMode.Mode.decode(s));
+            return findFieldValue("replay_gain_mode").map(s -> ReplayGainMode.Mode.decode(s));
         }
     }
 }

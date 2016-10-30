@@ -1,10 +1,14 @@
 package org.jjfflyboy.mpc4j;
 
 /**
+ * replay_gain_mode command from
+ * <a href='https://www.musicpd.org/doc/protocol/playback_option_commands.html'>MPD Playback option commands.</a>
  * @author jfraney
  */
 public class ReplayGainMode extends Simple {
-    // I don't like the name "ReplayGainMode.Mode"....just following the protocol here.
+    /**
+     * set of 'replay gain modes' available
+     */
     public enum Mode implements Parameter {
         OFF, TRACK, ALBUM, AUTO;
         public static Mode decode(String value) {
@@ -25,6 +29,7 @@ public class ReplayGainMode extends Simple {
     protected String command() {
         return "replay_gain_mode";
     }
+
     public ReplayGainMode(Mode mode) {
         super(mode);
     }
