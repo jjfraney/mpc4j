@@ -4,30 +4,23 @@ import java.time.ZonedDateTime;
 import java.util.Optional;
 
 /**
- * @author jfraney
+ * currentsong command
+ * from <a href='https://www.musicpd.org/doc/protocol/command_reference.html#status_commands'>MPD document</a>
+ * @Author jfraney
  */
-public class CurrentSong extends AbstractCommand<CurrentSong.Response> {
+
+public class CurrentSong extends AbstractCommand<QueuedSongInfoResponse> {
 
     public CurrentSong() {
         super();
     }
 
-    public static class Response extends SimpleResponse {
-        public Optional<String> getFile() {
-            return getStringValue("file");
-        }
-        public Optional<ZonedDateTime> getLastModified() {return getZonedDateTimeValue("Last-Modified"); }
-        public Optional<Integer> getTime() {return getIntegerValue("Time");}
-        public Optional<Integer> getPosition() {return getIntegerValue("Pos");}
-        public Optional<Integer> getId() {return getIntegerValue("Id");}
-
-        Response(String[] responseLines) {
-            super(responseLines);
-        }
-    }
-
+    /**
+     * @param responseLines given by mpd server in response to this command.
+     * @return response to 'currentsong' command
+     */
     @Override
-    public Response response(String[] responseLines) {
-        return new Response(responseLines);
+    public QueuedSongInfoResponse response(String[] responseLines) {
+        return new QueuedSongInfoResponse(responseLines);
     }
 }
