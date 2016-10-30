@@ -20,19 +20,21 @@ public class CurrentSongTest {
     public void response() throws Exception {
         ZonedDateTime now = ZonedDateTime.now();
         String file = "someFileName";
-        CurrentSong.Response r = new CurrentSong().response(new String[] {
+        QueuedSongInfoResponse response = new CurrentSong().response(new String[] {
                 "Last-Modified: " + now.format(DateTimeFormatter.ISO_ZONED_DATE_TIME),
                 "Id: 10",
                 "Time: 99",
                 "Pos: 23",
-                "file: " + file
+                "file: " + file,
+                "OK"
 
         });
+        QueuedSongInfoResponse.QueuedSongInfo r = response.getSongInfo().get(0);
         assertThat(r.getTime().get().intValue()).as("wrong ").isEqualTo(99);
         assertThat(r.getFile().get()).as("wrong ").isEqualTo(file);
         assertThat(r.getId().get().intValue()).as("wrong ").isEqualTo(10);
         assertThat(r.getLastModified().get()).as("wrong ").isEqualTo(now);
-        assertThat(r.getPosition().get().intValue()).as("wrong ").isEqualTo(23);
+        assertThat(r.getPos().get().intValue()).as("wrong ").isEqualTo(23);
     }
 
 }
