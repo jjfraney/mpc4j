@@ -3,6 +3,8 @@ package org.jjfflyboy.mpc4j;
 import java.math.BigDecimal;
 
 /**
+ * seek command from
+ * <a href='https://www.musicpd.org/doc/protocol/playback_commands.html'>MPD Document: Control playback.</a>
  * @Author jfraney
  */
 public class Seek extends Simple {
