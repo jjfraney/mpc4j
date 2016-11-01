@@ -12,6 +12,9 @@ import java.util.stream.Collectors;
  * @author jfraney
  */
 public class ListPlaylist extends AbstractCommand<ListPlaylist.Response> {
+    /**
+     * @param name of playlist
+     */
     public ListPlaylist(String name) {
         super(adapt(name));
     }

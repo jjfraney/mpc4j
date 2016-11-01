@@ -7,6 +7,11 @@ package org.jjfflyboy.mpc4j;
  */
 public class Prio extends Simple {
 
+    /**
+     * @param priority to apply to selected songs
+     * @param startPos of first selected song
+     * @param endPos of last selected song
+     */
     public Prio(Integer priority, Integer startPos, Integer endPos) {
         super(adapt(priority), new RangeParameter(startPos, endPos));
     }

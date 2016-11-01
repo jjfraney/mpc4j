@@ -13,6 +13,9 @@ import java.util.Optional;
 public class PlChangesPosId extends AbstractCommand<PlChangesPosId.Response> {
 
 
+    /**
+     * @param version to compare with
+     */
     public PlChangesPosId(Integer version) {
         super(adapt(version));
     }

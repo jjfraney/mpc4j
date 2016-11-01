@@ -16,8 +16,8 @@ public class Shuffle extends Simple {
 
     /**
      * shuffle songs between start:end
-     * @param start
-     * @param end
+     * @param start first song of selected range
+     * @param end last song of selected range
      */
     public Shuffle(Integer start, Integer end) {
         super(new RangeParameter(start, end));

@@ -12,9 +12,17 @@ import java.util.Optional;
  * @author jfraney
  */
 public class AddId extends Simple {
+    /**
+     * @param uri song file location
+     */
     public AddId(String uri) {
         super(adapt(uri));
     }
+
+    /**
+     * @param uri song file location
+     * @param pos position of the added song
+     */
     public AddId(String uri, Integer pos) {
         super(adapt(uri), adapt(pos));
     }

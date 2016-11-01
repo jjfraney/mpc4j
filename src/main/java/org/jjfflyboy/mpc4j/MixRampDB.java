@@ -8,7 +8,10 @@ import java.math.BigDecimal;
  * @author jfraney
  */
 public class MixRampDB extends Simple {
-    public MixRampDB(BigDecimal mixRampDB) {
-        super(adapt(mixRampDB));
+    /**
+     * @param deciBels threshold
+     */
+    public MixRampDB(BigDecimal deciBels) {
+        super(adapt(deciBels));
     }
 }

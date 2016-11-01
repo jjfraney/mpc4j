@@ -5,6 +5,9 @@ import java.util.Optional;
 /**
  * stats command
  * from <a href='https://www.musicpd.org/doc/protocol/command_reference.html#status_commands'>MPD document</a>
+ * <p>
+ *     The response to this command is custom and contains several metrics of the database.
+ * </p>
  * @Author jfraney
  */
 public class Stats extends AbstractCommand<Stats.Response> {

@@ -7,6 +7,9 @@ package org.jjfflyboy.mpc4j;
  */
 public class Consume extends Simple {
 
+    /**
+     * @param toggle on or off
+     */
     public Consume(Toggle toggle) {
         super(toggle);
     }

@@ -9,14 +9,14 @@ public class MixRampDelay extends Simple {
     private static Parameter NAN = adapt("nan");
     /**
      * A value or 'nan'.  Note: per protocol,'nan' disables MixRamp overlapping.
-     * @param mixRampDelay value or null (for 'nan').
+     * @param seconds of delay, or null for nan
      */
-    public MixRampDelay(Integer mixRampDelay) {
-        super(adapt(mixRampDelay));
+    public MixRampDelay(Integer seconds) {
+        super(adapt(seconds));
     }
 
     /**
-     * send value of 'nan'.
+     * sets mixrampdelay to nan, i.e., fallback to crossfading.
      */
     public MixRampDelay() {
         super(NAN);

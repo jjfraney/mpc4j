@@ -17,6 +17,10 @@ public class PlaylistFind extends AbstractCommand<QueuedSongInfoResponse> {
         }
     }
 
+    /**
+     * @param tag of songs to return in result
+     * @param needle (or value) of the tag of songs to return in result
+     */
     public PlaylistFind(PlaylistFind.Tag tag, String needle) {
         super(new Filters(new Filter(tag, needle)));
     }

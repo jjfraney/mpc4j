@@ -6,6 +6,10 @@ package org.jjfflyboy.mpc4j;
  * @author jfraney
  */
 public class ClearTagId extends Simple {
+    /**
+     * @param songId id of target song in the queue
+     * @param tag legal tag
+     */
     public ClearTagId(Integer songId, Tag tag) {
         super(adapt(songId), tag);
     }

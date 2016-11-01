@@ -1,6 +1,8 @@
 package org.jjfflyboy.mpc4j;
 
 /**
+ * Common base class defining a simple response.  Many commands return only OK or ACK and
+ * would use this base class.
  * @author jfraney
  */
 public abstract class Simple extends AbstractCommand<SimpleResponse> {

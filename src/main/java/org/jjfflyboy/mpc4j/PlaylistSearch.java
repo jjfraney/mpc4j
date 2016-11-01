@@ -10,6 +10,10 @@ package org.jjfflyboy.mpc4j;
  */
 public class PlaylistSearch extends PlaylistFind {
 
+    /**
+     * @param tag of songs to return in result
+     * @param needle (or value) of the tag of songs to return in result
+     */
     public PlaylistSearch(PlaylistSearch.Tag tag, String needle) {
         super(tag, needle);
     }

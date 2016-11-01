@@ -6,6 +6,9 @@ import java.util.Optional;
 /**
  * status command
  * from <a href='https://www.musicpd.org/doc/protocol/command_reference.html#status_commands'>MPD document</a>
+ * <p>
+ *     The response of this command is custom and contains the status of several playback controls.
+ * </p>
  * @Author jfraney
  */
 

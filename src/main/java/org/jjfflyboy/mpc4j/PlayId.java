@@ -6,9 +6,18 @@ package org.jjfflyboy.mpc4j;
  * @Author jfraney
  */
 public class PlayId extends Simple {
+    /**
+     * plays from first song in queue
+     */
     public PlayId() {
         super();
     }
+
+
+    /**
+     * plays from selected song in the queue
+     * @param songId of selected song
+     */
     public PlayId(Integer songId) {
         super(adapt(songId));
     }

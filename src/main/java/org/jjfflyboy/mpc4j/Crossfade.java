@@ -6,9 +6,16 @@ package org.jjfflyboy.mpc4j;
  * @Author jfraney
  */
 public class Crossfade extends Simple {
+    /**
+     * @param crossfade in seconds
+     */
     public Crossfade(Integer crossfade) {
         super(adapt(crossfade));
     }
+
+    /**
+     * sets crossfade to 0 seconds.
+     */
     public Crossfade() {
         super(adapt(0));
     }

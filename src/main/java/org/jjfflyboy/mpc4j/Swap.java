@@ -6,7 +6,11 @@ package org.jjfflyboy.mpc4j;
  * @author jfraney
  */
 public class Swap extends Simple {
-    public Swap(Integer pos1, Integer pos2) {
-        super(adapt(pos1), adapt(pos2));
+    /**
+     * @param position1 of one selected song
+     * @param position2 of the other selected song
+     */
+    public Swap(Integer position1, Integer position2) {
+        super(adapt(position1), adapt(position2));
     }
 }

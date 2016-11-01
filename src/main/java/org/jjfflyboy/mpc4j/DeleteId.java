@@ -8,6 +8,10 @@ import java.util.Optional;
  * @author jfraney
  */
 public class DeleteId extends Simple {
+    /**
+     * deletes a song from the queue
+     * @param songId of song to delete.
+     */
     public DeleteId(Integer songId) {
         super(adapt(songId));
     }

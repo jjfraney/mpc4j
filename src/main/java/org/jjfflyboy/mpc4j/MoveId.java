@@ -6,6 +6,10 @@ package org.jjfflyboy.mpc4j;
  * @author jfraney
  */
 public class MoveId extends Simple {
+    /**
+     * @param songId of song to move
+     * @param to new position of the song
+     */
     public MoveId(Integer songId, Integer to) {
         super(adapt(songId), adapt(to));
     }

@@ -6,7 +6,10 @@ package org.jjfflyboy.mpc4j;
  * @author jfraney
  */
 public class SetVol extends Simple {
-    public SetVol(Integer vol) {
-        super(adapt(vol));
+    /**
+     * @param volume level 0-100
+     */
+    public SetVol(Integer volume) {
+        super(adapt(volume));
     }
 }

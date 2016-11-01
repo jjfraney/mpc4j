@@ -5,6 +5,9 @@ import java.util.Optional;
 /**
  * replay_gain_status command from
  * <a href='https://www.musicpd.org/doc/protocol/playback_option_commands.html'>MPD Playback option commands.</a>
+ * <p>
+ *     This command returns the current replay gain mode in its response.
+ * </p>
  * @Author jfraney
  */
 public class ReplayGainStatus extends AbstractCommand<ReplayGainStatus.Response> {

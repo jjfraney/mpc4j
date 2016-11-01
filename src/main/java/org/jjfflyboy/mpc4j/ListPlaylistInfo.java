@@ -9,6 +9,9 @@ package org.jjfflyboy.mpc4j;
  * @author jfraney
  */
 public class ListPlaylistInfo extends AbstractCommand<DatabaseSongInfoResponse> {
+    /**
+     * @param name of playlist
+     */
     public ListPlaylistInfo(String name) {
         super(adapt(name));
     }

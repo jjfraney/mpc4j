@@ -30,6 +30,9 @@ public class ReplayGainMode extends Simple {
         return "replay_gain_mode";
     }
 
+    /**
+     * @param mode to apply
+     */
     public ReplayGainMode(Mode mode) {
         super(mode);
     }

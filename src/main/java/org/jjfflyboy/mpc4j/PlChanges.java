@@ -9,6 +9,9 @@ package org.jjfflyboy.mpc4j;
  * @author jfraney
  */
 public class PlChanges extends AbstractCommand<QueuedSongInfoResponse> {
+    /**
+     * @param version to compare changes
+     */
     public PlChanges(Integer version) {
         super(adapt(version));
     }

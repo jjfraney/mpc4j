@@ -6,6 +6,11 @@ package org.jjfflyboy.mpc4j;
  * @author jfraney
  */
 public class AddTagId extends Simple {
+    /**
+     * @param songId id of target song in the queue
+     * @param tag legal tag
+     * @param value
+     */
     public AddTagId(Integer songId, Tag tag, String value) {
         super(adapt(songId), tag, adapt(value));
     }

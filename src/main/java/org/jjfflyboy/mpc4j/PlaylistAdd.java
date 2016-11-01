@@ -6,6 +6,10 @@ package org.jjfflyboy.mpc4j;
  * @author jfraney
  */
 public class PlaylistAdd extends Simple {
+    /**
+     * @param name of playlist
+     * @param uri of song
+     */
     public PlaylistAdd(String name, String uri) {
         super(adapt(name), adapt(uri));
     }

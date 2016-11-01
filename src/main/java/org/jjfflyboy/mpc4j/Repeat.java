@@ -6,6 +6,9 @@ package org.jjfflyboy.mpc4j;
  * @author jfraney
  */
 public class Repeat extends Simple {
+    /**
+     * @param toggle on or off
+     */
     public Repeat(Toggle toggle) {
         super(toggle);
     }

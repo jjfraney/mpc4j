@@ -6,6 +6,9 @@ package org.jjfflyboy.mpc4j;
  * @author jfraney
  */
 public class PlaylistClear extends Simple {
+    /**
+     * @param name of playlist
+     */
     public PlaylistClear(String name) {
         super(adapt(name));
     }
