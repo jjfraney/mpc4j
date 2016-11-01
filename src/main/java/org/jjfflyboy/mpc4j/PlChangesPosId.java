@@ -3,6 +3,11 @@ package org.jjfflyboy.mpc4j;
 import java.util.Optional;
 
 /**
+ * plchangesposid command from
+ * <a href='https://www.musicpd.org/doc/protocol/queue.html'>MPD Document: The current playlist.</a>
+ * <p>
+ *     This command's response contains the new position, and id for each changed song.
+ * </p>
  * @author jfraney
  */
 public class PlChangesPosId extends AbstractCommand<PlChangesPosId.Response> {
