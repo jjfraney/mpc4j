@@ -4,7 +4,12 @@ import java.time.ZonedDateTime;
 import java.util.Optional;
 
 /**
- * @author jfraney
+ * listplaylists command from
+ * <a href='https://www.musicpd.org/doc/protocol/playlist_files.html'>MPD Document: Control playback.</a>
+ * <p>
+ *     On this command, mpd returns a list of playlist names with their last modified date.
+ * </p>
+ s* @author jfraney
  */
 public class ListPlaylists extends AbstractCommand<ListPlaylists.Response> {
     public ListPlaylists() {

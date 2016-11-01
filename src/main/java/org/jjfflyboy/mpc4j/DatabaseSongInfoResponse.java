@@ -1,7 +1,13 @@
 package org.jjfflyboy.mpc4j;
 
 /**
- * response of commands to search the database for song info.
+ * Parse responses from database query commands.
+ * <p>
+ *     This class parses the lines for the song 'metadata' returned
+ *     by commands in the 'datatbase' category.  This category is
+ *     distinct from the 'queue' category
+ *     (see @{link org.jjfflyboy.mpc4j.QueuedSongInfoResponse}).
+ * </p>
  * @author jfraney
  */
 public class DatabaseSongInfoResponse extends SongInfoResponse {

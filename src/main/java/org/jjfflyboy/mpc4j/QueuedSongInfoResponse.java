@@ -3,7 +3,13 @@ package org.jjfflyboy.mpc4j;
 import java.util.Optional;
 
 /**
- * response of commands to search the playlist queue for song info.
+ * Parse responses from database query commands.
+ * <p>
+ *     This class parses the lines for the song 'metadata' returned
+ *     by commands in the 'datatbase' category.  This category is
+ *     distinct from the 'queue' category
+ *     (see @{link org.jjfflyboy.mpc4j.QueuedSongInfoResponse}).
+ * </p>
  * @author jfraney
  */
 public class QueuedSongInfoResponse extends SongInfoResponse {
