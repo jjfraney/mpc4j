@@ -3,9 +3,11 @@ package org.jjfflyboy.mpc4j;
 import java.util.function.Consumer;
 
 /**
- * Represents the 'list' command.  A list command's form is:
- * <pre>"list {TYPE} [FILTERTYPE] [FILTERWHAT] [...] [group] [GROUPTYPE] [...]"</pre>
- *
+ * list command from
+ * <a href='https://www.musicpd.org/doc/protocol/database.html'>MPD Document: The music database.</a>
+ * <p>
+ *     TODO: the response to this command is not wrapped yet.
+ * </p>
  * @author jfraney
  */
 public class List extends AbstractCommand<List.Response> {

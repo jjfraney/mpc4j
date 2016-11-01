@@ -4,6 +4,11 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
+ * searchaddpl command from
+ * <a href='https://www.musicpd.org/doc/protocol/database.html'>MPD Document: The music database.</a>
+ * <p>
+ *     On this command, mpd returns database metadata for each song.
+ * </p>
  * @author jfraney
  */
 public class SearchAddPl extends Find {

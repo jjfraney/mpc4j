@@ -3,6 +3,11 @@ package org.jjfflyboy.mpc4j;
 import java.util.List;
 
 /**
+ * searchadd command from
+ * <a href='https://www.musicpd.org/doc/protocol/database.html'>MPD Document: The music database.</a>
+ * <p>
+ *     On this command, mpd returns database metadata for each song.
+ * </p>
  * @author jfraney
  */
 public class SearchAdd extends Find {

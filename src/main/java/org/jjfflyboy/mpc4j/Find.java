@@ -1,11 +1,15 @@
 package org.jjfflyboy.mpc4j;
 
 /**
- * Support the find command.
+ * find command from
+ * <a href='https://www.musicpd.org/doc/protocol/database.html'>MPD Document: The music database.</a>
  * <p>
- *     note: the only mpd protocol document (https://www.musicpd.org/doc/protocol/database.html)
+ *     On this command, mpd returns database metadata for each song.
+ * </p>
+ * <p>
+ *     note: the only mpd protocol document
  *     identifies 'window' option.
- *     A live mpd server fails to parse a command with 'window' option.
+ *     However, a live mpd server fails to parse a command with 'window' option.
  *     The source code for mpd version 0.19.x does not have 'window' option.
  *     So, there is not support for 'window' option here.
  *
