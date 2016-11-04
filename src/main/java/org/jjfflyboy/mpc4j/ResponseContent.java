@@ -23,6 +23,11 @@ public abstract class ResponseContent {
         this.responseLines = Collections.unmodifiableList(lines);
     }
 
+    /**
+     * Each line of the response has form 'name: value'.
+     * The last line starts with OK or ACK.
+     * @return all the lines of the response.
+     */
     public List<String> getResponseLines() {
         return responseLines;
     }
