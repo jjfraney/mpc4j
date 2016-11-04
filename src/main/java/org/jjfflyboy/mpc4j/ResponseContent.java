@@ -41,7 +41,8 @@ public abstract class ResponseContent {
         return getResponseLines().stream()
                 .filter((x) -> x.startsWith(search))
                 .findFirst()
-                .map(f -> f.substring(search.length()));
+                .map(f -> f.substring(search.length()))
+                .filter(l -> l.trim().length() != 0);
     }
 
     protected Optional<Integer> getIntegerValue(String fieldName) {
@@ -155,9 +156,10 @@ public abstract class ResponseContent {
      * @return true if the line starts with the given label
      */
     protected boolean isLabelMatch(String label, String line) {
-        return line.length() > label.length()
-                && line.charAt(label.length()) == ':'
-                && line.charAt(label.length() + 1) == ' '
+        return (line.length() > label.length()
+                    && line.charAt(label.length()) == ':')
+                && (line.length() == label.length() + 1
+                    || line.charAt(label.length() + 1) == ' ')
                 && line.startsWith(label);
     }
 }
