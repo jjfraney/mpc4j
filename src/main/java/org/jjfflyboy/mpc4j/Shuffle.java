@@ -24,8 +24,5 @@ public class Shuffle extends Simple {
         if(start == null) {
             throw new IllegalArgumentException("start must not be null");
         }
-        if(end == null) {
-            throw new IllegalArgumentException("end must not be null");
-        }
     }
 }
