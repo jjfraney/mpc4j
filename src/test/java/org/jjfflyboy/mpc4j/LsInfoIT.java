@@ -26,7 +26,7 @@ public class LsInfoIT {
     @Test
     @RunAsClient
     public void test() throws IOException {
-        DatabaseSongInfoResponse r = mpc.send(new LsInfo());
+        LsInfo.Response r = mpc.send(new LsInfo());
 
         assertThat(r.isOk()).isTrue();
 

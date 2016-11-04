@@ -17,7 +17,7 @@ public class LsInfoTest {
 
     @Test
     public void response() {
-        DatabaseSongInfoResponse r = new LsInfo().response(new String[] {
+        LsInfo.Response r = new LsInfo().response(new String[] {
                 "file: aaa.ogg",
                 "Last-Modified: 2016-10-19T00:33:30Z",
                 "Time: 100",
@@ -27,6 +27,12 @@ public class LsInfoTest {
                 "file: ccc.ogg",
                 "Last-Modified: 2016-10-19T00:33:30Z",
                 "Time: 300",
+                "playlist: t3",
+                "Last-Modified: 2016-10-30T02:15:24Z",
+                "playlist: test_IT_list",
+                "Last-Modified: 2016-11-04T01:29:35Z",
+                "playlist: ttt4",
+                "Last-Modified: 2016-10-30T02:05:46Z",
                 "OK"
         });
         assertThat(r.isOk()).as("no parse").isTrue();
@@ -36,5 +42,9 @@ public class LsInfoTest {
         assertThat(songs.get(0).getFile().get()).as("song file name").isEqualTo("aaa.ogg");
         assertThat(songs.get(1).getFile().get()).as("song file name").isEqualTo("bbb.ogg");
         assertThat(songs.get(2).getFile().get()).as("song file name").isEqualTo("ccc.ogg");
+
+        List<LsInfo.Response.PlaylistInfo> playlists = r.getPlaylistInfo();
+        assertThat(playlists.size()).isEqualTo(3);
+        assertThat(playlists.get(0).getPlaylist().get()).isEqualTo("t3");
     }
 }
