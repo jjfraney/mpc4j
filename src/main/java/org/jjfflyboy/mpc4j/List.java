@@ -81,12 +81,12 @@ public class List extends AbstractCommand<List.Response> {
     }
 
     @Override
-    public Response response(String[] responseLines) {
+    public Response response(java.util.List<String> responseLines) {
         return new Response(responseLines);
     }
 
     public class Response extends SimpleResponse {
-        Response(String[] responseLines) {
+        Response(java.util.List<String> responseLines) {
             super(responseLines);
         }
 

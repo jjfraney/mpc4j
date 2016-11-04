@@ -2,6 +2,8 @@ package org.jjfflyboy.mpc4j;
 
 import org.junit.Test;
 
+import java.util.Arrays;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -16,7 +18,7 @@ public class PlaylistFindTest {
 
     @Test
     public void response() {
-        String [] lines  = new String[] {
+        java.util.List<String> lines  = Arrays.asList(
                 "file: w2.ogg",
                 "Last-Modified: 2016-10-21T21:07:11Z",
                 "Genre: Acid Jazz",
@@ -29,7 +31,7 @@ public class PlaylistFindTest {
                 "Pos: 1",
                 "Id: 24",
                 "OK"
-        };
+        );
         QueuedSongInfoResponse r = new PlaylistFind(Tag.ARTIST, "Joe Mpc4J").response(lines);
         java.util.List<QueuedSongInfoResponse.QueuedSongInfo> songInfo = r.getSongInfo();
         assertThat(songInfo.size()).isEqualTo(1);

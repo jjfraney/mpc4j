@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
  * @author jfraney
  */
 public class QueuedSongInfoResponse extends SongInfoResponse {
-    QueuedSongInfoResponse(String[] responseLines) {
+    QueuedSongInfoResponse(java.util.List<String> responseLines) {
         super(responseLines);
     }
 
@@ -26,7 +26,7 @@ public class QueuedSongInfoResponse extends SongInfoResponse {
         /**
          * @param responseLines limited to a single song
          */
-        protected QueuedSongInfo(String[] responseLines) {
+        protected QueuedSongInfo(java.util.List<String> responseLines) {
             super(responseLines);
         }
 
@@ -51,7 +51,7 @@ public class QueuedSongInfoResponse extends SongInfoResponse {
     public java.util.List<QueuedSongInfo> getSongInfo() {
             return segments("file")
                     .stream()
-                    .map(l -> new QueuedSongInfoResponse.QueuedSongInfo(l.toArray(new String[l.size()])))
+                    .map(QueuedSongInfo::new)
                     .collect(Collectors.toList());
     }
 }

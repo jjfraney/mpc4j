@@ -11,6 +11,7 @@ import java.nio.channels.Channels;
 import java.nio.channels.SocketChannel;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
 
@@ -31,7 +32,7 @@ public class MPC {
     }
 
     public <R extends Command.Response> R send(Command command) throws IOException {
-        String[] result = send(command.text());
+        List<String> result = send(command.text());
         return (R) command.response(result);
     }
 
@@ -70,8 +71,8 @@ public class MPC {
         }
     }
 
-    public String [] send(String textCommand) throws IOException {
-        String [] result = new String[] {};
+    public List<String> send(String textCommand) throws IOException {
+        List<String> result;
         // try-with-resource: opens socket, a a writer toMpd, and a reader fromMpd
         SocketAddress address = new InetSocketAddress(host, port);
         try (SocketChannel channel = SocketChannel.open()) {
@@ -102,7 +103,7 @@ public class MPC {
                 }
             }
 
-            result = lines.toArray(new String[lines.size()]);
+            result = lines;
         }
         return result;
     }

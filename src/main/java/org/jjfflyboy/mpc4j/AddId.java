@@ -28,11 +28,11 @@ public class AddId extends Simple {
     }
 
     @Override
-    public Response response(String[] responseLines) {
+    public Response response(java.util.List<String> responseLines) {
         return new Response(responseLines);
     }
     public static class Response extends SimpleResponse {
-        public Response(String [] responseLines) {
+        public Response(java.util.List<String> responseLines) {
             super(responseLines);
         }
 

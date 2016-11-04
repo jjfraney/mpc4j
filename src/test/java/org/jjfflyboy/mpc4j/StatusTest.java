@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
@@ -26,7 +27,7 @@ public class StatusTest {
 
     @Test
     public void testResponseParse() {
-        String [] responseText = new String [] {
+        java.util.List<String> responseText = Arrays.asList(
                 "audio: anyAudio",
                 "bitrate: 5500",
                 "consume: 1",
@@ -48,7 +49,7 @@ public class StatusTest {
                 "updating_db: 70",
                 "volume: 30",
                 "xfade: 99"
-        };
+        );
         Status.Response response = command.response(responseText);
         assertThat(response.getAudio().get()).as("wrong parse").isEqualTo("anyAudio");
         assertThat(response.getBitRate().get().intValue()).as("wrong parse").isEqualTo(5500);
@@ -71,6 +72,6 @@ public class StatusTest {
         assertThat(response.getUpdatingDb().get().intValue()).as("wrong parse").isEqualTo(70);
         assertThat(response.getVolume().get().intValue()).as("wrong parse").isEqualTo(30);
         assertThat(response.getXfade().get().intValue()).as("wrong parse").isEqualTo(99);
-        assertThat(response.getResponseLines().length).as("untested property").isEqualTo(21);
+        assertThat(response.getResponseLines().size()).as("untested property").isEqualTo(21);
     }
 }

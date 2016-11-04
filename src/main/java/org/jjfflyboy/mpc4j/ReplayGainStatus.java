@@ -20,7 +20,7 @@ public class ReplayGainStatus extends AbstractCommand<ReplayGainStatus.Response>
         return "replay_gain_status";
     }
     @Override
-    public ReplayGainStatus.Response response(String[] responseLines) {
+    public ReplayGainStatus.Response response(java.util.List<String> responseLines) {
         return new Response(responseLines);
     }
 
@@ -28,7 +28,7 @@ public class ReplayGainStatus extends AbstractCommand<ReplayGainStatus.Response>
      * access to data in response to replay_gain_status
      */
     public static class Response extends SimpleResponse {
-        Response(String[] responseLines) {
+        Response(java.util.List<String> responseLines) {
             super(responseLines);
         }
 

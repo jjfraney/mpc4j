@@ -3,6 +3,8 @@ package org.jjfflyboy.mpc4j;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Arrays;
+
 import static org.assertj.core.api.Assertions.*;
 
 /**
@@ -22,7 +24,7 @@ public class PingTest {
 
     @Test
     public void response() {
-        String [] textResponse = new String[] {"OK"};
+        java.util.List<String> textResponse = Arrays.asList("OK");
         SimpleResponse response = command.response(textResponse);
         assertThat(response.isOk()).as("response could not parse \"OK\"").isTrue();
     }

@@ -2,6 +2,8 @@ package org.jjfflyboy.mpc4j;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -17,7 +19,7 @@ public class LsInfoTest {
 
     @Test
     public void response() {
-        LsInfo.Response r = new LsInfo().response(new String[] {
+        LsInfo.Response r = new LsInfo().response(Arrays.asList(
                 "file: aaa.ogg",
                 "Last-Modified: 2016-10-19T00:33:30Z",
                 "Time: 100",
@@ -34,7 +36,7 @@ public class LsInfoTest {
                 "playlist: ttt4",
                 "Last-Modified: 2016-10-30T02:05:46Z",
                 "OK"
-        });
+        ));
         assertThat(r.isOk()).as("no parse").isTrue();
         List<DatabaseSongInfoResponse.DatabaseSongInfo> songs = r.getSongInfo();
         assertThat(songs.size()).as("song count").isEqualTo(3);

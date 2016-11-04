@@ -16,7 +16,7 @@ public abstract class Simple extends AbstractCommand<SimpleResponse> {
     }
 
     @Override
-    public SimpleResponse response(String[] responseLines) {
+    public SimpleResponse response(java.util.List<String> responseLines) {
         return new SimpleResponse(responseLines);
     }
 

@@ -78,12 +78,12 @@ public class Count extends AbstractCommand<Count.Response> {
     }
 
     @Override
-    public Response response(String[] responseLines) {
+    public Response response(java.util.List<String> responseLines) {
         return new Response(responseLines);
     }
 
     public class Response extends SimpleResponse {
-        Response(String[] responseLines) {
+        Response(java.util.List<String> responseLines) {
             super(responseLines);
         }
 
@@ -112,7 +112,7 @@ public class Count extends AbstractCommand<Count.Response> {
             /**
              * @param responseLines limited to a single group
              */
-            public Group(String[] responseLines) {
+            public Group(java.util.List<String> responseLines) {
                 super(responseLines);
             }
 
@@ -136,7 +136,7 @@ public class Count extends AbstractCommand<Count.Response> {
             if(isGrouped()) {
                 return segments(group.toSongLabel())
                         .stream()
-                        .map(ls -> new Group(ls.toArray(new String[ls.size()])))
+                        .map(Group::new)
                         .collect(Collectors.toList());
             } else {
                 return Collections.emptyList();

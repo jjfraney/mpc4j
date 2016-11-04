@@ -28,7 +28,7 @@ interface Command<R extends Command.Response> {
      * @param responseLines given by mpd server in response to this command.
      * @return an actual Response to this Command.
      */
-    R response(String[] responseLines);
+    R response(java.util.List<String> responseLines);
 
     /**
      * An interface to access data of the response.  The intention is for
@@ -41,7 +41,7 @@ interface Command<R extends Command.Response> {
          * returns all the lines of the response
          * @return
          */
-        String[] getResponseLines();
+        java.util.List<String> getResponseLines();
 
         /**
          * get the response status from the last line of the response.

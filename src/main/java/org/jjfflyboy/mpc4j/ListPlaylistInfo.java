@@ -16,7 +16,7 @@ public class ListPlaylistInfo extends AbstractCommand<DatabaseSongInfoResponse> 
         super(adapt(name));
     }
     @Override
-    public DatabaseSongInfoResponse response(String[] responseLines) {
+    public DatabaseSongInfoResponse response(java.util.List<String> responseLines) {
         return new DatabaseSongInfoResponse(responseLines);
     }
 }

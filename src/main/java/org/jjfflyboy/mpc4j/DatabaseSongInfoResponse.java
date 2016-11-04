@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
  * @author jfraney
  */
 public class DatabaseSongInfoResponse extends SongInfoResponse {
-    DatabaseSongInfoResponse(String[] responseLines) {
+    DatabaseSongInfoResponse(java.util.List<String> responseLines) {
         super(responseLines);
     }
 
@@ -25,7 +25,7 @@ public class DatabaseSongInfoResponse extends SongInfoResponse {
         /**
          * @param responseLines limited to a single song
          */
-        protected DatabaseSongInfo(String[] responseLines) {
+        protected DatabaseSongInfo(java.util.List<String> responseLines) {
             super(responseLines);
         }
 
@@ -39,7 +39,7 @@ public class DatabaseSongInfoResponse extends SongInfoResponse {
     public java.util.List<DatabaseSongInfo> getSongInfo() {
         return segments("file")
                 .stream()
-                .map(l -> new DatabaseSongInfo(l.toArray(new String[l.size()])))
+                .map(DatabaseSongInfo::new)
                 .collect(Collectors.toList());
     }
 }

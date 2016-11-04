@@ -3,6 +3,8 @@ package org.jjfflyboy.mpc4j;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Arrays;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -28,7 +30,7 @@ public class IdleTest {
 
     @Test
     public void response() {
-        String [] textResponse = new String[] {"changed: options", "OK"};
+        java.util.List<String> textResponse = Arrays.asList("changed: options", "OK");
         Idle.Response response = command.response(textResponse);
         assertThat(response.getChanged().get()).as("response could not parse \"changed\"").isEqualTo(Idle.Subsystem.OPTIONS);
     }

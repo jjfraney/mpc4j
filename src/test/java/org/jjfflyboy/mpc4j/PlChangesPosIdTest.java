@@ -2,6 +2,8 @@ package org.jjfflyboy.mpc4j;
 
 import org.junit.Test;
 
+import java.util.Arrays;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -11,7 +13,7 @@ public class PlChangesPosIdTest {
 
     @Test
     public void response() {
-        String[] lines = new String [] {
+        java.util.List<String> lines = Arrays.asList(
                 "cpos: 1",
                 "Id: 2",
                 "cpos: 2",
@@ -19,7 +21,7 @@ public class PlChangesPosIdTest {
                 "cpos: 3",
                 "Id: 4",
                 "OK"
-        };
+        );
 
         PlChangesPosId.Response r = new PlChangesPosId(3).response(lines);
         assertThat(r.getEntries().size()).isEqualTo(3);

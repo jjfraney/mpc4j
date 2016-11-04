@@ -48,13 +48,13 @@ public class Stats extends AbstractCommand<Stats.Response> {
          */
         public Optional<Integer> getDbUpdate() {return getIntegerValue("db_update");}
 
-        Response(String[] responseLines) {
+        Response(java.util.List<String> responseLines) {
             super(responseLines);
         }
     }
 
     @Override
-    public Response response(String[] responseLines) {
+    public Response response(java.util.List<String> responseLines) {
         return new Response(responseLines);
     }
 }

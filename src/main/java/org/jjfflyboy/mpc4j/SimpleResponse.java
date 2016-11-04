@@ -8,7 +8,7 @@ import java.util.Optional;
  */
 public class SimpleResponse extends ResponseContent implements Command.Response {
 
-    SimpleResponse(String[] responseLines) {
+    SimpleResponse(java.util.List<String> responseLines) {
         super(responseLines);
     }
 

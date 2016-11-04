@@ -36,7 +36,7 @@ public class AckIT {
         assertThat(r.isOk()).as("bad command should fail").isEqualTo(false);
         assertThat(r.getAck()).as("ack should be response").isPresent();
 
-        assertThat(r.getResponseLines()[0]).isEqualTo("ACK [2@0] {find} too few arguments for \"find\"");
+        assertThat(r.getResponseLines().get(0)).isEqualTo("ACK [2@0] {find} too few arguments for \"find\"");
         Command.Response.Ack ack = r.getAck().get();
         assertThat(ack.getError()).as("error number should show bad find").isEqualTo(2);
         assertThat(ack.getCurrentCommand()).as("command should be 'find'.").isEqualTo("find");

@@ -20,7 +20,7 @@ public class CurrentSong extends AbstractCommand<QueuedSongInfoResponse> {
      * @return response to 'currentsong' command
      */
     @Override
-    public QueuedSongInfoResponse response(String[] responseLines) {
+    public QueuedSongInfoResponse response(java.util.List<String> responseLines) {
         return new QueuedSongInfoResponse(responseLines);
     }
 }

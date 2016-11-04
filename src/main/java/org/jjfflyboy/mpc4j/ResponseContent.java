@@ -17,12 +17,13 @@ import java.util.stream.Stream;
  */
 public abstract class ResponseContent {
 
-    private final String[] responseLines;
-    ResponseContent(String[] responseLines) {
-        this.responseLines = responseLines;
+    private final List<String> responseLines;
+    ResponseContent(java.util.List<String> responseLines) {
+        List<String> lines = new ArrayList<>(responseLines);
+        this.responseLines = Collections.unmodifiableList(lines);
     }
 
-    public String[] getResponseLines() {
+    public List<String> getResponseLines() {
         return responseLines;
     }
 
@@ -32,7 +33,7 @@ public abstract class ResponseContent {
      */
     protected Optional<String> findFieldValue(String name) {
         final String search = name + ": ";
-        return Stream.of(getResponseLines())
+        return getResponseLines().stream()
                 .filter((x) -> x.startsWith(search))
                 .findFirst()
                 .map(f -> f.substring(search.length()));
@@ -61,8 +62,8 @@ public abstract class ResponseContent {
     }
 
     protected boolean isOk() {
-        return getResponseLines().length > 0
-                &&  getResponseLines()[getResponseLines().length - 1].startsWith("OK");
+        return getResponseLines().size() > 0
+                &&  getResponseLines().get(getResponseLines().size() - 1).startsWith("OK");
     }
 
     /**
@@ -71,7 +72,7 @@ public abstract class ResponseContent {
      */
     protected Optional<Command.Response.Ack> getAck() {
         try {
-            return Optional.of(new AckImpl(getResponseLines()[getResponseLines().length - 1]));
+            return Optional.of(new AckImpl(getResponseLines().get(getResponseLines().size() - 1)));
         } catch (RuntimeException e) {
             return Optional.ofNullable(null);
         }

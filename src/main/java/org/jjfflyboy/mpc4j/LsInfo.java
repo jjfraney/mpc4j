@@ -20,19 +20,19 @@ public class LsInfo extends AbstractCommand<LsInfo.Response> {
 
     // TODO: this command also returns a list of playlists
     @Override
-    public Response response(String[] responseLines) {
+    public Response response(java.util.List<String> responseLines) {
         return new Response(responseLines);
     }
 
     public static class Response extends DatabaseSongInfoResponse {
 
-        Response(String[] responseLines) {
+        Response(java.util.List<String> responseLines) {
             super(responseLines);
         }
 
         public class PlaylistInfo extends ResponseContent {
 
-            PlaylistInfo(String[] responseLines) {
+            PlaylistInfo(java.util.List<String> responseLines) {
                 super(responseLines);
             }
 
@@ -45,7 +45,7 @@ public class LsInfo extends AbstractCommand<LsInfo.Response> {
             return segments("file", "playlist")
                     .stream()
                     .filter(seg -> isLabelMatch("file", seg.get(0)))
-                    .map(l -> new DatabaseSongInfo(l.toArray(new String[l.size()])))
+                    .map(DatabaseSongInfo::new)
                     .collect(Collectors.toList());
         }
 
@@ -53,7 +53,7 @@ public class LsInfo extends AbstractCommand<LsInfo.Response> {
            return segments("file", "playlist")
                    .stream()
                    .filter(seg -> isLabelMatch("playlist", seg.get(0)))
-                    .map(l -> new PlaylistInfo(l.toArray(new String[l.size()])))
+                    .map(PlaylistInfo::new)
                  .collect(Collectors.toList());
         }
     }

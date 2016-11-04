@@ -70,7 +70,7 @@ public class Find extends AbstractCommand<DatabaseSongInfoResponse> {
     }
 
     @Override
-    public DatabaseSongInfoResponse response(String[] responseLines) {
+    public DatabaseSongInfoResponse response(java.util.List<String> responseLines) {
         return new DatabaseSongInfoResponse(responseLines);
     }
 }

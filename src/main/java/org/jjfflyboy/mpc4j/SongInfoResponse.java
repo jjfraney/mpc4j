@@ -10,7 +10,7 @@ import java.util.Optional;
  */
 public abstract class SongInfoResponse extends SimpleResponse {
 
-    SongInfoResponse(String[] responseLines) {
+    SongInfoResponse(List<String> responseLines) {
         super(responseLines);
     }
 
@@ -21,7 +21,7 @@ public abstract class SongInfoResponse extends SimpleResponse {
         /**
          * @param responseLines limited to a single song
          */
-        protected SongInfo(String[] responseLines) {
+        protected SongInfo(List<String> responseLines) {
             super(responseLines);
         }
 

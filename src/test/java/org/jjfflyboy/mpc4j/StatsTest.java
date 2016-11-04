@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -19,7 +20,7 @@ public class StatsTest {
 
     @Test
     public void response() {
-        Stats.Response r = new Stats().response(new String[] {
+        Stats.Response r = new Stats().response(Arrays.asList(
                 "uptime: 10",
                 "playtime: 20",
                 "artists: 30",
@@ -28,7 +29,7 @@ public class StatsTest {
                 "db_playtime: 600",
                 "db_update: 900"
 
-        });
+        ));
         assertThat(r.getUptime().get().intValue()).as("wrong ").isEqualTo(10);
         assertThat(r.getPlaytime().get().intValue()).as("wrong ").isEqualTo(20);
         assertThat(r.getArtists().get().intValue()).as("wrong ").isEqualTo(30);

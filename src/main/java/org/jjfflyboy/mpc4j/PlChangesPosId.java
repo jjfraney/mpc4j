@@ -22,18 +22,18 @@ public class PlChangesPosId extends AbstractCommand<PlChangesPosId.Response> {
     }
 
     @Override
-    public Response response(String[] responseLines) {
+    public Response response(java.util.List<String> responseLines) {
         return new Response(responseLines);
     }
 
     public class Response extends SimpleResponse {
-        Response(String[] responseLines) {
+        Response(java.util.List<String> responseLines) {
             super(responseLines);
         }
 
         public class Entry extends ResponseContent {
 
-            Entry(String[] responseLines) {
+            Entry(java.util.List<String> responseLines) {
                 super(responseLines);
             }
 
@@ -48,7 +48,7 @@ public class PlChangesPosId extends AbstractCommand<PlChangesPosId.Response> {
         public java.util.List<Entry> getEntries() {
             return segments("cpos")
                     .stream()
-                    .map(ls -> new Entry(ls.toArray(new String[ls.size()])))
+                    .map(ls -> new Entry(ls))
                     .collect(Collectors.toList());
         }
     }

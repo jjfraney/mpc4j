@@ -18,18 +18,18 @@ public class ListPlaylists extends AbstractCommand<ListPlaylists.Response> {
     }
 
     @Override
-    public Response response(String[] responseLines) {
+    public Response response(java.util.List<String> responseLines) {
         return new Response(responseLines);
     }
 
     public static class Response extends SimpleResponse {
-        Response(String[] responseLines) {
+        Response(java.util.List<String> responseLines) {
             super(responseLines);
         }
 
         public class Playlist extends ResponseContent {
 
-            Playlist(String[] responseLines) {
+            Playlist(java.util.List<String> responseLines) {
                 super(responseLines);
             }
             public Optional<String> getPlaylist() {return getStringValue("playlist");}
@@ -39,7 +39,7 @@ public class ListPlaylists extends AbstractCommand<ListPlaylists.Response> {
         public java.util.List<Playlist> getPlaylists() {
             return segments("playlist")
                     .stream()
-                    .map(ls -> new Playlist(ls.toArray(new String[ls.size()])))
+                    .map(Playlist::new)
                     .collect(Collectors.toList());
         }
     }
