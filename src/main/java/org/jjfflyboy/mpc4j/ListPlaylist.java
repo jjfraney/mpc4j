@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 /**
  * listplaylist command from
- * <a href='https://www.musicpd.org/doc/protocol/playlist_files.html'>MPD Document: Control playback.</a>
+ * <a href='https://www.musicpd.org/doc/protocol/playlist_files.html'>MPD Document: Stored playlists.</a>
  * <p>
  *     On this command, mpd returns a list of files that comprise the named playlist.
  * </p>

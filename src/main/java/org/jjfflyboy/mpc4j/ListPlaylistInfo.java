@@ -2,7 +2,7 @@ package org.jjfflyboy.mpc4j;
 
 /**
  * listplaylistinfo command from
- * <a href='https://www.musicpd.org/doc/protocol/playlist_files.html'>MPD Document: Control playback.</a>
+ * <a href='https://www.musicpd.org/doc/protocol/playlist_files.html'>MPD Document: Stored playlists.</a>
  * <p>
  *     On this command, mpd returns database metadata for each song on the named playlist.
  * </p>

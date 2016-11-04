@@ -2,7 +2,7 @@ package org.jjfflyboy.mpc4j;
 
 /**
  * playlistmove command from
- * <a href='https://www.musicpd.org/doc/protocol/playlist_files.html'>MPD Document: Control playback.</a>
+ * <a href='https://www.musicpd.org/doc/protocol/playlist_files.html'>MPD Document: Stored playlists.</a>
  * @author jfraney
  */
 public class PlaylistMove extends Simple {
