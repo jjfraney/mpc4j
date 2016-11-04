@@ -1,15 +1,15 @@
 package org.jjfflyboy.mpc4j;
 
 /**
- * update command from
+ * rescan command from
  * <a href='https://www.musicpd.org/doc/protocol/database.html'>MPD Document: The music database.</a>
  * @Author jfraney
  */
-public class Update extends Simple {
-    public Update() {
+public class Rescan extends Simple {
+    public Rescan() {
         super();
     }
-    public Update(String uri) {
+    public Rescan(String uri) {
         super(adapt(uri));
     }
 }
