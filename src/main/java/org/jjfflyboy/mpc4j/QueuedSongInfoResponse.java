@@ -1,6 +1,7 @@
 package org.jjfflyboy.mpc4j;
 
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Parse responses from database query commands.
@@ -47,8 +48,10 @@ public class QueuedSongInfoResponse extends SongInfoResponse {
 
     }
 
-    /**
-     * @return a list of song info from the response.
-     */
-    public java.util.List<QueuedSongInfo> getSongInfo() {return getSongInfo(QueuedSongInfo.class);}
+    public java.util.List<QueuedSongInfo> getSongInfo() {
+            return segments("file")
+                    .stream()
+                    .map(l -> new QueuedSongInfoResponse.QueuedSongInfo(l.toArray(new String[l.size()])))
+                    .collect(Collectors.toList());
+    }
 }

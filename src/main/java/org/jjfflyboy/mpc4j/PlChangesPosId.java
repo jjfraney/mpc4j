@@ -1,6 +1,7 @@
 package org.jjfflyboy.mpc4j;
 
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * plchangesposid command from
@@ -45,7 +46,10 @@ public class PlChangesPosId extends AbstractCommand<PlChangesPosId.Response> {
             }
         }
         public java.util.List<Entry> getEntries() {
-            return getSubResponse(Entry.class);
+            return segments("cpos")
+                    .stream()
+                    .map(ls -> new Entry(ls.toArray(new String[ls.size()])))
+                    .collect(Collectors.toList());
         }
     }
 }

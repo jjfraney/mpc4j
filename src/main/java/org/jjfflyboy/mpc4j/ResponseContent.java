@@ -6,10 +6,8 @@ import java.math.BigDecimal;
 import java.text.ParseException;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 import java.util.List;
-import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
@@ -121,56 +119,39 @@ public abstract class ResponseContent {
     }
 
     /**
-     * return a list of T objects.  The class of T must be a non-static nested in the response class because
-     * the response lines do not exist outside of the response instance.
-     * An assumption: the responseLines are a repeating series.
-     * @param nested the class of objects to instantiate....must be nested by this ResponseContent
-     * @param <T> the type of object to return
-     * @return a list of objects found in the enclosing ResponseContent; empty if responseLines is empty.
+     * separates response lines
+     * @param markers
+     * @return
      */
-    protected <T extends ResponseContent> List<T> getSubResponse(Class<T> nested) {
-        List<T> result = new ArrayList<>();
+    protected List<List<String>> segments(String ... markers) {
+        List<List<String>> result = new ArrayList<>();
+        List<String> segment = null;
+        for(String line: getResponseLines()) {
+            if(line.startsWith("OK") || line.startsWith("ACK")) {
+                continue;
+            }
 
-        String firstTag = null;
-        if(getResponseLines().length > 0) {
-            String[] s = getResponseLines()[0].split(":");
-            firstTag = s[0];
-        }
-
-        // identify the indices that isolate each group of lines, by some first line
-        String first = firstTag + ":";
-        List<Integer> fileIndices = new ArrayList<>();
-        for (int i = 0; i < getResponseLines().length; i++) {
-            if (getResponseLines()[i].startsWith(first)) {
-                fileIndices.add(i);
+            Optional<String> match = Stream.of(markers).filter(m -> isLabelMatch(m, line)).findFirst();
+            if(match.isPresent()) {
+                segment = new ArrayList<>();
+                result.add(Collections.unmodifiableList(segment));
+            }
+            if(segment != null) {
+                segment.add(line);
             }
         }
-
-        // create a group for each set of lines between the indices
-        for (int i = 0; i < fileIndices.size(); i++) {
-            Integer startIndex = fileIndices.get(i);
-            Integer endIndex = fileIndices.size() > i + 1 ? fileIndices.get(i + 1) : getResponseLines().length - 1;
-
-            String[] responseLinesForSong = Arrays.copyOfRange(getResponseLines(), startIndex, endIndex);
-            T object = newResourceContent(this, nested, responseLinesForSong);
-            result.add(object);
-        }
-        return result;
+        return Collections.unmodifiableList(result);
     }
-    private <T extends ResponseContent> T newResourceContent(Object enclosure, Class<T> clz, String[] responseLines) {
-        try {
-            Constructor[] ctors = clz.getConstructors();
-            Constructor<T> ctor = clz.getDeclaredConstructor(enclosure.getClass(), String[].class);
-            return ctor.newInstance(enclosure, responseLines);
-        } catch (NoSuchMethodException e) {
-            // there must be such a method because it is part of the ResponseContent abstraction!
-            throw new RuntimeException(e);
-        } catch (IllegalAccessException | InvocationTargetException e) {
-            // doubt it will ever happen.
-            throw new RuntimeException(e);
-        } catch (InstantiationException e) {
-            // this is also under our control to prevent: we implement the ctors!
-            throw new RuntimeException(e);
-        }
+
+    /**
+     * @param label
+     * @param line
+     * @return true if the line starts with the given label
+     */
+    protected boolean isLabelMatch(String label, String line) {
+        return line.length() > label.length()
+                && line.charAt(label.length()) == ':'
+                && line.charAt(label.length() + 1) == ' '
+                && line.startsWith(label);
     }
 }

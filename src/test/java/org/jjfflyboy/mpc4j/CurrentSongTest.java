@@ -21,11 +21,11 @@ public class CurrentSongTest {
         ZonedDateTime now = ZonedDateTime.now();
         String file = "someFileName";
         QueuedSongInfoResponse response = new CurrentSong().response(new String[] {
+                "file: " + file,
                 "Last-Modified: " + now.format(DateTimeFormatter.ISO_ZONED_DATE_TIME),
                 "Id: 10",
                 "Time: 99",
                 "Pos: 23",
-                "file: " + file,
                 "OK"
 
         });

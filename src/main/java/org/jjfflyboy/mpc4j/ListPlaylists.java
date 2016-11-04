@@ -2,6 +2,7 @@ package org.jjfflyboy.mpc4j;
 
 import java.time.ZonedDateTime;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * listplaylists command from
@@ -36,7 +37,10 @@ public class ListPlaylists extends AbstractCommand<ListPlaylists.Response> {
         }
 
         public java.util.List<Playlist> getPlaylists() {
-            return getSubResponse(Playlist.class);
+            return segments("playlist")
+                    .stream()
+                    .map(ls -> new Playlist(ls.toArray(new String[ls.size()])))
+                    .collect(Collectors.toList());
         }
     }
 }

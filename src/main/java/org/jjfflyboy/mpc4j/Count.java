@@ -3,6 +3,7 @@ package org.jjfflyboy.mpc4j;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * count command from
@@ -24,7 +25,7 @@ public class Count extends AbstractCommand<Count.Response> {
         }
     }
 
-    private final boolean isGrouped;
+    private final org.jjfflyboy.mpc4j.Tag group;
     /**
      * a command of form: 'count {TAG} "{NEEDLE}"'.
      * @param tag name of tag to match
@@ -32,7 +33,7 @@ public class Count extends AbstractCommand<Count.Response> {
      */
     public Count(Tag tag, String needle) {
         super(new Filters(new Filter(tag, needle)));
-        isGrouped = false;
+        group = null;
     }
     /**
      * a command of form: 'count {TAG} "{NEEDLE}" [...]'.
@@ -40,7 +41,7 @@ public class Count extends AbstractCommand<Count.Response> {
      */
     public Count(Filter... filters) {
         super(new Filters(filters));
-        isGrouped = false;
+        group = null;
     }
 
     /**
@@ -51,7 +52,7 @@ public class Count extends AbstractCommand<Count.Response> {
      */
     public Count(Tag tag, String needle, org.jjfflyboy.mpc4j.Tag group) {
         super(new Filters(new Filter(tag, needle)), new GroupParameter(group));
-        isGrouped = true;
+        this.group = group;
     }
 
     /**
@@ -61,9 +62,12 @@ public class Count extends AbstractCommand<Count.Response> {
      */
     public Count(Filter[] filters, org.jjfflyboy.mpc4j.Tag group) {
         super(new Filters(filters), new GroupParameter(group));
-        isGrouped = true;
+        this.group = group;
     }
 
+    private boolean isGrouped() {
+        return group != null;
+    }
     /**
      *
      * @param group optional value to group results by, null if none.
@@ -87,7 +91,7 @@ public class Count extends AbstractCommand<Count.Response> {
          * @return if group was not specified, empty Optional, else the value for the 'songs' responseline.
          */
         public Optional<Integer> getSongs() {
-            if(isGrouped) {
+            if(isGrouped()) {
                 return Optional.empty();
             } else {
               return getIntegerValue("songs");
@@ -97,7 +101,7 @@ public class Count extends AbstractCommand<Count.Response> {
          * @return if group was not specified, empty Optional, else the value for the 'songs' responseline.
          */
         public Optional<Integer> getPlaytime() {
-            if(isGrouped) {
+            if(isGrouped()) {
                 return Optional.empty();
             } else {
                 return getIntegerValue("playtime");
@@ -129,8 +133,11 @@ public class Count extends AbstractCommand<Count.Response> {
          * @return if group not specified, empty list, else groups of response lines as GroupParameter.
          */
         public List<Group> getGroups() {
-            if(isGrouped) {
-                return getSubResponse(Group.class);
+            if(isGrouped()) {
+                return segments(group.toSongLabel())
+                        .stream()
+                        .map(ls -> new Group(ls.toArray(new String[ls.size()])))
+                        .collect(Collectors.toList());
             } else {
                 return Collections.emptyList();
             }

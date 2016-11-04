@@ -67,5 +67,5 @@ public abstract class SongInfoResponse extends SimpleResponse {
      *
      * @return a list of the 'songs' identified in the response.
      */
-    protected <T extends SongInfo> List<T> getSongInfo(Class<T> c) { return getSubResponse(c);}
+    protected abstract  <T extends SongInfo> List<T> getSongInfo();
 }
