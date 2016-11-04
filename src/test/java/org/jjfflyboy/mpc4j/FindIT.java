@@ -34,7 +34,7 @@ public class FindIT {
 
         List<DatabaseSongInfoResponse.DatabaseSongInfo> songs = r.getSongInfo();
         DatabaseSongInfoResponse.DatabaseSongInfo songInfo = songs.stream().filter(s -> s.getFile().get().equals("w2.ogg")).findAny().get();
-        assertThat(songInfo.getLastModified().get()).isEqualTo("2016-10-21T21:07:11Z");
+        assertThat(songInfo.getLastModified().get()).isEqualTo("2016-10-21T21:09:49Z");
         assertThat(songInfo.getTag(Tag.ARTIST).get()).isEqualTo("Joe Mpc4J");
 
     }
@@ -49,7 +49,7 @@ public class FindIT {
 
         List<DatabaseSongInfoResponse.DatabaseSongInfo> songs = r.getSongInfo();
         DatabaseSongInfoResponse.DatabaseSongInfo songInfo = songs.stream().filter(s -> s.getFile().get().equals("w2.ogg")).findAny().get();
-        assertThat(songInfo.getLastModified().get()).isEqualTo("2016-10-21T21:07:11Z");
+        assertThat(songInfo.getLastModified().get()).isEqualTo("2016-10-21T21:09:49Z");
         assertThat(songInfo.getTag(Tag.ARTIST).get()).isEqualTo("Joe Mpc4J");
 
     }
