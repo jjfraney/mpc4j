@@ -11,7 +11,7 @@ public class AckTest {
     @Test
     public void c1() {
         String line = "ACK [5@0] {cmd01} missing the command.";
-        ResponseContent.AckImpl ack = new ResponseContent.AckImpl(line);
+        SimpleResponse.AckImpl ack = new SimpleResponse.AckImpl(line);
         assertThat(ack.getError()).as("error num").isEqualTo(5);
         assertThat(ack.getCommandListNum()).as("command list num").isEqualTo(0);
         assertThat(ack.getCurrentCommand()).as("current command").isEqualTo("cmd01");
