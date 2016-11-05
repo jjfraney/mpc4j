@@ -10,6 +10,7 @@ import java.util.*;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -67,6 +68,18 @@ public abstract class ResponseContent {
         return findFieldValue(fieldName);
     }
 
+    /**
+     * @param label name to match
+     * @return list of string values, with that label
+     */
+    protected List<String> getListOfStringValue(String label) {
+        return getResponseLines().stream()
+                .filter(l -> l.startsWith(label + ": "))
+                .map(l -> l.split(": "))
+                .filter(s -> s.length == 2)
+                .map(s -> s[1])
+                .collect(Collectors.toList());
+    }
     protected boolean isOk() {
         return getResponseLines().size() > 0
                 &&  getResponseLines().get(getResponseLines().size() - 1).startsWith("OK");
@@ -83,6 +96,8 @@ public abstract class ResponseContent {
             return Optional.ofNullable(null);
         }
     }
+
+
 
     public static class AckImpl implements Command.Response.Ack {
         // ACK [error@command_listNum] {current_command} message_text\n
