@@ -1,20 +1,13 @@
 package org.jjfflyboy.mpc4j;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
-import java.text.ParseException;
 import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
- * access response content.  Provides common parse utilities.
+ * base class for holding and parsing a complete or a segment of response content.
+ * @author jfraney
  */
 public abstract class ResponseContent {
 
@@ -26,84 +19,84 @@ public abstract class ResponseContent {
 
     /**
      * Each line of the response has form 'name: value'.
-     * The last line starts with OK or ACK.
-     * @return all the lines of the response.
+     * @return the lines of content as unmodifiable list of String.
      */
     public List<String> getResponseLines() {
         return responseLines;
     }
 
     /**
-     * @param name
-     * @return an Optional for the value of the field referenced by 'name'
+     * @param name of field of interest
+     * @return the value, as String, of the first field in this response with 'name', if present.
      */
     protected Optional<String> findFieldValue(String name) {
-        final String search = name + ": ";
-        return getResponseLines().stream()
-                .filter((x) -> x.startsWith(search))
-                .findFirst()
-                .map(f -> f.substring(search.length()))
-                .filter(l -> l.trim().length() != 0);
-    }
-
-    protected Optional<Integer> getIntegerValue(String fieldName) {
-        return findFieldValue(fieldName).map((s) -> Integer.decode(s));
-    }
-    protected Optional<Long> getLongValue(String fieldName) {
-        return findFieldValue(fieldName).map((s) -> Long.decode(s));
-    }
-    protected Optional<Toggle> getToggleValue(String fieldName) {
-        return findFieldValue(fieldName).map(s -> Toggle.decode(s));
-    }
-
-    protected Optional<BigDecimal> getBigDecimalValue(String fieldName) {
-        return findFieldValue(fieldName).map(s -> new BigDecimal(s));
-    }
-
-    protected Optional<ZonedDateTime> getZonedDateTimeValue(String name) {
-        return findFieldValue(name).map(s -> ZonedDateTime.parse(s, DateTimeFormatter.ISO_ZONED_DATE_TIME));
-    }
-
-    protected Optional<String> getStringValue(String fieldName) {
-        return findFieldValue(fieldName);
+        return ResponseContentParser.findFieldValue(getResponseLines(), name);
     }
 
     /**
-     * @param label name to match
-     * @return list of string values, with that label
+     * @param name of field of interest
+     * @return the value, as Integer, of the first field in this response with 'name', if present.
      */
-    protected List<String> getListOfStringValue(String label) {
-        return getResponseLines().stream()
-                .filter(l -> l.startsWith(label + ": "))
-                .map(l -> l.split(": "))
-                .filter(s -> s.length == 2)
-                .map(s -> s[1])
-                .collect(Collectors.toList());
+    protected Optional<Integer> getIntegerValue(String name) {
+        return ResponseContentParser.getIntegerValue(getResponseLines(), name);
     }
 
     /**
-     * separates response lines
-     * @param markers
+     * @param name of field of interest
+     * @return the value, as Integer, of the first field in this response with 'name', if present.
+     */
+    protected Optional<Long> getLongValue(String name) {
+        return ResponseContentParser.getLongValue(getResponseLines(), name);
+    }
+
+    /**
+     * @param name of field of interest
+     * @return the value, as Toggle, of the first field in this response with 'name', if present.
+     */
+    protected Optional<Toggle> getToggleValue(String name) {
+        return ResponseContentParser.getToggleValue(getResponseLines(), name);
+    }
+
+    /**
+     * @param name of field of interest
+     * @return the value, as BigDecimal, of the first field in this response with 'name', if present.
+     */
+    protected Optional<BigDecimal> getBigDecimalValue(String name) {
+        return ResponseContentParser.getBigDecimalValue(getResponseLines(), name);
+    }
+
+    /**
+     * @param name of field of interest
+     * @return the value, as ZonedDateTime, of the first field in this response with 'name', if present.
+     */
+    protected Optional<ZonedDateTime> getZonedDateTimeValue(String name) {
+        return ResponseContentParser.getZonedDateTimeValue(getResponseLines(), name);
+    }
+
+    /**
+     * @param name of field of interest
+     * @return the value, as String, of the first field in this response with 'name', if present.
+     */
+    protected Optional<String> getStringValue(String name) {
+        return ResponseContentParser.getStringValue(getResponseLines(), name);
+    }
+
+    /**
+     * @param name of field of interest
+     * @return the value, as List<String>, of the first field in this response with 'name', if present.
+     */
+    protected List<String> getListOfStringValue(String name) {
+        return ResponseContentParser.getListOfStringValue(getResponseLines(), name);
+    }
+
+    /**
+     * separates this response into segments.
+     * @see org.jjfflyboy.mpc4j.ResponseContentParser#segments
+     * @param markers - that identify the first line of each segment
      * @return
      */
     protected List<List<String>> segments(String ... markers) {
-        List<List<String>> result = new ArrayList<>();
-        List<String> segment = null;
-        for(String line: getResponseLines()) {
-            if(line.startsWith("OK") || line.startsWith("ACK")) {
-                continue;
-            }
-
-            Optional<String> match = Stream.of(markers).filter(m -> isLabelMatch(m, line)).findFirst();
-            if(match.isPresent()) {
-                segment = new ArrayList<>();
-                result.add(Collections.unmodifiableList(segment));
-            }
-            if(segment != null) {
-                segment.add(line);
-            }
-        }
-        return Collections.unmodifiableList(result);
+        return ResponseContentParser.segments(getResponseLines(), markers);
     }
 
     /**
@@ -112,10 +105,6 @@ public abstract class ResponseContent {
      * @return true if the line starts with the given label
      */
     protected boolean isLabelMatch(String label, String line) {
-        return (line.length() > label.length()
-                    && line.charAt(label.length()) == ':')
-                && (line.length() == label.length() + 1
-                    || line.charAt(label.length() + 1) == ' ')
-                && line.startsWith(label);
+        return ResponseContentParser.isLabelMatch(label, line);
     }
 }
