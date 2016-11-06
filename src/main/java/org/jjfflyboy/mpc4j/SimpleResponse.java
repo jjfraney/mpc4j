@@ -5,7 +5,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * gives access to the status in the command's response.
+ * Class to access the last line of every mpd response..
  * @author jfraney
  */
 public class SimpleResponse extends ResponseContent implements Command.Response {
@@ -18,6 +18,7 @@ public class SimpleResponse extends ResponseContent implements Command.Response 
      * parses the last line to look for OK
      * @return true if last line starts with "OK"
      */
+    @Override
     public boolean isOk() {
         return getResponseLines().size() > 0
                 &&  getResponseLines().get(getResponseLines().size() - 1).startsWith("OK");
@@ -27,6 +28,7 @@ public class SimpleResponse extends ResponseContent implements Command.Response 
      * parses the last line as "ACK [error@commandListNum] {currentCommand} messageText"
      * @return an Ack, or if parse fails, null
      */
+    @Override
     public Optional<Command.Response.Ack> getAck() {
         try {
             return Optional.of(new AckImpl(getResponseLines().get(getResponseLines().size() - 1)));
@@ -37,10 +39,10 @@ public class SimpleResponse extends ResponseContent implements Command.Response 
 
 
 
-    public static class AckImpl implements Command.Response.Ack {
+    class AckImpl implements Command.Response.Ack {
         // ACK [error@command_listNum] {current_command} message_text\n
 
-        private static final Pattern PATTERN = Pattern.compile("ACK \\[(\\d*)@(\\d*)\\] \\{(.*)\\} (.*)");
+        private final Pattern PATTERN = Pattern.compile("ACK \\[(\\d*)@(\\d*)\\] \\{(.*)\\} (.*)");
         public AckImpl(String line) {
             Matcher m = PATTERN.matcher(line);
             if (m.matches()) {

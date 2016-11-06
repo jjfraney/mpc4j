@@ -1,6 +1,10 @@
 package org.jjfflyboy.mpc4j;
 
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -9,9 +13,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class AckTest {
 
     @Test
-    public void c1() {
-        String line = "ACK [5@0] {cmd01} missing the command.";
-        SimpleResponse.AckImpl ack = new SimpleResponse.AckImpl(line);
+    public void ackParse() {
+        java.util.List<String> response = Arrays.asList(
+                "ACK [5@0] {cmd01} missing the command."
+        );
+        Command.Response.Ack ack = new SimpleResponse(response).getAck().get();
         assertThat(ack.getError()).as("error num").isEqualTo(5);
         assertThat(ack.getCommandListNum()).as("command list num").isEqualTo(0);
         assertThat(ack.getCurrentCommand()).as("current command").isEqualTo("cmd01");
