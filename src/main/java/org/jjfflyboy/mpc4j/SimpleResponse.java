@@ -16,12 +16,16 @@ public class SimpleResponse extends ResponseContent implements Command.Response 
 
     /**
      * parses the last line to look for OK
-     * @return true if last line starts with "OK"
+     * <p>
+     *     Each response of any command can end in 'OK'
+     *     Each response segment of a 'command list' command ends in 'list_OK'.
+     * </p>
+     * @return true if last line contains "OK"
      */
     @Override
     public boolean isOk() {
         return getResponseLines().size() > 0
-                &&  getResponseLines().get(getResponseLines().size() - 1).startsWith("OK");
+                &&  getResponseLines().get(getResponseLines().size() - 1).contains("OK");
     }
 
     /**
