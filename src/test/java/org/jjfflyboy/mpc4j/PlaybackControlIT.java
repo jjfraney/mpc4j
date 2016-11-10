@@ -1,20 +1,18 @@
 package org.jjfflyboy.mpc4j;
 
-import org.jboss.arquillian.container.test.api.RunAsClient;
-import org.jboss.arquillian.junit.Arquillian;
 import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * Tests the playback control type commands
+ * <p>
+ *     Requires an mpd server, running on localhsot:6600.  See mpc4j/docker/mpd.
+ * </p>
+ ** Tests the playback control type commands
  * @author jfraney
  */
-@RunWith(Arquillian.class)
 public class PlaybackControlIT {
     private MPC mpc;
     @Before
@@ -22,9 +20,6 @@ public class PlaybackControlIT {
         mpc = new MPC();
     }
 
-    private static int count =0;
-    @Test
-    @RunAsClient
     public void testPlay() throws IOException {
         Play playCommand = new Play();
         Stop stopCommand = new Stop();

@@ -1,0 +1,5 @@
+command_list_ok_begin
+random 1
+status
+single 0
+command_list_end

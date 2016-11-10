@@ -6,6 +6,9 @@ import org.junit.Test;
 import java.io.IOException;
 import static org.assertj.core.api.Assertions.assertThat;
 /**
+ * <p>
+ *     Requires an mpd server, running on localhsot:6600.  See mpc4j/docker/mpd.
+ * </p>
  * @author jfraney
  */
 public class AddIdIT {

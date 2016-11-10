@@ -1,20 +1,18 @@
 package org.jjfflyboy.mpc4j;
 
-import org.jboss.arquillian.container.test.api.RunAsClient;
-import org.jboss.arquillian.junit.Arquillian;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
+ * <p>
+ *     Requires an mpd server, running on localhsot:6600.  See mpc4j/docker/mpd.
+ * </p>
  * @author jfraney
  */
-@RunWith(Arquillian.class)
-@RunAsClient
 public class StatusQueryIT {
 
     private MPC mpc;

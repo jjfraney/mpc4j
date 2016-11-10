@@ -3,12 +3,14 @@ package org.jjfflyboy.mpc4j;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.xml.crypto.Data;
 import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
+ * <p>
+ *     Requires an mpd server, running on localhsot:6600.  See mpc4j/docker/mpd.
+ * </p>
  * @author jfraney
  */
 public class ListPlaylistIT {
