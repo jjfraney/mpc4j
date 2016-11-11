@@ -8,22 +8,22 @@ package musicpd.protocol;
  * </p>
  * @author jfraney
  */
-public class Search extends Find {
+public class Search extends DatabaseQuery {
 
     /**
      * a command of form: 'search {TYPE} "{WHAT}"
      * @param type name of field to match
      * @param what value to match
      */
-    public Search(Type type, String what) {
-        super(type, what);
+    public Search(Find.Type type, String what) {
+        super(new Find.Filter(type, what));
     }
 
     /**
      * a command of form: 'search {TYPE} "{WHAT}" [...]'.
      * @param filters array of TYPE-WHAT filter pairs.
      */
-    public Search(Filter... filters) {
+    public Search(Find.Filter... filters) {
         super(filters);
     }
 

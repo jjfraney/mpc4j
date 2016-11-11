@@ -8,7 +8,7 @@ package musicpd.protocol;
  * </p>
  * @author jfraney
  */
-public class SearchAddPl extends Find {
+public class SearchAddPl extends DatabaseQuery {
 
     private final String playlistName;
 
@@ -17,8 +17,8 @@ public class SearchAddPl extends Find {
      * @param type name of field to match
      * @param what value to match
      */
-    public SearchAddPl(String playlistName, Type type, String what) {
-        super(type, what);
+    public SearchAddPl(String playlistName, Find.Type type, String what) {
+        super(new Find.Filter(type, what));
         if(playlistName == null) {
             throw new RuntimeException("playlistName cannot be null");
         }
@@ -30,7 +30,7 @@ public class SearchAddPl extends Find {
      * @param playlistName
      * @param filters array of TYPE-WHAT filter pairs.
      */
-    public SearchAddPl(String playlistName, Filter... filters) {
+    public SearchAddPl(String playlistName, Find.Filter... filters) {
         super(filters);
         this.playlistName = playlistName;
     }

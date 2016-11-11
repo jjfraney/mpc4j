@@ -16,7 +16,7 @@ package musicpd.protocol;
  * </p>
  * @author jfraney
  */
-public class Find extends AbstractCommand<DatabaseSongInfoResponse> {
+public class Find extends DatabaseQuery {
 
     /**
      * the find (and others) field-name parameter.
@@ -76,10 +76,5 @@ public class Find extends AbstractCommand<DatabaseSongInfoResponse> {
      */
     public Find(Filter... filters) {
         super(new Filters(filters));
-    }
-
-    @Override
-    public DatabaseSongInfoResponse response(java.util.List<String> responseLines) {
-        return new DatabaseSongInfoResponse(responseLines);
     }
 }
