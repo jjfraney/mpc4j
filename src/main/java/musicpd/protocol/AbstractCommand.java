@@ -26,16 +26,7 @@ public abstract class AbstractCommand<R extends Command.Response> implements Com
      * @param parameters from which the command parameters are generated.
      */
     protected AbstractCommand(Parameter ... parameters) {
-        StringBuilder b = new StringBuilder(command());
-        if(parameters.length > 0) {
-            b.append(" ").append(
-                    Arrays.stream(parameters)
-                            .map(Parameter::toParameter)
-                            .filter(s -> s.length() > 0)
-                            .collect(Collectors.joining(" "))
-            );
-        }
-        text = b.toString();
+        this(Arrays.asList(parameters));
     }
 
     /**
@@ -44,7 +35,16 @@ public abstract class AbstractCommand<R extends Command.Response> implements Com
      * @param parameters from which the command parameters are generated.
      */
     protected AbstractCommand(java.util.List<Parameter> parameters) {
-        this((Parameter[])parameters.toArray());
+        StringBuilder b = new StringBuilder(command());
+        if(parameters.size() > 0) {
+            b.append(" ").append(
+                    parameters.stream()
+                            .map(Parameter::toParameter)
+                            .filter(s -> s.length() > 0)
+                            .collect(Collectors.joining(" "))
+            );
+        }
+        text = b.toString();
     }
 
     /**

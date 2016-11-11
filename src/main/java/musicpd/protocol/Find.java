@@ -1,5 +1,8 @@
 package musicpd.protocol;
 
+import java.util.ArrayList;
+import java.util.function.Consumer;
+
 /**
  * find command from
  * <a href='https://www.musicpd.org/doc/protocol/database.html'>MPD Document: The music database.</a>
@@ -70,11 +73,33 @@ public class Find extends DatabaseQuery {
         super(new Filter(type, what));
     }
 
-    /**
-     * a command of form: 'find {TYPE} "{WHAT}" [...]'.
-     * @param filters array of TYPE-WHAT filter pairs.
-     */
-    public Find(Filter... filters) {
-        super(new Filters(filters));
+    public static abstract class AbstractBuilder<B extends AbstractBuilder, T extends DatabaseQuery> {
+        private final java.util.List<Filter> filters = new ArrayList<>();
+        protected AbstractBuilder() {};
+
+        public B with(Type type, String what) {
+            filters.add(new Filter(type, what));
+            return (B)this;
+        }
+        protected java.util.List<Filter> getFilters() {return filters;}
+
+        protected abstract T build();
+    }
+
+    private Find(java.util.List<Filter> filters) {
+        super(new ArrayList<>(filters));
+    }
+
+    public static class Builder extends AbstractBuilder<Builder, Find> {
+        @Override
+        protected Find build() {
+            return new Find(getFilters());
+        }
+    }
+
+    public static Find build(Consumer<Builder> c) {
+        Builder b = new Builder();
+        c.accept(b);
+        return b.build();
     }
 }

@@ -22,11 +22,14 @@ public class FindTest {
 
     @Test
     public void findCriteria() {
-        Find.Filter[] filters = {
-                new Find.Filter(Tag.ARTIST, "bob dylan"),
-                new Find.Filter(Tag.GENRE, "acid rock")
-        };
-        String text = new Find(filters).text();
+        Find find = Find.build(builder -> {
+            builder
+                .with(Tag.ARTIST, "bob dylan")
+                .with(Tag.GENRE, "acid rock")
+            ;
+        });
+        String text = find.text();
+
         assertThat(text).as("multiple filters").isEqualTo(("find artist \"bob dylan\" genre \"acid rock\""));
     }
 

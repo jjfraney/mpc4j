@@ -1,5 +1,8 @@
 package musicpd.protocol;
 
+import java.util.ArrayList;
+import java.util.function.Consumer;
+
 /**
  * searchaddpl command from
  * <a href='https://www.musicpd.org/doc/protocol/database.html'>MPD Document: The music database.</a>
@@ -25,14 +28,27 @@ public class SearchAddPl extends DatabaseQuery {
         this.playlistName = playlistName;
     }
 
-    /**
-     * a command of form: 'searchaddpl {NAME} {TYPE} "{WHAT}" [...]'.
-     * @param playlistName
-     * @param filters array of TYPE-WHAT filter pairs.
-     */
-    public SearchAddPl(String playlistName, Find.Filter... filters) {
-        super(filters);
+    private SearchAddPl(String playlistName, java.util.List<Find.Filter> filters) {
+        super(new ArrayList<>(filters));
         this.playlistName = playlistName;
     }
 
+    public static class Builder extends Find.AbstractBuilder<SearchAddPl.Builder, SearchAddPl> {
+        private String playlistName;
+
+        public Builder playlist(String name) {
+            this.playlistName = name;
+            return this;
+        }
+        @Override
+        protected SearchAddPl build() {
+            return new SearchAddPl(playlistName, getFilters());
+        }
+    }
+
+    public static SearchAddPl build(Consumer<Builder> c) {
+        SearchAddPl.Builder b = new SearchAddPl.Builder();
+        c.accept(b);
+        return b.build();
+    }
 }

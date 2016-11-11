@@ -8,6 +8,10 @@ abstract class DatabaseQuery extends AbstractCommand<DatabaseSongInfoResponse> {
         super(parameters);
     }
 
+    public DatabaseQuery(java.util.List<Parameter> parameters) {
+        super(parameters);
+    }
+
     @Override
     public DatabaseSongInfoResponse response(java.util.List<String> responseLines) {
         return new DatabaseSongInfoResponse(responseLines);
