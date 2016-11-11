@@ -1,6 +1,15 @@
 Java classes representing text commands and responses of the
 Media Player Daemon (MPD, https://www.musicpd.org/)
 protocol.
+
+This library has no external dependencies.
+Java Standard Edition (java se) 8+ runtime is required for applications that use this library.
+The programmer's API requires Java Development Kit (jdk) 8+.
+
+This library does not address concerns of thread management or network access.
+These concerns are broadly available in innumerable java frameworks, libraries and containers.
+A feature or function of this library that blocks its use in any of these
+can be considered a design or implementation bug.
  
 #Background
 MPD is a media player on linux.
@@ -13,30 +22,33 @@ with one or more lines of UTF-8 encoded text.
 #Goals
 This library provides classes that represent the commands
 and responses of the MPD protocol.
+It presents the text-based MPD protocol as Java classes.
+Like in Java's JAXB, where Javabeans are mapped to xml text, this library's classes
+are mapped to the music player daemons's text commands and response.
+
+Accommodation for change in the MPD protocol is present.
+For example:
+* response parsing does not fail in presence of unexpected fields (new fields).
+* unexpected fields (new fields) can be accessed by later applications.
+* command base classes are available for creating new command classes.
 
 The classes are intentionally immutable so they
 can be used in environments where immutability is an advantage (e.g., reactive environments).
-
-This library's command and response classes do not conform to the
-JavaBean convention.  The lack of setters is a consequence of
-the immutability goal.
-
-The author expects the classes can be extended (by sub-classing)
-to provide the JavaBean convention (by the sub-classes)
-for cases where immutability is not required.
-This use is an expected customization of the library.  
+The classes do not support methods that can change private data.
+They do not conform to the JavaBean convention.
+The lack of setters is a consequence of the immutability goal and is by design.
 
 This library is not providing a component to drive the
 exchange of messages with MPD
 (for example, a client side implementation
 using a Java IO library).
-Such can be easily obtained from onine programming examples.
+Such can be obtained from online programming examples.
 However, a prototype is provided
 to demonstrate how such would use the Command and Responses of this library.
 This prototype may be suitable for some environments.
 The author encourages developers to implement
 the network component appropriate for their
-specific runtime environment (i.e. Java SE, JavaEE, vertx, akka, whatever).
+specific runtime environment (i.e. Java SE, JavaEE, Android, vertx, akka, whatever).
  
 #Design
 For each MPD command, two classes are provided.  One is a Command;
@@ -63,35 +75,77 @@ from MPD.
 
 #Usage
 
-The usage of the Command and Response would be:
+An example usage:
 
 ```java
-    SetVol setVol = new SetVol();
+    // to set volume to 10%
+    SetVol setVol = new SetVol(10);
     Simple.Response setVolResponse = .....send(setVol);
     boolean success = setVolResponse.isOk();
 ```
     
-Because the Java ecosystem contains many client socket programming models,
+Because the Java ecosystem contains multiple client socket programming models,
 this library does not provide such implementation
 other than a nominally functional prototype.
 Developers are encouraged to implement an appropriate send/receive method
 for their framework.
 Such an implementation, perhaps a method named ```send```,
-would use the Command and Response this way:
+would be implemented to use the Command and Response this way:
 
 ```java
-    public <R extends Command.Response> R send(Command<R> command) {
-        // set up a socket
-        
-        // get command text
-        String commandText = command.text();
-        
-        // write to socket with UTF8 encoding
-        
-        // read from socket, decode with UFT8, into an array: one line per element
-        String [] responseLines = ....;
-        
-        // create response and return
-        return (R) command.response(responseLines);
+/**
+ * A sample MPC implementation.
+ */
+class MPC {
+    /**
+     * use a socket channel to send the command and read response.
+     *        
+     * @param command to send
+     * @return MPD's response to the command 
+     */
+    public <R extends Command.Response> R send(Command command) throws IOException {
+        List<String> result;
+        // try-with-resource: opens socket, a a writer toMpd, and a reader fromMpd
+        SocketAddress address = new InetSocketAddress(host, port);
+        try (SocketChannel channel = SocketChannel.open()) {
+
+            channel.connect(address);
+
+            BufferedReader fromMpd = new BufferedReader(Channels.newReader(channel, UTF_8.newDecoder(), -1));
+
+            String connectResponse;
+            // first, expect the connect status
+            while ((connectResponse = fromMpd.readLine()) != null) {
+                if (responseComplete(connectResponse)) {
+                    break;
+                }
+            }
+
+            // now send the command as text
+            ByteBuffer outGoing = ByteBuffer.wrap((command.text() + "\n").getBytes(UTF_8));
+            channel.write(outGoing);
+
+            // then read response into a List
+            List<String> lines = new ArrayList<>();
+            String responseSegment;
+            while ((responseSegment = fromMpd.readLine()) != null) {
+                lines.add(responseSegment);
+                if (responseComplete(responseSegment)) {
+                    break;
+                }
+            }
+
+            result = lines;
+        }
+        return (R) command.response(result);
     }
+
+    /**
+     * @return true if this is the last line of a command's response. 
+     */
+    private static boolean responseComplete(String response) {
+        return response.startsWith("OK") || response.startsWith("ACK");
+    }
+
+}
 ```
