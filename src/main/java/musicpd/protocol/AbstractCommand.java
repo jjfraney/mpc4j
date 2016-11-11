@@ -39,6 +39,15 @@ public abstract class AbstractCommand<R extends Command.Response> implements Com
     }
 
     /**
+     * generate this command's text from itself and the list of parameters
+     * supplied from concrete command classes.
+     * @param parameters from which the command parameters are generated.
+     */
+    protected AbstractCommand(java.util.List<Parameter> parameters) {
+        this((Parameter[])parameters.toArray());
+    }
+
+    /**
      * return only the spelling of this command...the first verb.
      * <p>
      *     This base implementation returns the simple name of this class in lower case.
