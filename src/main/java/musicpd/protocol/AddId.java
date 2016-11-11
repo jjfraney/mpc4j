@@ -11,7 +11,7 @@ import java.util.Optional;
 
  * @author jfraney
  */
-public class AddId extends Simple {
+public class AddId extends AbstractCommand<AddId.Response> {
     /**
      * @param uri song file location
      */
@@ -31,7 +31,7 @@ public class AddId extends Simple {
     public Response response(java.util.List<String> responseLines) {
         return new Response(responseLines);
     }
-    public static class Response extends SimpleResponse {
+    public static class Response extends HealthResponse {
         public Response(java.util.List<String> responseLines) {
             super(responseLines);
         }

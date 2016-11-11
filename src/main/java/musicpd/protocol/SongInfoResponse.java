@@ -8,7 +8,7 @@ import java.util.Optional;
  * response of commands that return song info
  * @author jfraney
  */
-public abstract class SongInfoResponse extends SimpleResponse {
+public abstract class SongInfoResponse extends HealthResponse {
 
     SongInfoResponse(List<String> responseLines) {
         super(responseLines);

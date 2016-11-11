@@ -36,7 +36,7 @@ public class CommandList extends AbstractCommand<CommandList.Response> {
         return new Response(responseLines, commands);
     }
 
-    public static class Response extends SimpleResponse {
+    public static class Response extends HealthResponse {
         private final List<Command> commands;
         public Response(List<String> responseLines, List<Command> commands) {
             super(responseLines);

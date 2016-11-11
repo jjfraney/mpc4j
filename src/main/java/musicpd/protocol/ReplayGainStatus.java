@@ -27,7 +27,7 @@ public class ReplayGainStatus extends AbstractCommand<ReplayGainStatus.Response>
     /**
      * access to data in response to replay_gain_status
      */
-    public static class Response extends SimpleResponse {
+    public static class Response extends HealthResponse {
         Response(java.util.List<String> responseLines) {
             super(responseLines);
         }

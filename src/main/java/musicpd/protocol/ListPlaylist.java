@@ -26,7 +26,7 @@ public class ListPlaylist extends AbstractCommand<ListPlaylist.Response> {
     /**
      * provides access to the list of file names returned by mpd by the listplaylist command.
      */
-    public static class Response extends SimpleResponse {
+    public static class Response extends HealthResponse {
         Response(java.util.List<String> responseLines) {
             super(responseLines);
         }

@@ -15,7 +15,7 @@ public class Commands extends AbstractCommand<Commands.Response> {
         super();
     }
 
-    public static class Response extends SimpleResponse {
+    public static class Response extends HealthResponse {
         Response(java.util.List<String> responseLines) {
             super(responseLines);
         }

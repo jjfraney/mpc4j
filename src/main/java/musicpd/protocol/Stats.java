@@ -18,7 +18,7 @@ public class Stats extends AbstractCommand<Stats.Response> {
     /**
      * provides access to data in the response to 'stats' command.
      */
-    public static class Response extends SimpleResponse {
+    public static class Response extends HealthResponse {
         /**
          * @return value of 'uptime: ' line
          */

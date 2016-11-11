@@ -45,7 +45,7 @@ public class Idle extends AbstractCommand<Idle.Response> {
     /**
      * provides access to the the values in an 'idle' response.
      */
-    public static class Response extends SimpleResponse {
+    public static class Response extends HealthResponse {
 
         /**
          * @return subsystem of 'changed: ' line

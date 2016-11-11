@@ -26,7 +26,7 @@ public class PlChangesPosId extends AbstractCommand<PlChangesPosId.Response> {
         return new Response(responseLines);
     }
 
-    public class Response extends SimpleResponse {
+    public class Response extends HealthResponse {
         Response(java.util.List<String> responseLines) {
             super(responseLines);
         }
