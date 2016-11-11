@@ -8,7 +8,7 @@ package musicpd.protocol;
  * </p>
  * @author jfraney
  */
-public class PlaylistFind extends AbstractCommand<QueuedSongInfoResponse> {
+public class PlaylistFind extends QueueQuery {
     interface Tag extends Filters.Field {
     }
     public static class Filter extends Filters.Filter {
@@ -25,8 +25,4 @@ public class PlaylistFind extends AbstractCommand<QueuedSongInfoResponse> {
         super(new Filters(new Filter(tag, needle)));
     }
 
-    @Override
-    public QueuedSongInfoResponse response(java.util.List<String> responseLines) {
-        return new QueuedSongInfoResponse(responseLines);
-    }
 }

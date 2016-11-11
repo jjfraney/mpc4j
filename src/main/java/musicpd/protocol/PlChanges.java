@@ -8,7 +8,7 @@ package musicpd.protocol;
  * </p>
  * @author jfraney
  */
-public class PlChanges extends AbstractCommand<QueuedSongInfoResponse> {
+public class PlChanges extends QueueQuery {
     /**
      * @param version to compare changes
      */
@@ -16,8 +16,4 @@ public class PlChanges extends AbstractCommand<QueuedSongInfoResponse> {
         super(adapt(version));
     }
 
-    @Override
-    public QueuedSongInfoResponse response(java.util.List<String> responseLines) {
-        return new QueuedSongInfoResponse(responseLines);
-    }
 }

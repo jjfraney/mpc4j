@@ -6,18 +6,9 @@ package musicpd.protocol;
  * @Author jfraney
  */
 
-public class CurrentSong extends AbstractCommand<QueuedSongInfoResponse> {
+public class CurrentSong extends QueueQuery {
 
     public CurrentSong() {
         super();
-    }
-
-    /**
-     * @param responseLines given by mpd server in response to this command.
-     * @return response to 'currentsong' command
-     */
-    @Override
-    public QueuedSongInfoResponse response(java.util.List<String> responseLines) {
-        return new QueuedSongInfoResponse(responseLines);
     }
 }

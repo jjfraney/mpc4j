@@ -8,13 +8,13 @@ package musicpd.protocol;
  * </p>
  * @author jfraney
  */
-public class PlaylistSearch extends PlaylistFind {
+public class PlaylistSearch extends QueueQuery {
 
     /**
      * @param tag of songs to return in result
      * @param needle (or value) of the tag of songs to return in result
      */
-    public PlaylistSearch(PlaylistSearch.Tag tag, String needle) {
-        super(tag, needle);
+    public PlaylistSearch(PlaylistFind.Tag tag, String needle) {
+        super(new PlaylistFind.Filter(tag, needle));
     }
 }

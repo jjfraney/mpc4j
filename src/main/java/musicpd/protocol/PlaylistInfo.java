@@ -8,7 +8,7 @@ package musicpd.protocol;
  * </p>
  * @author jfraney
  */
-public class PlaylistInfo extends AbstractCommand<QueuedSongInfoResponse> {
+public class PlaylistInfo extends QueueQuery {
     /**
      * @param songpos position of songs of interest
      */
@@ -20,8 +20,4 @@ public class PlaylistInfo extends AbstractCommand<QueuedSongInfoResponse> {
      */
     public PlaylistInfo(Integer start, Integer end) {super(new RangeParameter(start, end));}
 
-    @Override
-    public QueuedSongInfoResponse response(java.util.List<String> responseLines) {
-        return new QueuedSongInfoResponse(responseLines);
-    }
 }

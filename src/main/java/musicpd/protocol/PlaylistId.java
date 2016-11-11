@@ -8,7 +8,7 @@ package musicpd.protocol;
  * </p>
  * @author jfraney
  */
-public class PlaylistId extends AbstractCommand<QueuedSongInfoResponse> {
+public class PlaylistId extends QueueQuery {
     /**
      * all songs in the playlist
      */
@@ -20,8 +20,4 @@ public class PlaylistId extends AbstractCommand<QueuedSongInfoResponse> {
      */
     public PlaylistId(Integer songId) { super(adapt(songId));}
 
-    @Override
-    public QueuedSongInfoResponse response(java.util.List<String> responseLines) {
-        return new QueuedSongInfoResponse(responseLines);
-    }
 }
