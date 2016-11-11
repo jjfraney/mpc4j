@@ -1,5 +1,6 @@
 package musicpd.protocol;
 
+import java.util.ArrayList;
 import java.util.function.Consumer;
 
 /**
@@ -41,43 +42,12 @@ public class List extends AbstractCommand<List.Response> {
         }
     }
 
-    private static List.Filter[] NO_FILTERS = new List.Filter[0];
-    private static Tag [] NO_GROUPTYPES = new Tag [0];
-
     /**
      * list the tag or 'file' on all songs.
      * @param type the 'type' to list
      */
     public List(final List.Type type) {
         super(type);
-    }
-
-    /**
-     * list the tag or 'file' on songs that pass the filters.
-     * @param type the 'type' to list
-     * @param filters filters to apply
-     */
-    public List(List.Type type, List.Filter ... filters) {
-        super(type, new Filters(filters));
-    }
-
-    /**
-     * list the tag or 'file' on all songs, grouped.
-     * @param type the 'type' to list
-     * @param groupTypes tags to group by
-     */
-    public List(List.Type type, Tag ... groupTypes) {
-        super(type, new GroupParameter(groupTypes));
-    }
-
-    /**
-     * list the tag or 'file' on songs that pass the filters, grouped.
-     * @param type the 'type' to list
-     * @param filters filters to apply
-     * @param groupTypes tags to group by
-     */
-    public List(List.Type type, List.Filter[] filters, Tag[] groupTypes) {
-        super(type, new Filters(filters), new GroupParameter(groupTypes));
     }
 
     @Override
@@ -94,51 +64,50 @@ public class List extends AbstractCommand<List.Response> {
 
     }
 
-        /**
+    /**
      * build a 'list' Command with arbitrary arguments.
      */
     public static class Builder {
-
         private final List.Type type;
-        private Filter[] filters ;
-        private Tag [] groupTypes;
+        private java.util.List<Filter> filters = new ArrayList<>();
+        private java.util.List<Tag> groups = new ArrayList<>();
 
         private Builder(List.Type type) {
-            if(type == null) {
-                throw new IllegalArgumentException("type must not be null.");
-            }
             this.type = type;
+            if(type == null) {
+                throw new IllegalArgumentException("at least one {TYPE} is required.");
+            }
         }
 
         /**
-         * @param filters filters to apply
+         * can be called multiple times.
+         * @param filterType the type to filter
+         * @param filterWhat the string to filter
          * @return this builder
          */
-        public Builder withFilters(List.Filter ... filters) {
-            this.filters = filters;
+        public Builder with(Find.Type filterType, String filterWhat) {
+            filters.add(new Filter(filterType, filterWhat));
             return this;
         }
 
         /**
-         *
-         * @param groupTypes tags to group by
-         * @return
+         * can be called multiple times.
+         * @param tag to group by
+         * @return this builder
          */
-        public Builder withGroupTypes(Tag ... groupTypes) {
-            this.groupTypes = groupTypes;
+        public Builder groupBy(Tag tag) {
+            groups.add(tag);
             return this;
         }
+
         public List build() {
-            if(filters == null) {
-                filters = NO_FILTERS;
-            }
-            if(groupTypes == null) {
-                groupTypes = NO_GROUPTYPES;
-            }
-            return new List(type, filters, groupTypes);
+            return new List(type, filters, groups);
         }
     }
 
+    private List(List.Type type, java.util.List<Filter> filters, java.util.List<Tag> tags) {
+        super(type, adapt(new ArrayList<>(filters)), new GroupParameter(tags));
+    }
     /**
      * build a list command
      * @param type not-null tag or 'file' to list

@@ -10,7 +10,11 @@ import java.util.stream.Collectors;
 public class GroupParameter implements Parameter {
     private final String parameter;
     public GroupParameter(Tag ... tags) {
-        parameter = Arrays.stream(tags).map(tag -> "group " + tag.toParameter()).collect(Collectors.joining(" "));
+        this(Arrays.asList(tags));
+    }
+    public GroupParameter(java.util.List<Tag> tags) {
+        parameter = tags.stream().map(tag -> "group " + tag.toParameter()).collect(Collectors.joining(" "));
+
     }
 
     @Override

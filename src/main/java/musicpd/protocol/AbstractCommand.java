@@ -108,7 +108,7 @@ public abstract class AbstractCommand<R extends Command.Response> implements Com
      * @param <T>
      * @return
      */
-    protected static <T extends Parameter> Parameter adapt(java.util.List<Parameter> collection) {
+    protected static <T extends Parameter> Parameter adapt(java.util.List<? extends Parameter> collection) {
         return new Parameter() {
             @Override
             public String toParameter() {
