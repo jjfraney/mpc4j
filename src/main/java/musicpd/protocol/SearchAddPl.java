@@ -13,24 +13,20 @@ import java.util.function.Consumer;
  */
 public class SearchAddPl extends DatabaseQuery {
 
-    private final String playlistName;
-
     /**
      * a command of form: 'searchaddpl {Name} {TYPE} "{WHAT}"
      * @param type name of field to match
      * @param what value to match
      */
     public SearchAddPl(String playlistName, Find.Type type, String what) {
-        super(new Find.Filter(type, what));
+        super(adapt(playlistName), new Find.Filter(type, what));
         if(playlistName == null) {
             throw new RuntimeException("playlistName cannot be null");
         }
-        this.playlistName = playlistName;
     }
 
     private SearchAddPl(String playlistName, java.util.List<Find.Filter> filters) {
-        super(new ArrayList<>(filters));
-        this.playlistName = playlistName;
+        super(adapt(playlistName), adapt(new ArrayList<>(filters)));
     }
 
     public static class Builder extends Find.AbstractBuilder<SearchAddPl.Builder, SearchAddPl> {
@@ -42,6 +38,9 @@ public class SearchAddPl extends DatabaseQuery {
         }
         @Override
         protected SearchAddPl build() {
+            if(playlistName == null) {
+                throw new RuntimeException("playlistName cannot be null");
+            }
             return new SearchAddPl(playlistName, getFilters());
         }
     }

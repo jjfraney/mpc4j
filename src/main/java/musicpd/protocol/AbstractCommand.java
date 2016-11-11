@@ -1,6 +1,7 @@
 package musicpd.protocol;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.stream.Collectors;
 
 /**
@@ -98,6 +99,27 @@ public abstract class AbstractCommand<R extends Command.Response> implements Com
             }
         };
     }
+    /**
+     * adapt an collection of Parameters to a Parameter
+     * <p>
+     *     This method is a utility for concrete command classes.
+     * </p>
+     * @param collection
+     * @param <T>
+     * @return
+     */
+    protected static <T extends Parameter> Parameter adapt(java.util.List<Parameter> collection) {
+        return new Parameter() {
+            @Override
+            public String toParameter() {
+                return new StringBuilder()
+                        .append(collection.stream().map(Parameter::toParameter).collect(Collectors.joining(" ")))
+                        .toString();
+            }
+        };
+    }
+
+
 
     /**
      * adapt an object to a Parameter
