@@ -1,7 +1,9 @@
 package musicpd.protocol;
 
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 /**
  * list command from
@@ -36,12 +38,16 @@ public class List extends AbstractCommand<List.Response> {
         public String toLabel() {return name().toLowerCase();}
     }
 
+    // this first argument is the leading line of each item in the matching list.
+    private final Type type;
+
     /**
      * list the tag or 'file' on all songs.
      * @param type the 'type' to list
      */
     public List(final List.Type type) {
         super(type);
+        this.type = type;
     }
 
     @Override
@@ -54,8 +60,43 @@ public class List extends AbstractCommand<List.Response> {
             super(responseLines);
         }
 
-        // TODO: how to structure the response lines?
+        /**
+         * the metadata in List response.
+         * <p>
+         *     The response is not full metadata, as in 'find' command.
+         *     The response is sparse.
+         *     Only the types identified in the command parameters appear in the response.
+         * </p>
+         */
+        public class Metadata extends ResponseContent {
 
+            Metadata(java.util.List<String> responseLines) {
+                super(responseLines);
+            }
+
+            /**
+             * get the value for the line with the matching label.
+             * <p>
+             *     Expect only the types in the 'list' parameters to have value.
+             *     Even those may not be present.
+             * </p>
+             * @param type of interest
+             * @return the value of the string with the label matching 'type'
+             */
+            public Optional<String> getType(List.Type type) {
+                return getStringValue(type);
+            }
+        }
+
+        /**
+         * @return response of list command segmented by the 'type' parameter
+         */
+        public java.util.List<Metadata> getMetadata() {
+            return segments(type)
+                    .stream()
+                    .map(Metadata::new)
+                    .collect(Collectors.toList());
+        }
     }
 
     /**
@@ -101,6 +142,7 @@ public class List extends AbstractCommand<List.Response> {
 
     private List(List.Type type, java.util.List<FilterParameter> filters, java.util.List<Tag> tags) {
         super(type, adapt(new ArrayList<>(filters)), new GroupParameter(tags));
+        this.type = type;
     }
     /**
      * build a list command
