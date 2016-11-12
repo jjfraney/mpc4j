@@ -1,8 +1,10 @@
 package musicpd.protocol;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 /**
@@ -35,14 +37,6 @@ public class Count extends AbstractCommand<Count.Response> {
         super(new Filters(new Filter(tag, needle)));
         group = null;
     }
-    /**
-     * a command of form: 'count {TAG} "{NEEDLE}" [...]'.
-     * @param filters array of TYPE-WHAT filter pairs.
-     */
-    public Count(Filter... filters) {
-        super(new Filters(filters));
-        group = null;
-    }
 
     /**
      * a command of form: 'count {TAG} "{NEEDLE}"'.
@@ -55,26 +49,8 @@ public class Count extends AbstractCommand<Count.Response> {
         this.group = group;
     }
 
-    /**
-     *
-     * @param filters array of TYPE-WHAT filter pairs.
-     * @param group optional value to group results by, null if none.
-     */
-    public Count(Filter[] filters, musicpd.protocol.Tag group) {
-        super(new Filters(filters), new GroupParameter(group));
-        this.group = group;
-    }
-
     private boolean isGrouped() {
         return group != null;
-    }
-    /**
-     *
-     * @param group optional value to group results by, null if none.
-     * @param filters array of TYPE-WHAT filter pairs.
-     */
-    public Count(musicpd.protocol.Tag group, Filter... filters) {
-        this(filters, group);
     }
 
     @Override
@@ -142,5 +118,32 @@ public class Count extends AbstractCommand<Count.Response> {
                 return Collections.emptyList();
             }
         }
+    }
+
+    public static class Builder {
+        private final java.util.List<Filter> filters = new ArrayList<>();
+        private musicpd.protocol.Tag group;
+
+        public Builder with(Count.Tag tag, String needle) {
+            filters.add(new Filter(tag, needle));
+            return this;
+        }
+        public Builder groupBy(musicpd.protocol.Tag group) {
+            this.group = group;
+            return this;
+        }
+        private Count build() {
+            return new Count(filters, group);
+        }
+    }
+    private Count(java.util.List<Filter> filters, musicpd.protocol.Tag group) {
+        super(adapt(new ArrayList<>(filters)), new GroupParameter(group));
+        this.group = group;
+    }
+
+    public static Count build(Consumer<Builder> builder) {
+        Builder b = new Builder();
+        builder.accept(b);
+        return b.build();
     }
 }
