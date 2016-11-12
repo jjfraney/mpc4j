@@ -15,11 +15,16 @@ public class List extends AbstractCommand<List.Response> {
 
     /**
      * TYPE: can be any tag or 'file'.
+     * @see musicpd.protocol.Tag
+     * @see musicpd.protocol.List.Special
      */
-    interface Type extends Parameter {
+    interface Type extends FilterParameter.Type {
         String toSongLabel();
     }
 
+    /**
+     * List command allows also for 'file'.
+     */
     public enum Special implements List.Type {
         FILE;
 
@@ -30,16 +35,6 @@ public class List extends AbstractCommand<List.Response> {
 
         @Override
         public String toSongLabel() {return name().toLowerCase();}
-    }
-
-    /**
-     * any tag or 'file'.
-     */
-    public static class Filter extends Filters.Filter {
-
-        protected Filter(Find.Type type, String what) {
-            super(type, what);
-        }
     }
 
     /**
@@ -69,7 +64,7 @@ public class List extends AbstractCommand<List.Response> {
      */
     public static class Builder {
         private final List.Type type;
-        private java.util.List<Filter> filters = new ArrayList<>();
+        private java.util.List<FilterParameter> filters = new ArrayList<>();
         private java.util.List<Tag> groups = new ArrayList<>();
 
         private Builder(List.Type type) {
@@ -86,7 +81,7 @@ public class List extends AbstractCommand<List.Response> {
          * @return this builder
          */
         public Builder with(Find.Type filterType, String filterWhat) {
-            filters.add(new Filter(filterType, filterWhat));
+            filters.add(new FilterParameter(filterType, filterWhat));
             return this;
         }
 
@@ -105,7 +100,7 @@ public class List extends AbstractCommand<List.Response> {
         }
     }
 
-    private List(List.Type type, java.util.List<Filter> filters, java.util.List<Tag> tags) {
+    private List(List.Type type, java.util.List<FilterParameter> filters, java.util.List<Tag> tags) {
         super(type, adapt(new ArrayList<>(filters)), new GroupParameter(tags));
     }
     /**

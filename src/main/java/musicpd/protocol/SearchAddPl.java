@@ -19,13 +19,13 @@ public class SearchAddPl extends DatabaseQuery {
      * @param what value to match
      */
     public SearchAddPl(String playlistName, Find.Type type, String what) {
-        super(adapt(playlistName), new Find.Filter(type, what));
+        super(adapt(playlistName), new FilterParameter(type, what));
         if(playlistName == null) {
             throw new RuntimeException("playlistName cannot be null");
         }
     }
 
-    private SearchAddPl(String playlistName, java.util.List<Find.Filter> filters) {
+    private SearchAddPl(String playlistName, java.util.List<FilterParameter> filters) {
         super(adapt(playlistName), adapt(new ArrayList<>(filters)));
     }
 

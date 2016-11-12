@@ -15,26 +15,21 @@ import java.util.stream.Collectors;
 public class Count extends AbstractCommand<Count.Response> {
 
     /**
-     * The domain for the TAG parameter of 'count' command.
+     * The types allowed.
+     * @see musicpd.protocol.Tag
      */
-    interface Tag extends Filters.Field {
-    }
-
-    public static class Filter extends Filters.Filter {
-
-        protected Filter(Count.Tag tag, String value) {
-            super(tag, value);
-        }
+    interface Tag extends FilterParameter.Type {
     }
 
     private final musicpd.protocol.Tag group;
+
     /**
      * a command of form: 'count {TAG} "{NEEDLE}"'.
      * @param tag name of tag to match
      * @param needle value to match
      */
     public Count(Tag tag, String needle) {
-        super(new Filters(new Filter(tag, needle)));
+        super(new FilterParameter(tag, needle));
         group = null;
     }
 
@@ -45,7 +40,7 @@ public class Count extends AbstractCommand<Count.Response> {
      * @param group optional value to group results by, null if none.
      */
     public Count(Tag tag, String needle, musicpd.protocol.Tag group) {
-        super(new Filters(new Filter(tag, needle)), new GroupParameter(group));
+        super(new FilterParameter(tag, needle), new GroupParameter(group));
         this.group = group;
     }
 
@@ -121,11 +116,11 @@ public class Count extends AbstractCommand<Count.Response> {
     }
 
     public static class Builder {
-        private final java.util.List<Filter> filters = new ArrayList<>();
+        private final java.util.List<FilterParameter> filters = new ArrayList<>();
         private musicpd.protocol.Tag group;
 
         public Builder with(Count.Tag tag, String needle) {
-            filters.add(new Filter(tag, needle));
+            filters.add(new FilterParameter(tag, needle));
             return this;
         }
         public Builder groupBy(musicpd.protocol.Tag group) {
@@ -136,7 +131,7 @@ public class Count extends AbstractCommand<Count.Response> {
             return new Count(filters, group);
         }
     }
-    private Count(java.util.List<Filter> filters, musicpd.protocol.Tag group) {
+    private Count(java.util.List<FilterParameter> filters, musicpd.protocol.Tag group) {
         super(adapt(new ArrayList<>(filters)), new GroupParameter(group));
         this.group = group;
     }

@@ -19,10 +19,10 @@ public class Search extends DatabaseQuery {
      * @param what value to match
      */
     public Search(Find.Type type, String what) {
-        super(new Find.Filter(type, what));
+        super(new FilterParameter(type, what));
     }
 
-    private Search(java.util.List<Find.Filter> filters) {
+    private Search(java.util.List<FilterParameter> filters) {
         super(new ArrayList<>(filters));
     }
 

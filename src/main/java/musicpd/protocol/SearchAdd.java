@@ -19,10 +19,10 @@ public class SearchAdd extends DatabaseQuery {
      * @param what value to match
      */
     public SearchAdd(Find.Type type, String what) {
-        super(new Find.Filter(type, what));
+        super(new FilterParameter(type, what));
     }
 
-    private SearchAdd(java.util.List<Find.Filter> filters) {
+    private SearchAdd(java.util.List<FilterParameter> filters) {
         super(new ArrayList<>(filters));
     }
 

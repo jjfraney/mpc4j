@@ -22,33 +22,15 @@ import java.util.function.Consumer;
 public class Find extends DatabaseQuery {
 
     /**
-     * the find (and others) field-name parameter.
-     * Currently, either a TAG or a special type.
+     * The types allowed.  Find allows for a tag or special types.
+     * @see musicpd.protocol.Tag
+     * @see musicpd.protocol.Find.Special
      */
-    interface Type extends Filters.Field {
+    interface Type extends FilterParameter.Type {
     }
 
     /**
-     * 'filter' segment of a find command
-     */
-    public static class Filter extends Filters.Filter {
-        /**
-         * allows filter only by this Find.Type values.  As per
-         * mpd document, match songs with name of 'type' and value below.
-         * @param type  An enum of type Find.Type.
-         * @param what  The value to match against the metadata of the Find.Type.
-         * @see Find.Special
-         * @see Tag        */
-        protected Filter(Find.Type type, String what) {
-            super(type, what);
-        }
-    }
-
-    // find's TYPE may be a TAG or a special type.
-    // observe that enum Tag implements Find.Type.
-
-    /**
-     * find's TYPE may be one of these.
+     * find's TYPE also may be one of these.
      */
     public enum Special implements Type {
         ANY, FILE, BASE, MODIFIED_SINCE;
@@ -70,23 +52,23 @@ public class Find extends DatabaseQuery {
      * @param what value to match
      */
     public Find(Type type, String what) {
-        super(new Filter(type, what));
+        super(new FilterParameter(type, what));
     }
 
     public static abstract class AbstractBuilder<B extends AbstractBuilder, T extends DatabaseQuery> {
-        private final java.util.List<Filter> filters = new ArrayList<>();
+        private final java.util.List<FilterParameter> filters = new ArrayList<>();
         protected AbstractBuilder() {};
 
         public B with(Type type, String what) {
-            filters.add(new Filter(type, what));
+            filters.add(new FilterParameter(type, what));
             return (B)this;
         }
-        protected java.util.List<Filter> getFilters() {return filters;}
+        protected java.util.List<FilterParameter> getFilters() {return filters;}
 
         protected abstract T build();
     }
 
-    private Find(java.util.List<Filter> filters) {
+    private Find(java.util.List<FilterParameter> filters) {
         super(new ArrayList<>(filters));
     }
 

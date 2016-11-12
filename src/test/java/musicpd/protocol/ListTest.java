@@ -9,9 +9,6 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class ListTest {
 
-    private final List.Filter filterByTitle = new List.Filter(Tag.TITLE, "song title");
-    private final List.Filter filterByAlbum = new List.Filter(Tag.ALBUM, "white album");
-
     @Test
     public void listArtist() {
         String text = new List(Tag.ARTIST).text();
