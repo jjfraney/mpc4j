@@ -9,7 +9,10 @@ import java.util.stream.Collectors;
  *     A Tag is also a TYPE for the find command, and a TAG for the count command,
  *     and a GROUPTYPE for the list command.
  * </p>
- * @see Find.Filter
+ * @see musicpd.protocol.Find.Type
+ * @see musicpd.protocol.Count.Tag
+ * @see musicpd.protocol.List.Type
+ * @see musicpd.protocol.PlaylistFind.Tag
  * @author jfraney
  */
 public enum Tag implements Parameter, Find.Type, Count.Tag, List.Type, PlaylistFind.Tag {
@@ -34,18 +37,18 @@ public enum Tag implements Parameter, Find.Type, Count.Tag, List.Type, PlaylistF
     MUSIC_BRAINZ_TRACK_ID("MUSICBRAINZ_TRACKID"),
     MUSIC_BRAINZ_RELEASE_TRACK_ID("MUSICBRAINZ_RELEASETRACKID");
 
-    private String songLabel;
+    private String label;
     private String parameter;
 
-    Tag(String songLabel) {
-        this.songLabel = songLabel;
-        this.parameter = this.songLabel.toLowerCase();
+    Tag(String label) {
+        this.label = label;
+        this.parameter = this.label.toLowerCase();
     }
     Tag() {
         // convert Tag's name (CAPS and underscores) to camelCase
         String [] tokens = name().split("_");
-        this.songLabel = Arrays.stream(tokens).map(Tag::capitalize).collect(Collectors.joining(""));
-        this.parameter = this.songLabel.toLowerCase();
+        this.label = Arrays.stream(tokens).map(Tag::capitalize).collect(Collectors.joining(""));
+        this.parameter = this.label.toLowerCase();
     }
 
     /**
@@ -62,8 +65,9 @@ public enum Tag implements Parameter, Find.Type, Count.Tag, List.Type, PlaylistF
     /**
      * @return the tag as it would appear in response from database search commands.
      */
-    public String toSongLabel() {
-        return songLabel;
+    @Override
+    public String toLabel() {
+        return label;
     }
 
     /**

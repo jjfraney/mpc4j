@@ -18,8 +18,7 @@ public class List extends AbstractCommand<List.Response> {
      * @see musicpd.protocol.Tag
      * @see musicpd.protocol.List.Special
      */
-    interface Type extends FilterParameter.Type {
-        String toSongLabel();
+    interface Type extends FilterParameter.Type, ResponseContentParser.LineMetadata {
     }
 
     /**
@@ -34,7 +33,7 @@ public class List extends AbstractCommand<List.Response> {
         }
 
         @Override
-        public String toSongLabel() {return name().toLowerCase();}
+        public String toLabel() {return name().toLowerCase();}
     }
 
     /**

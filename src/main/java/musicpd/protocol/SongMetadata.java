@@ -48,6 +48,6 @@ public abstract class SongMetadata extends ResponseContent {
      * @return the value in the response line with the tag.
      */
     public Optional<String> getTag(Tag tag) {
-        return getStringValue(tag.toSongLabel());
+        return getStringValue(tag);
     }
 }

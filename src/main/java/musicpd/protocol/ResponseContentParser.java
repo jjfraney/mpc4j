@@ -80,6 +80,14 @@ public class ResponseContentParser {
     public static Optional<String> getStringValue(List<String> responseLines, String name) {
         return findFieldValue(responseLines, name);
     }
+    /**
+     * @param responseLines to search
+     * @param metadata of field of interest
+     * @return the value, as String, of the first field in 'responseLines' with 'name', if present.
+     */
+    public static Optional<String> getStringValue(List<String> responseLines, LineMetadata metadata) {
+        return findFieldValue(responseLines, metadata.toLabel());
+    }
 
     /**
      * @param responseLines to search
@@ -126,12 +134,12 @@ public class ResponseContentParser {
      *             The MPD server's implementation can verified by observation with a tool such as netcap.
      *         </li>
      *     </ul>
-       * </p>
+     * </p>
      * @param responseLines to search
      * @param markers that identify the first line of each segment
      * @return list of identified segments in 'responseLines'
      */
-    public static List<List<String>> segments(List<String> responseLines, String ... markers) {
+    public static List<List<String>> segments(List<String> responseLines, java.util.List<String> markers) {
         List<List<String>> result = new ArrayList<>();
         List<String> segment = null;
         for(String line: responseLines) {
@@ -139,7 +147,7 @@ public class ResponseContentParser {
                 continue;
             }
 
-            Optional<String> match = Stream.of(markers).filter(m -> isLabelMatch(m, line)).findFirst();
+            Optional<String> match = markers.stream().filter(m -> isLabelMatch(m, line)).findFirst();
             if(match.isPresent()) {
                 segment = new ArrayList<>();
                 result.add(Collections.unmodifiableList(segment));
@@ -149,6 +157,28 @@ public class ResponseContentParser {
             }
         }
         return Collections.unmodifiableList(result);
+    }
+    /**
+     * separates response lines into segments.
+     *
+     * @param responseLines to search
+     * @param markers that identify the first line of each segment
+     * @return list of identified segments in 'responseLines'
+     */
+    public static List<List<String>> segments(List<String> responseLines, String ... markers) {
+        return segments(responseLines, Arrays.asList(markers));
+    }
+
+    /**
+     * separates response lines into segments.
+     *
+     * @param responseLines to search
+     * @param metadata that identify the first line of each segment
+     * @return list of identified segments in 'responseLines'
+     */
+    public static List<List<String>> segments(List<String> responseLines, LineMetadata ... metadata) {
+        java.util.List<String> m = Arrays.stream(metadata).map(LineMetadata::toLabel).collect(Collectors.toList());
+        return segments(responseLines, m);
     }
 
     /**
@@ -164,5 +194,29 @@ public class ResponseContentParser {
                 && (line.length() == label.length() + 1
                     || line.charAt(label.length() + 1) == ' ')
                 && line.startsWith(label);
+    }
+
+    /**
+     * determines whether a line has a required label.
+     * @param metadata required
+     * @param line to compare
+     * @return true if the line has the label specified by metadata
+     */
+    public static boolean isLabelMatch(LineMetadata metadata, String line) {
+        return isLabelMatch(metadata.toLabel(), line);
+    }
+
+    /**
+     * Interface to describe any line in response data, for example, the line's label.
+     * @see DatabaseQueryResponse
+     * @see QueueQueryResponse
+     * @author jfraney
+     */
+    public static interface LineMetadata {
+        /**
+         * returns the label of the response for this data.
+         * @return
+         */
+        String toLabel();
     }
 }

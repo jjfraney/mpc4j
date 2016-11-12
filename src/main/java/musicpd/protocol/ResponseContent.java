@@ -80,6 +80,13 @@ public abstract class ResponseContent {
     protected Optional<String> getStringValue(String name) {
         return ResponseContentParser.getStringValue(getResponseLines(), name);
     }
+    /**
+     * @param metatdata of field of interest
+     * @return the value, as String, of the first field in this response with 'name', if present.
+     */
+    protected Optional<String> getStringValue(ResponseContentParser.LineMetadata metatdata) {
+        return ResponseContentParser.getStringValue(getResponseLines(), metatdata);
+    }
 
     /**
      * @param name of field of interest
@@ -98,7 +105,15 @@ public abstract class ResponseContent {
     protected List<List<String>> segments(String ... markers) {
         return ResponseContentParser.segments(getResponseLines(), markers);
     }
-
+    /**
+     * separates this response into segments.
+     * @see ResponseContentParser#segments
+     * @param metadata - that identify the first line of each segment
+     * @return
+     */
+    protected List<List<String>> segments(ResponseContentParser.LineMetadata ... metadata) {
+        return ResponseContentParser.segments(getResponseLines(), metadata);
+    }
     /**
      * @param label
      * @param line
@@ -106,5 +121,13 @@ public abstract class ResponseContent {
      */
     protected boolean isLabelMatch(String label, String line) {
         return ResponseContentParser.isLabelMatch(label, line);
+    }
+    /**
+     * @param metadata
+     * @param line
+     * @return true if the line starts with the given label
+     */
+    protected boolean isLabelMatch(ResponseContentParser.LineMetadata metadata, String line) {
+        return ResponseContentParser.isLabelMatch(metadata, line);
     }
 }

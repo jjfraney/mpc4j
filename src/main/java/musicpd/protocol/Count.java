@@ -96,7 +96,7 @@ public class Count extends AbstractCommand<Count.Response> {
             }
 
             public Optional<String> getTag(musicpd.protocol.Tag tag) {
-                return getStringValue(tag.toSongLabel());
+                return getStringValue(tag);
             }
         }
 
@@ -105,7 +105,7 @@ public class Count extends AbstractCommand<Count.Response> {
          */
         public List<Group> getGroups() {
             if(isGrouped()) {
-                return segments(group.toSongLabel())
+                return segments(group)
                         .stream()
                         .map(Group::new)
                         .collect(Collectors.toList());
