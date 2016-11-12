@@ -9,24 +9,24 @@ import java.util.stream.Collectors;
  *     This class parses the lines for the song 'metadata' returned
  *     by commands in the 'playlist' or 'queue' category.  This category is
  *     distinct from the 'database' category
- *     (see {@link musicpd.protocol.DatabaseSongInfoResponse}).
+ *     (see {@link DatabaseQueryResponse}).
  * </p>
  * @author jfraney
  */
-public class QueuedSongInfoResponse extends SongInfoResponse {
-    QueuedSongInfoResponse(java.util.List<String> responseLines) {
+public class QueueQueryResponse extends HealthResponse {
+    QueueQueryResponse(java.util.List<String> responseLines) {
         super(responseLines);
     }
 
     /**
      * song info returned by playlist commands
      */
-    public class QueuedSongInfo extends SongInfo {
+    public class QueuedSongMetadata extends SongMetadata {
 
         /**
          * @param responseLines limited to a single song
          */
-        protected QueuedSongInfo(java.util.List<String> responseLines) {
+        protected QueuedSongMetadata(java.util.List<String> responseLines) {
             super(responseLines);
         }
 
@@ -48,10 +48,10 @@ public class QueuedSongInfoResponse extends SongInfoResponse {
 
     }
 
-    public java.util.List<QueuedSongInfo> getSongInfo() {
+    public java.util.List<QueuedSongMetadata> getSongMetadata() {
             return segments("file")
                     .stream()
-                    .map(QueuedSongInfo::new)
+                    .map(QueuedSongMetadata::new)
                     .collect(Collectors.toList());
     }
 }

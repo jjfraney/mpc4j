@@ -37,7 +37,7 @@ public class LsInfoTest {
                 "OK"
         ));
         assertThat(r.isOk()).as("no parse").isTrue();
-        List<DatabaseSongInfoResponse.DatabaseSongInfo> songs = r.getSongInfo();
+        List<DatabaseQueryResponse.DatabaseSongMetadata> songs = r.getMetadata();
         assertThat(songs.size()).as("song count").isEqualTo(3);
 
         assertThat(songs.get(0).getFile().get()).as("song file name").isEqualTo("aaa.ogg");

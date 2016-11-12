@@ -8,7 +8,7 @@ package musicpd.protocol;
  * </p>
  * @author jfraney
  */
-public class ListPlaylistInfo extends AbstractCommand<DatabaseSongInfoResponse> {
+public class ListPlaylistInfo extends AbstractCommand<DatabaseQueryResponse> {
     /**
      * @param name of playlist
      */
@@ -16,7 +16,7 @@ public class ListPlaylistInfo extends AbstractCommand<DatabaseSongInfoResponse> 
         super(adapt(name));
     }
     @Override
-    public DatabaseSongInfoResponse response(java.util.List<String> responseLines) {
-        return new DatabaseSongInfoResponse(responseLines);
+    public DatabaseQueryResponse response(java.util.List<String> responseLines) {
+        return new DatabaseQueryResponse(responseLines);
     }
 }

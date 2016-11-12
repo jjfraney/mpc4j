@@ -21,7 +21,7 @@ public class CurrentSongTest {
     public void response() throws Exception {
         ZonedDateTime now = ZonedDateTime.now();
         String file = "someFileName";
-        QueuedSongInfoResponse response = new CurrentSong().response(Arrays.asList(
+        QueueQueryResponse response = new CurrentSong().response(Arrays.asList(
                 "file: " + file,
                 "Last-Modified: " + now.format(DateTimeFormatter.ISO_ZONED_DATE_TIME),
                 "Id: 10",
@@ -29,7 +29,7 @@ public class CurrentSongTest {
                 "Pos: 23",
                 "OK"
         ));
-        QueuedSongInfoResponse.QueuedSongInfo r = response.getSongInfo().get(0);
+        QueueQueryResponse.QueuedSongMetadata r = response.getSongMetadata().get(0);
         assertThat(r.getTime().get().intValue()).as("wrong ").isEqualTo(99);
         assertThat(r.getFile().get()).as("wrong ").isEqualTo(file);
         assertThat(r.getId().get().intValue()).as("wrong ").isEqualTo(10);

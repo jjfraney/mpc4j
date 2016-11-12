@@ -32,8 +32,8 @@ public class PlaylistFindTest {
                 "Id: 24",
                 "OK"
         );
-        QueuedSongInfoResponse r = new PlaylistFind(Tag.ARTIST, "Joe Mpc4J").response(lines);
-        java.util.List<QueuedSongInfoResponse.QueuedSongInfo> songInfo = r.getSongInfo();
+        QueueQueryResponse r = new PlaylistFind(Tag.ARTIST, "Joe Mpc4J").response(lines);
+        java.util.List<QueueQueryResponse.QueuedSongMetadata> songInfo = r.getSongMetadata();
         assertThat(songInfo.size()).isEqualTo(1);
         assertThat(songInfo.get(0).getPos().get()).isEqualTo(1);
         assertThat(songInfo.get(0).getId().get()).isEqualTo(24);

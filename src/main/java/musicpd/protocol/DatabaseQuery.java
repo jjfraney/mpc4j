@@ -3,7 +3,7 @@ package musicpd.protocol;
 /**
  * @author jfraney
  */
-abstract class DatabaseQuery extends AbstractCommand<DatabaseSongInfoResponse> {
+abstract class DatabaseQuery extends AbstractCommand<DatabaseQueryResponse> {
     public DatabaseQuery(Parameter... parameters) {
         super(parameters);
     }
@@ -13,7 +13,7 @@ abstract class DatabaseQuery extends AbstractCommand<DatabaseSongInfoResponse> {
     }
 
     @Override
-    public DatabaseSongInfoResponse response(java.util.List<String> responseLines) {
-        return new DatabaseSongInfoResponse(responseLines);
+    public DatabaseQueryResponse response(java.util.List<String> responseLines) {
+        return new DatabaseQueryResponse(responseLines);
     }
 }

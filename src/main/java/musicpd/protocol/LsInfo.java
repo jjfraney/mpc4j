@@ -24,7 +24,7 @@ public class LsInfo extends AbstractCommand<LsInfo.Response> {
         return new Response(responseLines);
     }
 
-    public static class Response extends DatabaseSongInfoResponse {
+    public static class Response extends DatabaseQueryResponse {
 
         Response(java.util.List<String> responseLines) {
             super(responseLines);
@@ -41,11 +41,11 @@ public class LsInfo extends AbstractCommand<LsInfo.Response> {
         }
 
         @Override
-        public java.util.List<DatabaseSongInfo> getSongInfo() {
+        public java.util.List<DatabaseSongMetadata> getMetadata() {
             return segments("file", "playlist")
                     .stream()
                     .filter(seg -> isLabelMatch("file", seg.get(0)))
-                    .map(DatabaseSongInfo::new)
+                    .map(DatabaseSongMetadata::new)
                     .collect(Collectors.toList());
         }
 

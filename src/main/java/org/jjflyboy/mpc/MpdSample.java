@@ -1,7 +1,6 @@
 package org.jjflyboy.mpc;
 
 import musicpd.protocol.*;
-import org.jjflyboy.mpc.MPC;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -70,8 +69,8 @@ public class MpdSample {
     private static void runStatusQueryCommands() throws IOException {
         run(new ClearError());
         run(new CurrentSong());
-        QueuedSongInfoResponse csr = mpc.send(new CurrentSong());
-        QueuedSongInfoResponse.QueuedSongInfo info =  csr.getSongInfo().get(0);
+        QueueQueryResponse csr = mpc.send(new CurrentSong());
+        QueueQueryResponse.QueuedSongMetadata info =  csr.getSongMetadata().get(0);
         System.out.println("last modified: " + info.getLastModified());
         run(new Status());
         run(new Stats());

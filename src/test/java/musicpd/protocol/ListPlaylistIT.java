@@ -67,9 +67,9 @@ public class ListPlaylistIT {
         Command.Response rload = mpc.send(new Load(TEST_PLAYLIST));
         assertThat(rload.isOk()).isTrue();
 
-        DatabaseSongInfoResponse rfind = mpc.send(new Find(Find.Special.FILE, "w1.ogg"));
+        DatabaseQueryResponse rfind = mpc.send(new Find(Find.Special.FILE, "w1.ogg"));
         assertThat(rfind.isOk()).isTrue();
-        java.util.List<DatabaseSongInfoResponse.DatabaseSongInfo> songInfo = rfind.getSongInfo();
+        java.util.List<DatabaseQueryResponse.DatabaseSongMetadata> songInfo = rfind.getMetadata();
         assertThat(songInfo.size()).isEqualTo(1);
         assertThat(songInfo.get(0).getFile().get()).isEqualTo("w1.ogg");
 
