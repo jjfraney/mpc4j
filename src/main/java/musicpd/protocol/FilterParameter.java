@@ -3,7 +3,7 @@ package musicpd.protocol;
 /**
  * @author jfraney
  */
-public class FilterParameter implements Parameter {
+class FilterParameter implements Parameter {
     interface Type extends Parameter {
     }
 
