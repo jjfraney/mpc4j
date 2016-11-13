@@ -14,13 +14,6 @@ import java.util.stream.Collectors;
  */
 public class Count extends AbstractCommand<Count.Response> {
 
-    /**
-     * The types allowed.
-     * @see musicpd.protocol.Tag
-     */
-    interface Tag extends FilterParameter.Type {
-    }
-
     private final musicpd.protocol.Tag group;
 
     /**
@@ -119,7 +112,7 @@ public class Count extends AbstractCommand<Count.Response> {
         private final java.util.List<FilterParameter> filters = new ArrayList<>();
         private musicpd.protocol.Tag group;
 
-        public Builder with(Count.Tag tag, String needle) {
+        public Builder with(Tag tag, String needle) {
             filters.add(new FilterParameter(tag, needle));
             return this;
         }

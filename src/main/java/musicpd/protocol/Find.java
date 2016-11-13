@@ -22,17 +22,9 @@ import java.util.function.Consumer;
 public class Find extends DatabaseQuery {
 
     /**
-     * The types allowed.  Find allows for a tag or special types.
-     * @see musicpd.protocol.Tag
-     * @see musicpd.protocol.Find.Special
-     */
-    interface Type extends FilterParameter.Type {
-    }
-
-    /**
      * find's TYPE also may be one of these.
      */
-    public enum Special implements Type {
+    public enum Special implements Parameter {
         ANY, FILE, BASE, MODIFIED_SINCE;
 
         @Override
@@ -50,8 +42,18 @@ public class Find extends DatabaseQuery {
      * a command of form: 'find {TYPE} "{WHAT}"'
      * @param type name of field to match
      * @param what value to match
+     * @see musicpd.protocol.Tag
      */
-    public Find(Type type, String what) {
+    public Find(Tag type, String what) {
+        super(new FilterParameter(type, what));
+    }
+    /**
+     * a command of form: 'find {TYPE} "{WHAT}"'
+     * @param type name of field to match
+     * @param what value to match
+     * @see musicpd.protocol.Find.Special
+     */
+    public Find(Special type, String what) {
         super(new FilterParameter(type, what));
     }
 
@@ -59,7 +61,23 @@ public class Find extends DatabaseQuery {
         private final java.util.List<FilterParameter> filters = new ArrayList<>();
         protected AbstractBuilder() {};
 
-        public B with(Type type, String what) {
+        /**
+         * with a tag as {TYPE}
+         * @param type name of field to match
+         * @param what value to match
+         * @see musicpd.protocol.Tag
+         */
+        public B with(Tag type, String what) {
+            filters.add(new FilterParameter(type, what));
+            return (B)this;
+        }
+        /**
+         * with a Special as {TYPE}
+         * @param type name of field to match
+         * @param what value to match
+         * @see musicpd.protocol.Tag
+         */
+        public B with(Special type, String what) {
             filters.add(new FilterParameter(type, what));
             return (B)this;
         }

@@ -4,18 +4,10 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 /**
- * The tags implemented by MPD.
- * <p>
- *     A Tag is also a TYPE for the find command, and a TAG for the count command,
- *     and a GROUPTYPE for the list command.
- * </p>
- * @see musicpd.protocol.Find.Type
- * @see musicpd.protocol.Count.Tag
- * @see musicpd.protocol.List.Type
- * @see musicpd.protocol.PlaylistFind.Tag
+ * The tags implemented by MPD.  They appear in command parameters and response labels.
  * @author jfraney
  */
-public enum Tag implements Parameter, Find.Type, Count.Tag, List.Type, PlaylistFind.Tag {
+public enum Tag implements Parameter, ResponseContentParser.LineMetadata {
     ARTIST,
     ARTIST_SORT,
     ALBUM,
@@ -63,7 +55,7 @@ public enum Tag implements Parameter, Find.Type, Count.Tag, List.Type, PlaylistF
     }
 
     /**
-     * @return the tag as it would appear in response from database search commands.
+     * @return the tag as it would appear as a label in a response.
      */
     @Override
     public String toLabel() {

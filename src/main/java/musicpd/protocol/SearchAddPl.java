@@ -18,8 +18,20 @@ public class SearchAddPl extends DatabaseQuery {
      * @param type name of field to match
      * @param what value to match
      */
-    public SearchAddPl(String playlistName, Find.Type type, String what) {
-        super(adapt(playlistName), new FilterParameter(type, what));
+    public SearchAddPl(String playlistName, Tag type, String what) {
+        this(playlistName, new FilterParameter(type, what));
+    }
+    /**
+     * a command of form: 'searchaddpl {Name} {TYPE} "{WHAT}"
+     * @param type name of field to match
+     * @param what value to match
+     */
+    public SearchAddPl(String playlistName, Find.Special type, String what) {
+        this(playlistName, new FilterParameter(type, what));
+    }
+
+    private SearchAddPl(String playlistName, FilterParameter fp) {
+        super(adapt(playlistName), fp);
         if(playlistName == null) {
             throw new RuntimeException("playlistName cannot be null");
         }

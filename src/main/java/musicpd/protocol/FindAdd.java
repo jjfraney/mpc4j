@@ -18,7 +18,15 @@ public class FindAdd extends DatabaseQuery {
      * @param type name of field to match
      * @param what value to match
      */
-    public FindAdd(Find.Type type, String what) {
+    public FindAdd(Tag type, String what) {
+        super(new FilterParameter(type, what));
+    }
+    /**
+     * a command of form: 'findadd {TYPE} "{WHAT}"
+     * @param type name of field to match
+     * @param what value to match
+     */
+    public FindAdd(Find.Special type, String what) {
         super(new FilterParameter(type, what));
     }
 

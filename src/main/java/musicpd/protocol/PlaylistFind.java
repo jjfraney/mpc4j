@@ -9,18 +9,13 @@ package musicpd.protocol;
  * @author jfraney
  */
 public class PlaylistFind extends QueueQuery {
-    /**
-     * The TAGs allowed.
-     * @see musicpd.protocol.Tag
-     */
-    interface Tag extends FilterParameter.Type {
-    }
 
     /**
      * @param tag of songs to return in result
      * @param needle (or value) of the tag of songs to return in result
+     * @see musicpd.protocol.Tag
      */
-    public PlaylistFind(PlaylistFind.Tag tag, String needle) {
+    public PlaylistFind(Tag tag, String needle) {
         super(new FilterParameter(tag, needle));
     }
 

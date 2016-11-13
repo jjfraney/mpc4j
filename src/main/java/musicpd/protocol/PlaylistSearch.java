@@ -14,7 +14,7 @@ public class PlaylistSearch extends QueueQuery {
      * @param tag of songs to return in result
      * @param needle (or value) of the tag of songs to return in result
      */
-    public PlaylistSearch(PlaylistFind.Tag tag, String needle) {
+    public PlaylistSearch(Tag tag, String needle) {
         super(new FilterParameter(tag, needle));
     }
 }

@@ -4,11 +4,9 @@ package musicpd.protocol;
  * @author jfraney
  */
 class FilterParameter implements Parameter {
-    interface Type extends Parameter {
-    }
 
     private final String text;
-    public FilterParameter(Type type, String what) {
+    public FilterParameter(Parameter type, String what) {
         this.text = new StringBuilder()
                 .append(type.toParameter())
                 .append(" \"")

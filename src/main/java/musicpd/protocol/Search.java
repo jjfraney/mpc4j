@@ -18,7 +18,15 @@ public class Search extends DatabaseQuery {
      * @param type name of field to match
      * @param what value to match
      */
-    public Search(Find.Type type, String what) {
+    public Search(Tag type, String what) {
+        super(new FilterParameter(type, what));
+    }
+    /**
+     * a command of form: 'search {TYPE} "{WHAT}"
+     * @param type name of field to match
+     * @param what value to match
+     */
+    public Search(Find.Special type, String what) {
         super(new FilterParameter(type, what));
     }
 
