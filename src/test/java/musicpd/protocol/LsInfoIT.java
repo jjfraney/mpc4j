@@ -33,7 +33,6 @@ public class LsInfoIT {
 
         List<DatabaseQueryResponse.DatabaseSongMetadata> songs = r.getMetadata();
         SongMetadata songInfo = songs.stream().filter(s -> s.getFile().get().equals("w1.ogg")).findAny().get();
-        assertThat(songInfo.getLastModified().get()).isEqualTo("2016-10-21T21:10:14Z");
         assertThat(songInfo.getTag(Tag.ARTIST).get()).isEqualTo("Joe Mpc4J");
 
     }
