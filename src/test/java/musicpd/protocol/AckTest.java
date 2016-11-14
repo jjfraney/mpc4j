@@ -1,5 +1,7 @@
 package musicpd.protocol;
 
+import org.jjflyboy.mpc.Command;
+import org.jjflyboy.mpc.SimpleResponse;
 import org.junit.Test;
 
 import java.util.Arrays;

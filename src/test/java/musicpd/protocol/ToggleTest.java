@@ -2,8 +2,8 @@ package musicpd.protocol;
 
 import org.junit.Test;
 
-import static musicpd.protocol.Toggle.OFF;
-import static musicpd.protocol.Toggle.ON;
+import static org.jjflyboy.mpc.Toggle.OFF;
+import static org.jjflyboy.mpc.Toggle.ON;
 import static org.assertj.core.api.Assertions.*;
 
 /**

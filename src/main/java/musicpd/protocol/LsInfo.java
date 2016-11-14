@@ -1,5 +1,9 @@
 package musicpd.protocol;
 
+import org.jjflyboy.mpc.AbstractCommand;
+import org.jjflyboy.mpc.DatabaseQueryResponse;
+import org.jjflyboy.mpc.ResponseContent;
+
 import java.time.ZonedDateTime;
 import java.util.Optional;
 import java.util.stream.Collectors;

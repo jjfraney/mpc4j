@@ -1,7 +1,5 @@
 package org.jjflyboy.mpc;
 
-import musicpd.protocol.Command;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.net.InetSocketAddress;

@@ -1,4 +1,4 @@
-package musicpd.protocol;
+package org.jjflyboy.mpc;
 
 
 import java.util.Optional;

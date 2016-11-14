@@ -1,4 +1,4 @@
-package musicpd.protocol;
+package org.jjflyboy.mpc;
 
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
  * @author jfraney
  */
 public class QueueQueryResponse extends HealthResponse {
-    QueueQueryResponse(java.util.List<String> responseLines) {
+    protected QueueQueryResponse(java.util.List<String> responseLines) {
         super(responseLines);
     }
 

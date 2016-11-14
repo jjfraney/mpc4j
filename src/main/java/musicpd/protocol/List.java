@@ -1,9 +1,10 @@
 package musicpd.protocol;
 
+import org.jjflyboy.mpc.*;
+
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.function.Consumer;
-import java.util.logging.Filter;
 import java.util.stream.Collectors;
 
 /**

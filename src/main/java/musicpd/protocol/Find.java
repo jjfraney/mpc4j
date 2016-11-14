@@ -1,5 +1,9 @@
 package musicpd.protocol;
 
+import org.jjflyboy.mpc.DatabaseQuery;
+import org.jjflyboy.mpc.FilterParameter;
+import org.jjflyboy.mpc.Parameter;
+
 import java.util.ArrayList;
 import java.util.function.Consumer;
 

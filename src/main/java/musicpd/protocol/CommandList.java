@@ -1,5 +1,10 @@
 package musicpd.protocol;
 
+import org.jjflyboy.mpc.AbstractCommand;
+import org.jjflyboy.mpc.Command;
+import org.jjflyboy.mpc.HealthResponse;
+import org.jjflyboy.mpc.ResponseContentParser;
+
 import java.util.*;
 import java.util.List;
 import java.util.stream.Collectors;

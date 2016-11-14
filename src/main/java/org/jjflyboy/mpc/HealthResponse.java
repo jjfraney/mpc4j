@@ -1,4 +1,7 @@
-package musicpd.protocol;
+package org.jjflyboy.mpc;
+
+import org.jjflyboy.mpc.Command;
+import org.jjflyboy.mpc.ResponseContent;
 
 import java.util.Optional;
 import java.util.regex.Matcher;
@@ -10,7 +13,7 @@ import java.util.regex.Pattern;
  */
 public abstract class HealthResponse extends ResponseContent implements Command.Response {
 
-    HealthResponse(java.util.List<String> responseLines) {
+    protected HealthResponse(java.util.List<String> responseLines) {
         super(responseLines);
     }
 

@@ -1,4 +1,7 @@
-package musicpd.protocol;
+package org.jjflyboy.mpc;
+
+import musicpd.protocol.Tag;
+import org.jjflyboy.mpc.ResponseContent;
 
 import java.time.ZonedDateTime;
 import java.util.*;

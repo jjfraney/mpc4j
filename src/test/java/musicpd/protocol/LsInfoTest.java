@@ -1,5 +1,6 @@
 package musicpd.protocol;
 
+import org.jjflyboy.mpc.DatabaseQueryResponse;
 import org.junit.Test;
 
 import java.util.Arrays;

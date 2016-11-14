@@ -1,4 +1,6 @@
-package musicpd.protocol;
+package org.jjflyboy.mpc;
+
+import musicpd.protocol.Tag;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -7,9 +9,9 @@ import java.util.stream.Collectors;
  * Represents the 'group' parameter for the 'count' and 'list'-ish commands.
  * @author jfraney
  */
-class GroupParameter implements Parameter {
+public class GroupParameter implements Parameter {
     private final String parameter;
-    public GroupParameter(Tag ... tags) {
+    public GroupParameter(Tag... tags) {
         this(Arrays.asList(tags));
     }
     public GroupParameter(java.util.List<Tag> tags) {

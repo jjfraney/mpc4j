@@ -1,5 +1,8 @@
 package musicpd.protocol;
 
+import org.jjflyboy.mpc.AbstractCommand;
+import org.jjflyboy.mpc.HealthResponse;
+
 /**
  * commands command
  * from <a href='https://www.musicpd.org/doc/protocol/reflection_commands.html'>MPD document: Reflection</a>

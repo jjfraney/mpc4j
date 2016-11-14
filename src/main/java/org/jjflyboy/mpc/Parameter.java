@@ -1,9 +1,9 @@
-package musicpd.protocol;
+package org.jjflyboy.mpc;
 
 /**
  * @author jfraney
  */
-interface Parameter {
+public interface Parameter {
     /**
      * @return the parameter with the mpd protocol spelling
      */

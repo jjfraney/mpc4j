@@ -1,9 +1,9 @@
-package musicpd.protocol;
+package org.jjflyboy.mpc;
 
 /**
  * @author jfraney
  */
-abstract class QueueQuery extends AbstractCommand<QueueQueryResponse> {
+public abstract class QueueQuery extends AbstractCommand<QueueQueryResponse> {
     public QueueQuery(Parameter... parameters) {
         super(parameters);
     }

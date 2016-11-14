@@ -1,6 +1,8 @@
 package musicpd.protocol;
 
+import org.jjflyboy.mpc.DatabaseQueryResponse;
 import org.jjflyboy.mpc.MPC;
+import org.jjflyboy.mpc.SongMetadata;
 import org.junit.Before;
 import org.junit.Test;
 

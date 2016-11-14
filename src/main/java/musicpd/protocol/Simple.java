@@ -1,5 +1,9 @@
 package musicpd.protocol;
 
+import org.jjflyboy.mpc.AbstractCommand;
+import org.jjflyboy.mpc.Parameter;
+import org.jjflyboy.mpc.SimpleResponse;
+
 /**
  * Common base class defining a simple response.  Many commands return only OK or ACK and
  * would use this base class.
@@ -11,7 +15,7 @@ public abstract class Simple extends AbstractCommand<SimpleResponse> {
      * instantiate simple command.  The concrete class name, to lower case, is the command's spelling.
      * @param parameters
      */
-    protected Simple(Parameter ... parameters) {
+    protected Simple(Parameter... parameters) {
         super(parameters);
     }
 

@@ -1,9 +1,9 @@
-package musicpd.protocol;
+package org.jjflyboy.mpc;
 
 /**
  * @author jfraney
  */
-abstract class DatabaseQuery extends AbstractCommand<DatabaseQueryResponse> {
+public abstract class DatabaseQuery extends AbstractCommand<DatabaseQueryResponse> {
     public DatabaseQuery(Parameter... parameters) {
         super(parameters);
     }

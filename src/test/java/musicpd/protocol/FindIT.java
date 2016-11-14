@@ -1,5 +1,6 @@
 package musicpd.protocol;
 
+import org.jjflyboy.mpc.DatabaseQueryResponse;
 import org.jjflyboy.mpc.MPC;
 import org.junit.Before;
 import org.junit.Test;

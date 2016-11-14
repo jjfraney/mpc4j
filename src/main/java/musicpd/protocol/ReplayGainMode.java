@@ -1,5 +1,7 @@
 package musicpd.protocol;
 
+import org.jjflyboy.mpc.Parameter;
+
 /**
  * replay_gain_mode command from
  * <a href='https://www.musicpd.org/doc/protocol/playback_option_commands.html'>MPD Playback option commands.</a>

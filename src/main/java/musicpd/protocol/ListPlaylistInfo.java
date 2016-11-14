@@ -1,5 +1,8 @@
 package musicpd.protocol;
 
+import org.jjflyboy.mpc.AbstractCommand;
+import org.jjflyboy.mpc.DatabaseQueryResponse;
+
 /**
  * listplaylistinfo command from
  * <a href='https://www.musicpd.org/doc/protocol/playlist_files.html'>MPD Document: Stored playlists.</a>

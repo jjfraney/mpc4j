@@ -1,5 +1,7 @@
 package musicpd.protocol;
 
+import org.jjflyboy.mpc.AbstractCommand;
+
 /**
  * notcommands command
  * from <a href='https://www.musicpd.org/doc/protocol/reflection_commands.html'>MPD document: Reflection</a>

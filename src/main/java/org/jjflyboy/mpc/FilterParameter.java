@@ -1,9 +1,9 @@
-package musicpd.protocol;
+package org.jjflyboy.mpc;
 
 /**
  * @author jfraney
  */
-class FilterParameter implements Parameter {
+public class FilterParameter implements Parameter {
 
     private final String text;
     public FilterParameter(Parameter type, String what) {

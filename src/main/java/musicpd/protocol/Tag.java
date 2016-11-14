@@ -1,5 +1,8 @@
 package musicpd.protocol;
 
+import org.jjflyboy.mpc.Parameter;
+import org.jjflyboy.mpc.ResponseContentParser;
+
 import java.util.Arrays;
 import java.util.stream.Collectors;
 

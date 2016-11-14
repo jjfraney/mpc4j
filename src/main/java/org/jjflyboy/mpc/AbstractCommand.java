@@ -1,14 +1,13 @@
-package musicpd.protocol;
+package org.jjflyboy.mpc;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.stream.Collectors;
 
 /**
  * base abstract class for most, if not all, commmands.
  * @author jfraney
  */
-abstract class AbstractCommand<R extends Command.Response> implements Command<R> {
+public abstract class AbstractCommand<R extends Command.Response> implements Command<R> {
 
     /**
      * the command as text...generated when this class is instantiated
@@ -26,7 +25,7 @@ abstract class AbstractCommand<R extends Command.Response> implements Command<R>
      * supplied from concrete command classes.
      * @param parameters from which the command parameters are generated.
      */
-    protected AbstractCommand(Parameter ... parameters) {
+    protected AbstractCommand(Parameter... parameters) {
         this(Arrays.asList(parameters));
     }
 

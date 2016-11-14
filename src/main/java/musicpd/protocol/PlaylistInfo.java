@@ -1,5 +1,8 @@
 package musicpd.protocol;
 
+import org.jjflyboy.mpc.QueueQuery;
+import org.jjflyboy.mpc.RangeParameter;
+
 /**
  * playlistinfo command from
  * <a href='https://www.musicpd.org/doc/protocol/queue.html'>MPD Document: The current playlist.</a>

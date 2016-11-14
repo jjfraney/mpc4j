@@ -1,5 +1,6 @@
 package musicpd.protocol;
 
+import org.jjflyboy.mpc.QueueQueryResponse;
 import org.junit.Test;
 
 import java.util.Arrays;

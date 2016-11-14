@@ -1,5 +1,9 @@
 package musicpd.protocol;
 
+import org.jjflyboy.mpc.AbstractCommand;
+import org.jjflyboy.mpc.HealthResponse;
+import org.jjflyboy.mpc.ResponseContent;
+
 import java.time.ZonedDateTime;
 import java.util.*;
 import java.util.stream.Collectors;

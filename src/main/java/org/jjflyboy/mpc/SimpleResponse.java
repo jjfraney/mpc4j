@@ -1,8 +1,4 @@
-package musicpd.protocol;
-
-import java.util.Optional;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+package org.jjflyboy.mpc;
 
 /**
  * Class to access the last line of every mpd response..
@@ -10,7 +6,7 @@ import java.util.regex.Pattern;
  */
 public final class SimpleResponse extends HealthResponse {
 
-    SimpleResponse(java.util.List<String> responseLines) {
+    public SimpleResponse(java.util.List<String> responseLines) {
         super(responseLines);
     }
 }

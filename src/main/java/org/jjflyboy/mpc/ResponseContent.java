@@ -1,4 +1,4 @@
-package musicpd.protocol;
+package org.jjflyboy.mpc;
 
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
@@ -12,7 +12,7 @@ import java.util.List;
 public abstract class ResponseContent {
 
     private final List<String> responseLines;
-    ResponseContent(java.util.List<String> responseLines) {
+    protected ResponseContent(java.util.List<String> responseLines) {
         List<String> lines = new ArrayList<>(responseLines);
         this.responseLines = Collections.unmodifiableList(lines);
     }

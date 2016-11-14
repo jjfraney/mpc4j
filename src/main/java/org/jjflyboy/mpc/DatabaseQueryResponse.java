@@ -1,4 +1,4 @@
-package musicpd.protocol;
+package org.jjflyboy.mpc;
 
 import java.util.stream.Collectors;
 
@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
  * @author jfraney
  */
 public class DatabaseQueryResponse extends HealthResponse {
-    DatabaseQueryResponse(java.util.List<String> responseLines) {
+    public DatabaseQueryResponse(java.util.List<String> responseLines) {
         super(responseLines);
     }
 
@@ -25,7 +25,7 @@ public class DatabaseQueryResponse extends HealthResponse {
         /**
          * @param responseLines limited to a single song
          */
-        protected DatabaseSongMetadata(java.util.List<String> responseLines) {
+        public DatabaseSongMetadata(java.util.List<String> responseLines) {
             super(responseLines);
         }
 

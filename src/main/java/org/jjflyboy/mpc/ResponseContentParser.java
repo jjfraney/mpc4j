@@ -1,4 +1,4 @@
-package musicpd.protocol;
+package org.jjflyboy.mpc;
 
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
@@ -6,7 +6,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * Utility methods for 'parsing' mpd response lines.
