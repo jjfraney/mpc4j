@@ -31,7 +31,7 @@ public class IdleTest {
     @Test
     public void response() {
         java.util.List<String> textResponse = Arrays.asList("changed: options", "OK");
-        Idle.Response response = command.response(textResponse);
+        Idle.Response response = command.response(textResponse, "OK MPD 0.19.0");
         assertThat(response.getChanged().get()).as("response could not parse \"changed\"").isEqualTo(Idle.Subsystem.OPTIONS);
     }
 }

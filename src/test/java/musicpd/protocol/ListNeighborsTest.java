@@ -30,7 +30,7 @@ public class ListNeighborsTest {
                 "neighbor: xyz://unknown",
                 "name: UKnown"
         );
-        ListNeighbors.Response response = command.response(responseText);
+        ListNeighbors.Response response = command.response(responseText, "OK MPD 0.19.0");
         java.util.List<ListNeighbors.Response.Neighbor> neighbors = response.getNeighbors();
         assertThat(neighbors.size()).isEqualTo(2);
         assertThat(neighbors.get(1).getNeighbor().get()).isEqualTo("xyz://unknown");

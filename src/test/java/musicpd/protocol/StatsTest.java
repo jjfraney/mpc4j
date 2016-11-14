@@ -26,7 +26,7 @@ public class StatsTest {
                 "db_playtime: 600",
                 "db_update: 900"
 
-        ));
+        ), "OK MPD 0.19.0");
         assertThat(r.getUptime().get().intValue()).as("wrong ").isEqualTo(10);
         assertThat(r.getPlaytime().get().intValue()).as("wrong ").isEqualTo(20);
         assertThat(r.getArtists().get().intValue()).as("wrong ").isEqualTo(30);

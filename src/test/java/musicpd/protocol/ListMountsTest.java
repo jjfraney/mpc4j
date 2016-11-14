@@ -30,7 +30,7 @@ public class ListMountsTest {
                 "mount: foo",
                 "storage: nfs://192.168.1.4/export/mp3"
         );
-        ListMounts.Response response = command.response(responseText);
+        ListMounts.Response response = command.response(responseText, "OK MPD 0.19.0");
         java.util.List<ListMounts.Response.Mount> mounts = response.getMounts();
         assertThat(mounts.size()).isEqualTo(2);
         assertThat(mounts.get(1).getStorage().get()).isEqualTo("nfs://192.168.1.4/export/mp3");

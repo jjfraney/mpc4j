@@ -26,9 +26,10 @@ public interface Command<R extends Command.Response> {
 
     /**
      * @param responseLines given by mpd server in response to this command.
+     * @param connectResponse of the MPD source of the response.
      * @return an actual Response to this Command.
      */
-    R response(java.util.List<String> responseLines);
+    R response(java.util.List<String> responseLines, String connectResponse);
 
     /**
      * An interface to access data of the response.  The intention is for
@@ -42,6 +43,16 @@ public interface Command<R extends Command.Response> {
          * @return
          */
         java.util.List<String> getResponseLines();
+
+        /**
+         * @return the single line response on connect to MPD
+         */
+        String getConnectResponse();
+
+        /**
+         * @return the version of the protocol in use by the MPD.
+         */
+        Optional<String> getProtocolVersion();
 
         /**
          * get the response status from the last line of the response.

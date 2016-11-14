@@ -19,7 +19,7 @@ public class ListPlaylistTest {
                 "file: three.ogg",
                 "OK"
         );
-        ListPlaylist.Response r = new ListPlaylist("no-op").response(responseLines);
+        ListPlaylist.Response r = new ListPlaylist("no-op").response(responseLines, "OK MPD 0.19.0");
         assertThat(r.isOk()).isTrue();
         assertThat(r.getFiles().size()).isEqualTo(3);
         assertThat(r.getFiles().get(2)).isEqualTo("three.ogg");

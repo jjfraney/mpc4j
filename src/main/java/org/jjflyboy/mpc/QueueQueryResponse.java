@@ -14,8 +14,8 @@ import java.util.stream.Collectors;
  * @author jfraney
  */
 public class QueueQueryResponse extends HealthResponse {
-    protected QueueQueryResponse(java.util.List<String> responseLines) {
-        super(responseLines);
+    protected QueueQueryResponse(java.util.List<String> responseLines, String connectResponse) {
+        super(responseLines, connectResponse);
     }
 
     /**

@@ -30,7 +30,7 @@ public class Playlist extends AbstractCommand<Command.Response> {
     }
 
     @Override
-    public Response response(List<String> responseLines) {
+    public Response response(List<String> responseLines, String connectResponse) {
         return null;
     }
 }

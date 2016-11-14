@@ -19,7 +19,7 @@ public class ListPlaylistInfo extends AbstractCommand<DatabaseQueryResponse> {
         super(adapt(name));
     }
     @Override
-    public DatabaseQueryResponse response(java.util.List<String> responseLines) {
-        return new DatabaseQueryResponse(responseLines);
+    public DatabaseQueryResponse response(java.util.List<String> responseLines, String connectResponse) {
+        return new DatabaseQueryResponse(responseLines, connectResponse);
     }
 }

@@ -23,7 +23,7 @@ public class DecodersTest {
                 "mime_type: audio/mpeg",
                 "mime_type: application/x-diff",
                 "OK"
-        ));
+        ), "OK MPD 0.19.0");
         java.util.List<Decoders.Response.Plugin> decoders = r.getDecoders();
         assertThat(decoders.size()).isEqualTo(2);
 

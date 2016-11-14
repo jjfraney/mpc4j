@@ -16,7 +16,7 @@ public class ConfigTest {
         Config.Response r = new Config().response(Arrays.asList(
                 "music_directory: some-directory",
                 "OK"
-        ));
+        ), "OK MPD 0.19.0");
         assertThat(r.getMusicDirectory()).isPresent();
         assertThat(r.getMusicDirectory().get()).isEqualTo("some-directory");
     }

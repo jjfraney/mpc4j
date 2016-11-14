@@ -18,7 +18,7 @@ public class AckTest {
         java.util.List<String> response = Arrays.asList(
                 "ACK [5@0] {cmd01} missing the command."
         );
-        Command.Response.Ack ack = new SimpleResponse(response).getAck().get();
+        Command.Response.Ack ack = new SimpleResponse(response, "OK MPD 0.19.0").getAck().get();
         assertThat(ack.getError()).as("error num").isEqualTo(5);
         assertThat(ack.getCommandListNum()).as("command list num").isEqualTo(0);
         assertThat(ack.getCurrentCommand()).as("current command").isEqualTo("cmd01");

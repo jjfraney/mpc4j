@@ -36,7 +36,7 @@ public class LsInfoTest {
                 "playlist: ttt4",
                 "Last-Modified: 2016-10-30T02:05:46Z",
                 "OK"
-        ));
+        ), "OK MPD 0.19.0");
         assertThat(r.isOk()).as("no parse").isTrue();
         List<DatabaseQueryResponse.DatabaseSongMetadata> songs = r.getMetadata();
         assertThat(songs.size()).as("song count").isEqualTo(3);

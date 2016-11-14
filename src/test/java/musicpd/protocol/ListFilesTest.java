@@ -29,7 +29,7 @@ public class ListFilesTest {
                 "Last-Modified: 2016-10-19T00:33:30Z",
                 "size: 3100",
                 "OK"
-        ));
+        ), "OK MPD 0.19.0");
         assertThat(r.isOk()).as("no parse").isTrue();
         List<ListFiles.Response.Entry> entries = r.getEntries();
         assertThat(entries.size()).as("song count").isEqualTo(3);

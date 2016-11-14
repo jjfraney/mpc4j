@@ -1,8 +1,5 @@
 package org.jjflyboy.mpc;
 
-import org.jjflyboy.mpc.Command;
-import org.jjflyboy.mpc.ResponseContent;
-
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -13,8 +10,28 @@ import java.util.regex.Pattern;
  */
 public abstract class HealthResponse extends ResponseContent implements Command.Response {
 
-    protected HealthResponse(java.util.List<String> responseLines) {
+    private final String connectResponse;
+
+    /**
+     * @param responseLines the lines of the command response
+     * @param connectResponse the line of the connect response
+     */
+    protected HealthResponse(java.util.List<String> responseLines, String connectResponse) {
         super(responseLines);
+        this.connectResponse = connectResponse;
+    }
+
+    public String getConnectResponse() {
+        return connectResponse;
+    }
+
+    @Override
+    public Optional<String> getProtocolVersion() {
+        String version = null;
+        if(connectResponse != null) {
+            version = connectResponse.replace("OK MPD ", "");
+        }
+        return Optional.ofNullable(version);
     }
 
     /**

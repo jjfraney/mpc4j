@@ -49,7 +49,7 @@ public class StatusTest {
                 "volume: 30",
                 "xfade: 99"
         );
-        Status.Response response = command.response(responseText);
+        Status.Response response = command.response(responseText, "OK MPD 0.19.0");
         assertThat(response.getAudio().get()).as("wrong parse").isEqualTo("anyAudio");
         assertThat(response.getBitRate().get().intValue()).as("wrong parse").isEqualTo(5500);
         assertThat(response.getConsume().get()).as("wrong parse").isEqualTo(Toggle.ON);

@@ -18,7 +18,7 @@ public class CommandsTest {
                 "command: addid",
                 "command: addtagid",
                 "OK"
-        ));
+        ), "OK MPD 0.19.0");
         java.util.List<String> commands = r.getCommands();
         assertThat(commands.size()).isEqualTo(3);
         assertThat(commands.get(2)).isEqualTo("addtagid");

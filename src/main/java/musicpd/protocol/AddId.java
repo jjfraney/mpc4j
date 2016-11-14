@@ -9,7 +9,7 @@ import java.util.Optional;
  * addid command from
  * <a href='https://www.musicpd.org/doc/protocol/queue.html'>MPD Document: The current playlist.</a>
  * <p>
- *     This command resturns the added file's song id.
+ *     This command returns the added file's song id.
  * </p>
 
  * @author jfraney
@@ -31,12 +31,12 @@ public class AddId extends AbstractCommand<AddId.Response> {
     }
 
     @Override
-    public Response response(java.util.List<String> responseLines) {
-        return new Response(responseLines);
+    public Response response(java.util.List<String> responseLines, String connectResponse) {
+        return new Response(responseLines, connectResponse);
     }
     public static class Response extends HealthResponse {
-        public Response(java.util.List<String> responseLines) {
-            super(responseLines);
+        public Response(java.util.List<String> responseLines, String connectResponse) {
+            super(responseLines, connectResponse);
         }
 
         public Optional<Integer> getId() {return getIntegerValue("Id");}

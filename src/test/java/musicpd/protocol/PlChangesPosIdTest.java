@@ -23,7 +23,7 @@ public class PlChangesPosIdTest {
                 "OK"
         );
 
-        PlChangesPosId.Response r = new PlChangesPosId(3).response(lines);
+        PlChangesPosId.Response r = new PlChangesPosId(3).response(lines, "OK MPD 0.19.0");
         assertThat(r.getEntries().size()).isEqualTo(3);
         assertThat(r.getEntries().get(2).getCpos().get()).isEqualTo(3);
         assertThat(r.getEntries().get(2).getId().get()).isEqualTo(4);

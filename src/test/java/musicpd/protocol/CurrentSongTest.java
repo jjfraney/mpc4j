@@ -29,7 +29,7 @@ public class CurrentSongTest {
                 "Time: 99",
                 "Pos: 23",
                 "OK"
-        ));
+        ), "OK MPD 0.19.0");
         QueueQueryResponse.QueuedSongMetadata r = response.getSongMetadata().get(0);
         assertThat(r.getTime().get().intValue()).as("wrong ").isEqualTo(99);
         assertThat(r.getFile().get()).as("wrong ").isEqualTo(file);

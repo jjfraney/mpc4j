@@ -37,14 +37,14 @@ public class CommandList extends AbstractCommand<CommandList.Response> {
     }
 
     @Override
-    public Response response(List<String> responseLines) {
-        return new Response(responseLines, commands);
+    public Response response(List<String> responseLines, String connectResponse) {
+        return new Response(responseLines, connectResponse, commands);
     }
 
     public static class Response extends HealthResponse {
         private final List<Command> commands;
-        public Response(List<String> responseLines, List<Command> commands) {
-            super(responseLines);
+        public Response(List<String> responseLines, String connectResponse, List<Command> commands) {
+            super(responseLines, connectResponse);
             this.commands = commands;
         }
 
@@ -91,7 +91,7 @@ public class CommandList extends AbstractCommand<CommandList.Response> {
 
             List<Command.Response> result = new ArrayList<>();
             for(int i = 0; i < responses.size(); i++ ) {
-                result.add(commands.get(i).response(responses.get(i)));
+                result.add(commands.get(i).response(responses.get(i), getConnectResponse()));
             }
             return result;
         }

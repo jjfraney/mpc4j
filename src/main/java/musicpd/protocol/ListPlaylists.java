@@ -22,13 +22,13 @@ public class ListPlaylists extends AbstractCommand<ListPlaylists.Response> {
     }
 
     @Override
-    public Response response(java.util.List<String> responseLines) {
-        return new Response(responseLines);
+    public Response response(java.util.List<String> responseLines, String connectResponse) {
+        return new Response(responseLines, connectResponse);
     }
 
     public static class Response extends HealthResponse {
-        Response(java.util.List<String> responseLines) {
-            super(responseLines);
+        Response(java.util.List<String> responseLines, String connectResponse) {
+            super(responseLines, connectResponse);
         }
 
         public class Playlist extends ResponseContent {

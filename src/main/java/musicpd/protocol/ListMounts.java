@@ -21,16 +21,16 @@ public class ListMounts extends AbstractCommand<ListMounts.Response> {
     }
 
     @Override
-    public Response response(java.util.List<String> responseLines) {
-        return new Response(responseLines);
+    public Response response(java.util.List<String> responseLines, String connectResponse) {
+        return new Response(responseLines, connectResponse);
     }
 
     /**
      * provides access to the list of file names returned by mpd by the listplaylist command.
      */
     public static class Response extends HealthResponse {
-        Response(java.util.List<String> responseLines) {
-            super(responseLines);
+        Response(java.util.List<String> responseLines, String connectResponse) {
+            super(responseLines, connectResponse);
         }
 
         public class Mount extends ResponseContent {

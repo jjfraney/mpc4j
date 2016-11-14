@@ -18,7 +18,7 @@ public class NotCommands extends AbstractCommand<Commands.Response> {
     }
 
     @Override
-    public Commands.Response response(java.util.List<String> responseLines) {
-        return new Commands.Response(responseLines);
+    public Commands.Response response(java.util.List<String> responseLines, String connectResponse) {
+        return new Commands.Response(responseLines, connectResponse);
     }
 }

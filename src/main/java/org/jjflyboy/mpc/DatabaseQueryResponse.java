@@ -13,8 +13,8 @@ import java.util.stream.Collectors;
  * @author jfraney
  */
 public class DatabaseQueryResponse extends HealthResponse {
-    public DatabaseQueryResponse(java.util.List<String> responseLines) {
-        super(responseLines);
+    public DatabaseQueryResponse(java.util.List<String> responseLines, String protcolVersion) {
+        super(responseLines, protcolVersion);
     }
 
     /**

@@ -21,13 +21,13 @@ public class Outputs extends AbstractCommand<Outputs.Response> {
     }
 
     @Override
-    public Response response(java.util.List<String> responseLines) {
-        return new Response(responseLines);
+    public Response response(java.util.List<String> responseLines, String connectResponse) {
+        return new Response(responseLines, connectResponse);
     }
 
     public static class Response extends HealthResponse {
-        Response(java.util.List<String> responseLines) {
-            super(responseLines);
+        Response(java.util.List<String> responseLines, String connectResponse) {
+            super(responseLines, connectResponse);
         }
 
         public class Output extends ResponseContent {

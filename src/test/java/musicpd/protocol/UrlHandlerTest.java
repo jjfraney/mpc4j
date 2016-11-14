@@ -18,7 +18,7 @@ public class UrlHandlerTest {
                 "handler: https://",
                 "handler: smb://",
                 "OK"
-        ));
+        ), "OK MPD 0.19.0");
         java.util.List<String> commands = r.getHandlers();
         assertThat(commands.size()).isEqualTo(3);
         assertThat(commands.get(2)).isEqualTo("smb://");

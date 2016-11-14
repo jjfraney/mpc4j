@@ -33,7 +33,7 @@ public class PlaylistFindTest {
                 "Id: 24",
                 "OK"
         );
-        QueueQueryResponse r = new PlaylistFind(Tag.ARTIST, "Joe Mpc4J").response(lines);
+        QueueQueryResponse r = new PlaylistFind(Tag.ARTIST, "Joe Mpc4J").response(lines, "OK MPD 0.19.0");
         java.util.List<QueueQueryResponse.QueuedSongMetadata> songInfo = r.getSongMetadata();
         assertThat(songInfo.size()).isEqualTo(1);
         assertThat(songInfo.get(0).getPos().get()).isEqualTo(1);

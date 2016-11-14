@@ -9,7 +9,7 @@ public abstract class QueueQuery extends AbstractCommand<QueueQueryResponse> {
     }
 
     @Override
-    public QueueQueryResponse response(java.util.List<String> responseLines) {
-        return new QueueQueryResponse(responseLines);
+    public QueueQueryResponse response(java.util.List<String> responseLines, String connectResponse) {
+        return new QueueQueryResponse(responseLines, connectResponse);
     }
 }

@@ -159,8 +159,8 @@ public class Status extends AbstractCommand<Status.Response> {
         /**
          * @param responseLines lines read from socket including 'OK' or 'ACK...."
          */
-        Response(java.util.List<String> responseLines) {
-            super(responseLines);
+        Response(java.util.List<String> responseLines, String connectResponse) {
+            super(responseLines, connectResponse);
         }
     }
 
@@ -169,7 +169,7 @@ public class Status extends AbstractCommand<Status.Response> {
      * @return access response data.
      */
     @Override
-    public Response response(java.util.List<String> responseLines) {
-        return new Response(responseLines);
+    public Response response(java.util.List<String> responseLines, String connectResponse ) {
+        return new Response(responseLines, connectResponse);
     }
 }

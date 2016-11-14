@@ -41,8 +41,8 @@ public class Idle extends AbstractCommand<Idle.Response> {
      * @return response to 'idle' command
      */
     @Override
-    public Response response(java.util.List<String> responseLines) {
-        return new Response(responseLines);
+    public Response response(java.util.List<String> responseLines, String connectResponse) {
+        return new Response(responseLines, connectResponse);
     }
 
 
@@ -57,8 +57,8 @@ public class Idle extends AbstractCommand<Idle.Response> {
         public Optional<Subsystem> getChanged() {
             return getStringValue("changed").map(s->Subsystem.decode(s));
         }
-        Response(java.util.List<String> responseLines) {
-            super(responseLines);
+        Response(java.util.List<String> responseLines, String connectResponse) {
+            super(responseLines, connectResponse);
         }
     }
 }
