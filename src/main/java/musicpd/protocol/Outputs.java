@@ -9,29 +9,27 @@ import java.util.stream.Collectors;
 
 /**
  * outputs command from
- * <a href='https://www.musicpd.org/doc/protocol/output_commands.html'>MPD Document: Audio output devices.</a>
+ * <a href='https://www.musicpd.org/doc/protocol/output_commands.html'>
+ *     MPD Document: Audio output devices.</a>
  * <p>
  *     On this command, mpd returns a list of outputs.
  * </p>
  * @author jfraney
  */
 public class Outputs extends AbstractCommand<Outputs.Response> {
-    public Outputs() {
-        super();
-    }
 
     @Override
-    public Response response(java.util.List<String> responseLines, String connectResponse) {
+    public Response response(final java.util.List<String> responseLines, final String connectResponse) {
         return new Response(responseLines, connectResponse);
     }
 
     public static class Response extends HealthResponse {
-        Response(java.util.List<String> responseLines, String connectResponse) {
+        Response(final java.util.List<String> responseLines, final String connectResponse) {
             super(responseLines, connectResponse);
         }
 
         public class Output extends ResponseContent {
-            Output(java.util.List<String> responseLines) {
+            Output(final java.util.List<String> responseLines) {
                 super(responseLines);
             }
 
@@ -52,7 +50,7 @@ public class Outputs extends AbstractCommand<Outputs.Response> {
          */
         public java.util.List<Output> getOutputs() {
             return segments("outputid").stream()
-                    .map(sg -> new Output(sg))
+                    .map(Output::new)
                     .collect(Collectors.toList());
         }
     }

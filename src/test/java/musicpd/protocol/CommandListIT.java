@@ -23,17 +23,17 @@ public class CommandListIT {
 
     @Test
     public void commands() throws IOException {
-        Command c1 = new Status();
-        Command c2 = new Random(Toggle.ON);
-        Command c3 = new Outputs();
+        final Command c1 = new Status();
+        final Command c2 = new Random(Toggle.ON);
+        final Command c3 = new Outputs();
 
-        CommandList.Response r = mpc.send(new CommandList(c1, c2, c3));
+        final CommandList.Response r = mpc.send(new CommandList(c1, c2, c3));
 
         assertThat(r.isOk()).isTrue();
 
-        java.util.List<Command.Response> responses = r.getResponses();
+        final java.util.List<Command.Response> responses = r.getResponses();
         assertThat(responses.get(0) instanceof Status.Response).isTrue();
-        Status.Response statusResponse = (Status.Response) responses.get(0);
-        assertThat(statusResponse.getState().get()).isEqualTo("stop");
+        final Status.Response statusResponse = (Status.Response) responses.get(0);
+        assertThat(statusResponse.getState().orElse(null)).isEqualTo("stop");
     }
 }

@@ -7,21 +7,18 @@ import java.util.stream.Collectors;
 
 /**
  * tagtypes command
- * from <a href='https://www.musicpd.org/doc/protocol/reflection_commands.html'>MPD document: Reflection</a>
+ * from <a href='https://www.musicpd.org/doc/protocol/reflection_commands.html'>
+ *     MPD document: Reflection</a>
  * <p>
  *     The response of this command is list of strings (existing tagtypes).
  * </p>
- * @Author jfraney
+ * @author jfraney
  */
 
 public class TagTypes extends AbstractCommand<TagTypes.Response> {
 
-    public TagTypes() {
-        super();
-    }
-
     public static class Response extends HealthResponse {
-        Response(java.util.List<String> responseLines, String connectResponse) {
+        Response(final java.util.List<String> responseLines, final String connectResponse) {
             super(responseLines, connectResponse);
         }
 
@@ -36,7 +33,7 @@ public class TagTypes extends AbstractCommand<TagTypes.Response> {
     }
 
     @Override
-    public Response response(java.util.List<String> responseLines, String connectResponse) {
+    public Response response(final java.util.List<String> responseLines, final String connectResponse) {
         return new Response(responseLines, connectResponse);
     }
 }

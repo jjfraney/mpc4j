@@ -13,7 +13,7 @@ public class PlChangesPosIdTest {
 
     @Test
     public void response() {
-        java.util.List<String> lines = Arrays.asList(
+        final java.util.List<String> lines = Arrays.asList(
                 "cpos: 1",
                 "Id: 2",
                 "cpos: 2",
@@ -23,9 +23,9 @@ public class PlChangesPosIdTest {
                 "OK"
         );
 
-        PlChangesPosId.Response r = new PlChangesPosId(3).response(lines, "OK MPD 0.19.0");
+        final PlChangesPosId.Response r = new PlChangesPosId(3).response(lines, "OK MPD 0.19.0");
         assertThat(r.getEntries().size()).isEqualTo(3);
-        assertThat(r.getEntries().get(2).getCpos().get()).isEqualTo(3);
-        assertThat(r.getEntries().get(2).getId().get()).isEqualTo(4);
+        assertThat(r.getEntries().get(2).getCpos().orElse(null)).isEqualTo(3);
+        assertThat(r.getEntries().get(2).getId().orElse(null)).isEqualTo(4);
     }
 }

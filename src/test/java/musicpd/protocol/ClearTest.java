@@ -11,7 +11,7 @@ public class ClearTest {
 
     @Test
     public void command() {
-        String text = new Clear().text();
+        final String text = new Clear().text();
         assertThat(text).isEqualTo("clear");
     }
 }

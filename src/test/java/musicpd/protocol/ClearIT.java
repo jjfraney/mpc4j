@@ -25,7 +25,7 @@ public class ClearIT {
 
     @Test
     public void clear() throws IOException {
-        SimpleResponse r = mpc.send(new Clear());
+        final SimpleResponse r = mpc.send(new Clear());
         assertThat(r.isOk()).isTrue();
     }
 }

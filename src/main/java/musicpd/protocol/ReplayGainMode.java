@@ -4,7 +4,8 @@ import org.jjflyboy.mpc.Parameter;
 
 /**
  * replay_gain_mode command from
- * <a href='https://www.musicpd.org/doc/protocol/playback_option_commands.html'>MPD Playback option commands.</a>
+ * <a href='https://www.musicpd.org/doc/protocol/playback_option_commands.html'>
+ *     MPD Playback option commands.</a>
  * @author jfraney
  */
 public class ReplayGainMode extends Simple {
@@ -13,7 +14,7 @@ public class ReplayGainMode extends Simple {
      */
     public enum Mode implements Parameter {
         OFF, TRACK, ALBUM, AUTO;
-        public static Mode decode(String value) {
+        public static Mode decode(final String value) {
             return valueOf(value.toUpperCase());
         }
         public String encode() {
@@ -35,7 +36,7 @@ public class ReplayGainMode extends Simple {
     /**
      * @param mode to apply
      */
-    public ReplayGainMode(Mode mode) {
+    public ReplayGainMode(final Mode mode) {
         super(mode);
     }
 }

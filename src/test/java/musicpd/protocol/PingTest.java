@@ -4,7 +4,7 @@ import org.jjflyboy.mpc.SimpleResponse;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Arrays;
+import java.util.Collections;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -25,8 +25,8 @@ public class PingTest {
 
     @Test
     public void response() {
-        java.util.List<String> textResponse = Arrays.asList("OK");
-        SimpleResponse response = command.response(textResponse, "OK MPD 0.19.0");
+        final java.util.List<String> textResponse = Collections.singletonList("OK");
+        final SimpleResponse response = command.response(textResponse, "OK MPD 0.19.0");
         assertThat(response.isOk()).as("response could not parse \"OK\"").isTrue();
     }
 }

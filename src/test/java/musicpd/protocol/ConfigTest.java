@@ -13,11 +13,11 @@ public class ConfigTest {
 
     @Test
     public void commands() {
-        Config.Response r = new Config().response(Arrays.asList(
+        final Config.Response r = new Config().response(Arrays.asList(
                 "music_directory: some-directory",
                 "OK"
         ), "OK MPD 0.19.0");
         assertThat(r.getMusicDirectory()).isPresent();
-        assertThat(r.getMusicDirectory().get()).isEqualTo("some-directory");
+        assertThat(r.getMusicDirectory().orElse(null)).isEqualTo("some-directory");
     }
 }

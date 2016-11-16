@@ -6,13 +6,11 @@ package org.jjflyboy.mpc;
 public class FilterParameter implements Parameter {
 
     private final String text;
-    public FilterParameter(Parameter type, String what) {
-        this.text = new StringBuilder()
-                .append(type.toParameter())
-                .append(" \"")
-                .append(what)
-                .append('"')
-                .toString();
+    public FilterParameter(final Parameter type, final String what) {
+        this.text = type.toParameter() +
+                " \"" +
+                what +
+                '"';
     }
 
     @Override

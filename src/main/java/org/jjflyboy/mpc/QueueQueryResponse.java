@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
  * @author jfraney
  */
 public class QueueQueryResponse extends HealthResponse {
-    protected QueueQueryResponse(java.util.List<String> responseLines, String connectResponse) {
+    protected QueueQueryResponse(final java.util.List<String> responseLines, final String connectResponse) {
         super(responseLines, connectResponse);
     }
 
@@ -26,7 +26,7 @@ public class QueueQueryResponse extends HealthResponse {
         /**
          * @param responseLines limited to a single song
          */
-        protected QueuedSongMetadata(java.util.List<String> responseLines) {
+        protected QueuedSongMetadata(final java.util.List<String> responseLines) {
             super(responseLines);
         }
 

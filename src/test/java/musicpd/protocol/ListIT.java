@@ -21,22 +21,20 @@ public class ListIT {
 
     @Test
     public void listArtist() throws IOException {
-        List list = List.build(Tag.TITLE, builder -> {
-            builder
-                    .groupBy(Tag.ARTIST)
-                    .groupBy(Tag.ALBUM)
-                    .groupBy(Tag.GENRE);
-        });
-        List.Response r = mpc.send(list);
-        java.util.List<List.Response.Metadata> metadata = r.getMetadata();
+        final List list = List.build(Tag.TITLE, builder -> builder
+                .groupBy(Tag.ARTIST)
+                .groupBy(Tag.ALBUM)
+                .groupBy(Tag.GENRE));
+        final List.Response r = mpc.send(list);
+        final java.util.List<List.Response.Metadata> metadata = r.getMetadata();
         assertThat(metadata.size()).isEqualTo(3);
         for(int i = 0; i < 3; i++) {
-            String expectedTitle = "W" + (i+1) + " Song";
+            final String expectedTitle = "W" + (i+1) + " Song";
             assertThat(metadata.get(i).getType(Tag.TITLE)).isPresent();
-            assertThat(metadata.get(i).getType(Tag.TITLE).get()).isEqualTo(expectedTitle);
+            assertThat(metadata.get(i).getType(Tag.TITLE).orElse(null)).isEqualTo(expectedTitle);
         }
         r.getMetadata().stream()
-                .map(m -> m.getType(Tag.TITLE).get() + ", " + m.getType(Tag.ALBUM).get() + ", " + m.getType(Tag.GENRE).get())
+                .map(m -> m.getType(Tag.TITLE).orElse(null) + ", " + m.getType(Tag.ALBUM).orElse(null) + ", " + m.getType(Tag.GENRE).orElse(null))
                 .forEach(System.out::println);
     }
 }

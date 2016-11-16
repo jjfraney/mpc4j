@@ -19,7 +19,7 @@ public class LsInfoTest {
 
     @Test
     public void response() {
-        LsInfo.Response r = new LsInfo().response(Arrays.asList(
+        final LsInfo.Response r = new LsInfo().response(Arrays.asList(
                 "file: aaa.ogg",
                 "Last-Modified: 2016-10-19T00:33:30Z",
                 "Time: 100",
@@ -38,15 +38,15 @@ public class LsInfoTest {
                 "OK"
         ), "OK MPD 0.19.0");
         assertThat(r.isOk()).as("no parse").isTrue();
-        List<DatabaseQueryResponse.DatabaseSongMetadata> songs = r.getMetadata();
+        final List<DatabaseQueryResponse.DatabaseSongMetadata> songs = r.getMetadata();
         assertThat(songs.size()).as("song count").isEqualTo(3);
 
-        assertThat(songs.get(0).getFile().get()).as("song file name").isEqualTo("aaa.ogg");
-        assertThat(songs.get(1).getFile().get()).as("song file name").isEqualTo("bbb.ogg");
-        assertThat(songs.get(2).getFile().get()).as("song file name").isEqualTo("ccc.ogg");
+        assertThat(songs.get(0).getFile().orElse(null)).as("song file name").isEqualTo("aaa.ogg");
+        assertThat(songs.get(1).getFile().orElse(null)).as("song file name").isEqualTo("bbb.ogg");
+        assertThat(songs.get(2).getFile().orElse(null)).as("song file name").isEqualTo("ccc.ogg");
 
-        List<LsInfo.Response.PlaylistInfo> playlists = r.getPlaylistInfo();
+        final List<LsInfo.Response.PlaylistInfo> playlists = r.getPlaylistInfo();
         assertThat(playlists.size()).isEqualTo(3);
-        assertThat(playlists.get(0).getPlaylist().get()).isEqualTo("t3");
+        assertThat(playlists.get(0).getPlaylist().orElse(null)).isEqualTo("t3");
     }
 }

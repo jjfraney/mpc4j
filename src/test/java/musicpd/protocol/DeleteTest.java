@@ -11,12 +11,12 @@ public class DeleteTest {
 
     @Test
     public void deleteWithPos() {
-        String text = new Delete(10).text();
+        final String text = new Delete(10).text();
         assertThat(text).isEqualTo("delete 10");
     }
     @Test
     public void deleteWithStartEnd() {
-        String text = new Delete(10, 20).text();
+        final String text = new Delete(10, 20).text();
         assertThat(text).isEqualTo("delete 10:20");
     }
 

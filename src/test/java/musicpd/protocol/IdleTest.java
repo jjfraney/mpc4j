@@ -24,14 +24,14 @@ public class IdleTest {
 
     @Test
     public void textWithMultipleSubsystems() {
-        String text = new Idle(Idle.Subsystem.MIXER, Idle.Subsystem.OPTIONS, Idle.Subsystem.DATABASE).text();
+        final String text = new Idle(Idle.Subsystem.MIXER, Idle.Subsystem.OPTIONS, Idle.Subsystem.DATABASE).text();
         assertThat(text).isEqualTo("idle mixer options database");
     }
 
     @Test
     public void response() {
-        java.util.List<String> textResponse = Arrays.asList("changed: options", "OK");
-        Idle.Response response = command.response(textResponse, "OK MPD 0.19.0");
-        assertThat(response.getChanged().get()).as("response could not parse \"changed\"").isEqualTo(Idle.Subsystem.OPTIONS);
+        final java.util.List<String> textResponse = Arrays.asList("changed: options", "OK");
+        final Idle.Response response = command.response(textResponse, "OK MPD 0.19.0");
+        assertThat(response.getChanged().orElse(null)).as("response could not parse \"changed\"").isEqualTo(Idle.Subsystem.OPTIONS);
     }
 }

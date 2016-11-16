@@ -24,16 +24,16 @@ public class ListMountsTest {
 
     @Test
     public void testResponseParse() {
-        java.util.List<String> responseText = Arrays.asList(
+        final java.util.List<String> responseText = Arrays.asList(
                 "mount:",
                 "storage: /home/foo/music",
                 "mount: foo",
                 "storage: nfs://192.168.1.4/export/mp3"
         );
-        ListMounts.Response response = command.response(responseText, "OK MPD 0.19.0");
-        java.util.List<ListMounts.Response.Mount> mounts = response.getMounts();
+        final ListMounts.Response response = command.response(responseText, "OK MPD 0.19.0");
+        final java.util.List<ListMounts.Response.Mount> mounts = response.getMounts();
         assertThat(mounts.size()).isEqualTo(2);
-        assertThat(mounts.get(1).getStorage().get()).isEqualTo("nfs://192.168.1.4/export/mp3");
+        assertThat(mounts.get(1).getStorage().orElse(null)).isEqualTo("nfs://192.168.1.4/export/mp3");
         assertThat(mounts.get(0).getMount()).isNotPresent();
     }
 }

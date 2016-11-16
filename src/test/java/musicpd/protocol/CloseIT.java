@@ -25,7 +25,7 @@ public class CloseIT {
 
     @Test
     public void close() throws IOException {
-        SimpleResponse r = mpc.send(new Close());
+        final SimpleResponse r = mpc.send(new Close());
         assertThat(r.isOk()).isFalse();
         assertThat(r.getAck()).isNotPresent();
         assertThat(r.getResponseLines().size()).isEqualTo(0);

@@ -4,7 +4,8 @@ import org.jjflyboy.mpc.RangeParameter;
 
 /**
  * rangeid command from
- * <a href='https://www.musicpd.org/doc/protocol/queue.html'>MPD Document: The current playlist.</a>
+ * <a href='https://www.musicpd.org/doc/protocol/queue.html'>
+ *     MPD Document: The current playlist.</a>
  * @author jfraney
  */
 public class RangeId extends Simple {
@@ -13,7 +14,7 @@ public class RangeId extends Simple {
      * @param start of range or null
      * @param end of range or null
      */
-    public RangeId(Integer id, Integer start, Integer end) {
+    public RangeId(final Integer id, final Integer start, final Integer end) {
         super(adapt(id), new RangeParameter(start, end));
     }
 
@@ -21,5 +22,5 @@ public class RangeId extends Simple {
      * command form: 'rangeid <id> :'
      * @param id of song to play
      */
-    public RangeId(Integer id) { this(id, null, null);}
+    public RangeId(final Integer id) { super(adapt(id));}
 }

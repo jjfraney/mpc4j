@@ -2,7 +2,8 @@ package musicpd.protocol;
 
 /**
  * prioid command from
- * <a href='https://www.musicpd.org/doc/protocol/queue.html'>MPD Document: The current playlist.</a>
+ * <a href='https://www.musicpd.org/doc/protocol/queue.html'>
+ *     MPD Document: The current playlist.</a>
  * @author jfraney
  */
 public class PrioId extends Simple {
@@ -12,7 +13,7 @@ public class PrioId extends Simple {
      * @param id of a selected song
      * @param ids of optional, additional songs
      */
-    public PrioId(Integer priority, Integer id, Integer ... ids) {
+    public PrioId(final Integer priority, final Integer id, final Integer ... ids) {
         super(adapt(priority), adapt(id), adapt(ids));
     }
 }

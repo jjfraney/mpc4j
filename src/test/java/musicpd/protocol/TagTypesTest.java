@@ -13,13 +13,13 @@ public class TagTypesTest {
 
     @Test
     public void commands() {
-        TagTypes.Response r = new TagTypes().response(Arrays.asList(
+        final TagTypes.Response r = new TagTypes().response(Arrays.asList(
                 "tagtype: Artist",
                 "tagtype: ArtistSort",
                 "tagtype: Album",
                 "OK"
         ), "OK MPD 0.19.0");
-        java.util.List<String> tagTypes = r.getTagTypes();
+        final java.util.List<String> tagTypes = r.getTagTypes();
         assertThat(tagTypes.size()).isEqualTo(3);
         assertThat(tagTypes.get(2)).isEqualTo("Album");
     }

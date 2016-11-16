@@ -13,13 +13,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class PlaylistFindTest {
     @Test
     public void text() {
-        String text = new PlaylistFind(Tag.ARTIST, "bob dylan").text();
+        final String text = new PlaylistFind(Tag.ARTIST, "bob dylan").text();
         assertThat(text).isEqualTo("playlistfind artist \"bob dylan\"");
     }
 
     @Test
     public void response() {
-        java.util.List<String> lines  = Arrays.asList(
+        final java.util.List<String> lines  = Arrays.asList(
                 "file: w2.ogg",
                 "Last-Modified: 2016-10-21T21:07:11Z",
                 "Genre: Acid Jazz",
@@ -33,12 +33,12 @@ public class PlaylistFindTest {
                 "Id: 24",
                 "OK"
         );
-        QueueQueryResponse r = new PlaylistFind(Tag.ARTIST, "Joe Mpc4J").response(lines, "OK MPD 0.19.0");
-        java.util.List<QueueQueryResponse.QueuedSongMetadata> songInfo = r.getSongMetadata();
+        final QueueQueryResponse r = new PlaylistFind(Tag.ARTIST, "Joe Mpc4J").response(lines, "OK MPD 0.19.0");
+        final java.util.List<QueueQueryResponse.QueuedSongMetadata> songInfo = r.getSongMetadata();
         assertThat(songInfo.size()).isEqualTo(1);
-        assertThat(songInfo.get(0).getPos().get()).isEqualTo(1);
-        assertThat(songInfo.get(0).getId().get()).isEqualTo(24);
-        assertThat(songInfo.get(0).getTime().get()).isEqualTo(11);
+        assertThat(songInfo.get(0).getPos().orElse(null)).isEqualTo(1);
+        assertThat(songInfo.get(0).getId().orElse(null)).isEqualTo(24);
+        assertThat(songInfo.get(0).getTime().orElse(null)).isEqualTo(11);
     }
 }
 

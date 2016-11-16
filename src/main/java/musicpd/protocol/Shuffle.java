@@ -4,7 +4,8 @@ import org.jjflyboy.mpc.RangeParameter;
 
 /**
  * shuffle command from
- * <a href='https://www.musicpd.org/doc/protocol/queue.html'>MPD Document: The current playlist.</a>
+ * <a href='https://www.musicpd.org/doc/protocol/queue.html'>
+ *     MPD Document: The current playlist.</a>
  * @author jfraney
  */
 public class Shuffle extends Simple {
@@ -21,7 +22,7 @@ public class Shuffle extends Simple {
      * @param start first song of selected range
      * @param end last song of selected range
      */
-    public Shuffle(Integer start, Integer end) {
+    public Shuffle(final Integer start, final Integer end) {
         super(new RangeParameter(start, end));
         if(start == null) {
             throw new IllegalArgumentException("start must not be null");

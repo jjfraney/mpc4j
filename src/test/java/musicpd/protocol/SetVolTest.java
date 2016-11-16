@@ -2,6 +2,8 @@ package musicpd.protocol;
 
 import org.junit.Test;
 
+import java.io.IOException;
+
 import static org.assertj.core.api.Assertions.*;
 
 /**
@@ -10,8 +12,8 @@ import static org.assertj.core.api.Assertions.*;
 public class SetVolTest {
 
     @Test
-    public void text() throws Exception {
-        SetVol command = new SetVol(20);
+    public void text() throws IOException {
+        final SetVol command = new SetVol(20);
         assertThat(command.text()).as("wrong command").isEqualTo("setvol 20");
     }
 }

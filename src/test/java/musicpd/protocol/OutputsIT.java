@@ -24,8 +24,8 @@ public class OutputsIT {
 
     @Test
     public void outputs() throws IOException {
-        Outputs.Response r = mpc.send(new Outputs());
-        java.util.List<Outputs.Response.Output> outputs = r.getOutputs();
+        final Outputs.Response r = mpc.send(new Outputs());
+        final java.util.List<Outputs.Response.Output> outputs = r.getOutputs();
         assertThat(outputs.size()).isGreaterThanOrEqualTo(1);
         assertThat(outputs.get(0).getOutputEnabled()).isPresent();
         assertThat(outputs.get(0).getOutputId()).isPresent();

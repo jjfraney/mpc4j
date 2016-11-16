@@ -1,6 +1,7 @@
 package org.jjflyboy.mpc;
 
 
+import java.io.Serializable;
 import java.util.Optional;
 
 /**
@@ -15,7 +16,7 @@ import java.util.Optional;
  * </p>
  * @author jfraney
  */
-public interface Command<R extends Command.Response> {
+public interface Command<R extends Command.Response> extends Serializable {
     /**
      * gets the text for this command as conforms to mpd protocol, and any
      * parameters.  The intention is for implementations to provide the
@@ -37,10 +38,9 @@ public interface Command<R extends Command.Response> {
      * Implementations of Response should be able to read the response lines for the
      * MPD protocol response fields and access their values.
      */
-    interface Response {
+    interface Response extends Serializable {
         /**
-         * returns all the lines of the response
-         * @return
+         * @return all the lines of the response
          */
         java.util.List<String> getResponseLines();
 

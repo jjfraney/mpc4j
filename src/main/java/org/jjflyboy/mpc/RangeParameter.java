@@ -12,15 +12,13 @@ public class RangeParameter implements Parameter {
      * @param start of range or null
      * @param end or range or null
      */
-    public RangeParameter(Integer start, Integer end) {
+    public RangeParameter(final Integer start, final Integer end) {
         this.start = start;
         this.end = end;
     }
     public String toParameter() {
-        return new StringBuilder()
-                .append(start == null ? "" : start.toString())
-                .append(":")
-                .append(end == null ? "" : end.toString())
-                .toString();
+        return (start == null ? "" : start.toString()) +
+                ":" +
+                (end == null ? "" : end.toString());
     }
 }

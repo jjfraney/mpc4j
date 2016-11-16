@@ -2,8 +2,9 @@ package musicpd.protocol;
 
 /**
  * play command from
- * <a href='https://www.musicpd.org/doc/protocol/playback_commands.html'>MPD Document: Control playback.</a>
- * @Author jfraney
+ * <a href='https://www.musicpd.org/doc/protocol/playback_commands.html'>
+ *     MPD Document: Control playback.</a>
+ * @author jfraney
  */
 public class Play extends Simple {
     /**
@@ -17,7 +18,7 @@ public class Play extends Simple {
      * play from this song position
      * @param songpos of first song to play
      */
-    public Play(Integer songpos) {
+    public Play(final Integer songpos) {
         super(adapt(songpos));
     }
 }

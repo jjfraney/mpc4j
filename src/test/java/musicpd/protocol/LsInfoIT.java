@@ -27,15 +27,15 @@ public class LsInfoIT {
 
     @Test
     public void test() throws IOException {
-        LsInfo.Response r = mpc.send(new LsInfo());
+        final LsInfo.Response r = mpc.send(new LsInfo());
 
         assertThat(r.isOk()).isTrue();
 
         assertThat(r.getMetadata().size()).isEqualTo(3);
 
-        List<DatabaseQueryResponse.DatabaseSongMetadata> songs = r.getMetadata();
-        SongMetadata songInfo = songs.stream().filter(s -> s.getFile().get().equals("w1.ogg")).findAny().get();
-        assertThat(songInfo.getTag(Tag.ARTIST).get()).isEqualTo("Joe Mpc4J");
+        final List<DatabaseQueryResponse.DatabaseSongMetadata> songs = r.getMetadata();
+        final SongMetadata songInfo = songs.stream().filter(s -> s.getFile().orElse(null).equals("w1.ogg")).findAny().orElse(null);
+        assertThat(songInfo.getTag(Tag.ARTIST).orElse(null)).isEqualTo("Joe Mpc4J");
 
     }
 

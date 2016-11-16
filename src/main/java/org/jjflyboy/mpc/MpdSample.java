@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 public class MpdSample {
     private static MPC mpc = new MPC();
 
-    public static void main(String [] args) throws IOException {
+    public static void main(final String [] args) throws IOException {
 
 
         //sendIdle();
@@ -27,7 +27,7 @@ public class MpdSample {
         runPlaybackControlCommands();
 
 
-        Status.Response r = mpc.send(new Status());
+        final Status.Response r = mpc.send(new Status());
 
         System.out.println("volume=" + r.getVolume().orElse(-1));
         System.out.println("mix ramp db: " + r.getMixRampDb().orElse(null));
@@ -69,22 +69,21 @@ public class MpdSample {
     private static void runStatusQueryCommands() throws IOException {
         run(new ClearError());
         run(new CurrentSong());
-        QueueQueryResponse csr = mpc.send(new CurrentSong());
-        QueueQueryResponse.QueuedSongMetadata info =  csr.getSongMetadata().get(0);
+        final QueueQueryResponse csr = mpc.send(new CurrentSong());
+        final QueueQueryResponse.QueuedSongMetadata info =  csr.getSongMetadata().get(0);
         System.out.println("last modified: " + info.getLastModified());
         run(new Status());
         run(new Stats());
     }
 
     private static void sendIdle() throws IOException {
-        Idle.Response ir = mpc.send(new Idle(Idle.Subsystem.OPTIONS, Idle.Subsystem.MIXER));
-        System.out.println("what changed? " + ir.getChanged().get());
+        final Idle.Response ir = mpc.send(new Idle(Idle.Subsystem.OPTIONS, Idle.Subsystem.MIXER));
+        System.out.println("what changed? " + ir.getChanged().orElse(null));
     }
 
-    private static Command.Response run(Command command) throws IOException {
-        Command.Response response = mpc.send(command);
+    private static void run(final Command command) throws IOException {
+        final Command.Response response = mpc.send(command);
         System.out.println("command: '" + command.text() + "' isOk? ...." + response.isOk());
         Stream.of(response.getResponseLines()).map(s -> "\t" + s).forEach(System.out::println);
-        return response;
     }
 }

@@ -1,7 +1,6 @@
 package org.jjflyboy.mpc;
 
 import musicpd.protocol.Tag;
-import org.jjflyboy.mpc.ResponseContent;
 
 import java.time.ZonedDateTime;
 import java.util.*;
@@ -14,7 +13,7 @@ public abstract class SongMetadata extends ResponseContent {
     /**
      * @param responseLines limited to a single song
      */
-    protected SongMetadata(java.util.List<String> responseLines) {
+    protected SongMetadata(final List<String> responseLines) {
         super(responseLines);
     }
 
@@ -47,10 +46,10 @@ public abstract class SongMetadata extends ResponseContent {
     }
 
     /**
-     * @param tag
+     * @param tag to search in the response.
      * @return the value in the response line with the tag.
      */
-    public Optional<String> getTag(Tag tag) {
+    public Optional<String> getTag(final Tag tag) {
         return getStringValue(tag);
     }
 }

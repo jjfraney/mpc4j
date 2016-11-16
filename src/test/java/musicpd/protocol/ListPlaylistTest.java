@@ -13,13 +13,13 @@ public class ListPlaylistTest {
 
     @Test
     public void listFilesTest() {
-        java.util.List<String> responseLines = Arrays.asList(
+        final java.util.List<String> responseLines = Arrays.asList(
                 "file: one.ogg",
                 "file: two.ogg",
                 "file: three.ogg",
                 "OK"
         );
-        ListPlaylist.Response r = new ListPlaylist("no-op").response(responseLines, "OK MPD 0.19.0");
+        final ListPlaylist.Response r = new ListPlaylist("no-op").response(responseLines, "OK MPD 0.19.0");
         assertThat(r.isOk()).isTrue();
         assertThat(r.getFiles().size()).isEqualTo(3);
         assertThat(r.getFiles().get(2)).isEqualTo("three.ogg");

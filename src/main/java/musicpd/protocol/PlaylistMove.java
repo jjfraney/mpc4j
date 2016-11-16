@@ -4,7 +4,8 @@ import org.jjflyboy.mpc.RangeParameter;
 
 /**
  * playlistmove command from
- * <a href='https://www.musicpd.org/doc/protocol/playlist_files.html'>MPD Document: Stored playlists.</a>
+ * <a href='https://www.musicpd.org/doc/protocol/playlist_files.html'>
+ *     MPD Document: Stored playlists.</a>
  * @author jfraney
  */
 public class PlaylistMove extends Simple {
@@ -13,7 +14,7 @@ public class PlaylistMove extends Simple {
      * @param from current position
      * @param to new position
      */
-    public PlaylistMove(String name, Integer from, Integer to) {
+    public PlaylistMove(final String name, final Integer from, final Integer to) {
         super(adapt(name), new RangeParameter(from, to));
     }
 }

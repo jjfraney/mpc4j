@@ -16,7 +16,7 @@ public abstract class HealthResponse extends ResponseContent implements Command.
      * @param responseLines the lines of the command response
      * @param connectResponse the line of the connect response
      */
-    protected HealthResponse(java.util.List<String> responseLines, String connectResponse) {
+    protected HealthResponse(final java.util.List<String> responseLines, final String connectResponse) {
         super(responseLines);
         this.connectResponse = connectResponse;
     }
@@ -56,8 +56,8 @@ public abstract class HealthResponse extends ResponseContent implements Command.
     public Optional<Ack> getAck() {
         try {
             return Optional.of(new AckImpl(getResponseLines().get(getResponseLines().size() - 1)));
-        } catch (RuntimeException e) {
-            return Optional.ofNullable(null);
+        } catch (final RuntimeException e) {
+            return Optional.empty();
         }
     }
 
@@ -67,15 +67,15 @@ public abstract class HealthResponse extends ResponseContent implements Command.
         // ACK [error@command_listNum] {current_command} message_text\n
 
         private final Pattern PATTERN = Pattern.compile("ACK \\[(\\d*)@(\\d*)\\] \\{(.*)\\} (.*)");
-        public AckImpl(String line) {
-            Matcher m = PATTERN.matcher(line);
+        public AckImpl(final String line) {
+            final Matcher m = PATTERN.matcher(line);
             if (m.matches()) {
                 this.error = Integer.parseInt(m.group(1));
                 this.commandListNum = Integer.parseInt(m.group(2));
                 this.currentCommand = m.group(3);
                 this.messageText = m.group(4);
             } else {
-                throw new RuntimeException("bad parse");
+                throw new MpcRuntimeException("bad parse");
             }
         }
         private Integer error;

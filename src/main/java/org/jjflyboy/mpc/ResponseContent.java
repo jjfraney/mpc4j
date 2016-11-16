@@ -3,7 +3,6 @@ package org.jjflyboy.mpc;
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 import java.util.*;
-import java.util.List;
 
 /**
  * base class for holding and parsing a complete or a segment of response content.
@@ -12,8 +11,8 @@ import java.util.List;
 public abstract class ResponseContent {
 
     private final List<String> responseLines;
-    protected ResponseContent(java.util.List<String> responseLines) {
-        List<String> lines = new ArrayList<>(responseLines);
+    protected ResponseContent(final List<String> responseLines) {
+        final List<String> lines = new ArrayList<>(responseLines);
         this.responseLines = Collections.unmodifiableList(lines);
     }
 
@@ -29,7 +28,7 @@ public abstract class ResponseContent {
      * @param name of field of interest
      * @return the value, as String, of the first field in this response with 'name', if present.
      */
-    protected Optional<String> findFieldValue(String name) {
+    protected Optional<String> findFieldValue(final String name) {
         return ResponseContentParser.findFieldValue(getResponseLines(), name);
     }
 
@@ -37,7 +36,7 @@ public abstract class ResponseContent {
      * @param name of field of interest
      * @return the value, as Integer, of the first field in this response with 'name', if present.
      */
-    protected Optional<Integer> getIntegerValue(String name) {
+    protected Optional<Integer> getIntegerValue(final String name) {
         return ResponseContentParser.getIntegerValue(getResponseLines(), name);
     }
 
@@ -45,7 +44,7 @@ public abstract class ResponseContent {
      * @param name of field of interest
      * @return the value, as Integer, of the first field in this response with 'name', if present.
      */
-    protected Optional<Long> getLongValue(String name) {
+    protected Optional<Long> getLongValue(final String name) {
         return ResponseContentParser.getLongValue(getResponseLines(), name);
     }
 
@@ -53,7 +52,7 @@ public abstract class ResponseContent {
      * @param name of field of interest
      * @return the value, as Toggle, of the first field in this response with 'name', if present.
      */
-    protected Optional<Toggle> getToggleValue(String name) {
+    protected Optional<Toggle> getToggleValue(final String name) {
         return ResponseContentParser.getToggleValue(getResponseLines(), name);
     }
 
@@ -61,7 +60,7 @@ public abstract class ResponseContent {
      * @param name of field of interest
      * @return the value, as BigDecimal, of the first field in this response with 'name', if present.
      */
-    protected Optional<BigDecimal> getBigDecimalValue(String name) {
+    protected Optional<BigDecimal> getBigDecimalValue(final String name) {
         return ResponseContentParser.getBigDecimalValue(getResponseLines(), name);
     }
 
@@ -69,7 +68,7 @@ public abstract class ResponseContent {
      * @param name of field of interest
      * @return the value, as ZonedDateTime, of the first field in this response with 'name', if present.
      */
-    protected Optional<ZonedDateTime> getZonedDateTimeValue(String name) {
+    protected Optional<ZonedDateTime> getZonedDateTimeValue(final String name) {
         return ResponseContentParser.getZonedDateTimeValue(getResponseLines(), name);
     }
 
@@ -77,14 +76,14 @@ public abstract class ResponseContent {
      * @param name of field of interest
      * @return the value, as String, of the first field in this response with 'name', if present.
      */
-    protected Optional<String> getStringValue(String name) {
+    protected Optional<String> getStringValue(final String name) {
         return ResponseContentParser.getStringValue(getResponseLines(), name);
     }
     /**
      * @param metatdata of field of interest
      * @return the value, as String, of the first field in this response with 'name', if present.
      */
-    protected Optional<String> getStringValue(ResponseContentParser.LineMetadata metatdata) {
+    protected Optional<String> getStringValue(final ResponseContentParser.LineMetadata metatdata) {
         return ResponseContentParser.getStringValue(getResponseLines(), metatdata);
     }
 
@@ -92,42 +91,42 @@ public abstract class ResponseContent {
      * @param name of field of interest
      * @return the value, as List<String>, of the first field in this response with 'name', if present.
      */
-    protected List<String> getListOfStringValue(String name) {
+    protected List<String> getListOfStringValue(final String name) {
         return ResponseContentParser.getListOfStringValue(getResponseLines(), name);
     }
 
     /**
-     * separates this response into segments.
+     * separates this response into segments..
      * @see ResponseContentParser#segments
-     * @param markers - that identify the first line of each segment
-     * @return
+     * @param markers - some labels, any marks the first line of a segment
+     * @return segments....each begins with one of markers
      */
-    protected List<List<String>> segments(String ... markers) {
+    protected List<List<String>> segments(final String ... markers) {
         return ResponseContentParser.segments(getResponseLines(), markers);
     }
     /**
      * separates this response into segments.
      * @see ResponseContentParser#segments
-     * @param metadata - that identify the first line of each segment
-     * @return
+     * @param metadata - some labels, any marks the first line of a segment
+     * @return segments....each begins with one of metadata
      */
-    protected List<List<String>> segments(ResponseContentParser.LineMetadata ... metadata) {
+    protected List<List<String>> segments(final ResponseContentParser.LineMetadata ... metadata) {
         return ResponseContentParser.segments(getResponseLines(), metadata);
     }
     /**
-     * @param label
-     * @param line
+     * @param label to check for
+     * @param line to check
      * @return true if the line starts with the given label
      */
-    protected boolean isLabelMatch(String label, String line) {
+    protected boolean isLabelMatch(final String label, final String line) {
         return ResponseContentParser.isLabelMatch(label, line);
     }
     /**
-     * @param metadata
-     * @param line
+     * @param metadata to check for
+     * @param line to check
      * @return true if the line starts with the given label
      */
-    protected boolean isLabelMatch(ResponseContentParser.LineMetadata metadata, String line) {
+    protected boolean isLabelMatch(final ResponseContentParser.LineMetadata metadata, final String line) {
         return ResponseContentParser.isLabelMatch(metadata, line);
     }
 }

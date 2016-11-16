@@ -11,18 +11,16 @@ public class CountTest {
 
     @Test
     public void text() {
-        Count cmd = new Count(Tag.ARTIST, "bob dylan");
+        final Count cmd = new Count(Tag.ARTIST, "bob dylan");
         assertThat(cmd.text()).isEqualTo("count artist \"bob dylan\"");
     }
 
     @Test
     public void textComplex() {
-        Count count = Count.build(builder -> {
-            builder
-                    .with(Tag.ARTIST, "bob dylan")
-                    .with(Tag.TITLE, "stones")
-                    .groupBy(Tag.TITLE);
-        });
+        final Count count = Count.build(builder -> builder
+                .with(Tag.ARTIST, "bob dylan")
+                .with(Tag.TITLE, "stones")
+                .groupBy(Tag.TITLE));
         assertThat(count.text()).isEqualTo("count artist \"bob dylan\" title \"stones\" group title");
     }
 }

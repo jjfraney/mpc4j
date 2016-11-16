@@ -3,6 +3,7 @@ package musicpd.protocol;
 import org.jjflyboy.mpc.Command;
 import org.jjflyboy.mpc.DatabaseQueryResponse;
 import org.jjflyboy.mpc.MPC;
+import org.jjflyboy.mpc.MpcRuntimeException;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -25,55 +26,52 @@ public class ListPlaylistIT {
     @Before
     public void before() throws IOException {
         mpc = new MPC();
-        Command.Response r = mpc.send(remove);
-        if(! r.isOk()) {
-            if(r.getAck().get().getError() != 50) {
-                throw new RuntimeException("fail to remove: " + r.getAck().get().getMessageText());
-            }
+        final Command.Response r = mpc.send(remove);
+        if(! r.isOk() && r.getAck().orElse(null).getError() != 50) {
+            throw new MpcRuntimeException("fail to remove: " + r.getAck().orElse(null).getMessageText());
         }
     }
 
     @Test
     public void add() throws IOException {
-        Command.Response r = mpc.send(new PlaylistAdd(TEST_PLAYLIST, "w1.ogg"));
+        final Command.Response r = mpc.send(new PlaylistAdd(TEST_PLAYLIST, "w1.ogg"));
         assertThat(r.isOk()).isTrue();
 
-        ListPlaylist.Response lpl = mpc.send(new ListPlaylist(TEST_PLAYLIST));
+        final ListPlaylist.Response lpl = mpc.send(new ListPlaylist(TEST_PLAYLIST));
         assertThat(lpl.getFiles().size()).isEqualTo(1);
         assertThat(lpl.getFiles().get(0)).isEqualTo("w1.ogg");
 
-        ListPlaylists.Response rpl = mpc.send(new ListPlaylists());
+        final ListPlaylists.Response rpl = mpc.send(new ListPlaylists());
         assertThat(rpl.isOk()).isTrue();
-        java.util.List<ListPlaylists.Response.Playlist> playlists = rpl.getPlaylists();
 
     }
     @Test
     public void delete() throws IOException {
-        Command.Response radd = mpc.send(new PlaylistAdd(TEST_PLAYLIST, "w1.ogg"));
+        final Command.Response radd = mpc.send(new PlaylistAdd(TEST_PLAYLIST, "w1.ogg"));
         assertThat(radd.isOk()).isTrue();
 
-        Command.Response rdelete = mpc.send(new PlaylistDelete(TEST_PLAYLIST, 0));
+        final Command.Response rdelete = mpc.send(new PlaylistDelete(TEST_PLAYLIST, 0));
         assertThat(rdelete.isOk()).isTrue();
 
-        ListPlaylist.Response lpl = mpc.send(new ListPlaylist(TEST_PLAYLIST));
+        final ListPlaylist.Response lpl = mpc.send(new ListPlaylist(TEST_PLAYLIST));
         assertThat(lpl.getFiles().size()).isEqualTo(0);
     }
     @Test
     public void load() throws IOException {
-        Command.Response rclear = mpc.send(new Clear());
+        final Command.Response rclear = mpc.send(new Clear());
         assertThat(rclear.isOk()).isTrue();
 
-        Command.Response radd = mpc.send(new PlaylistAdd(TEST_PLAYLIST, "w1.ogg"));
+        final Command.Response radd = mpc.send(new PlaylistAdd(TEST_PLAYLIST, "w1.ogg"));
         assertThat(radd.isOk()).isTrue();
 
-        Command.Response rload = mpc.send(new Load(TEST_PLAYLIST));
+        final Command.Response rload = mpc.send(new Load(TEST_PLAYLIST));
         assertThat(rload.isOk()).isTrue();
 
-        DatabaseQueryResponse rfind = mpc.send(new Find(Find.Special.FILE, "w1.ogg"));
+        final DatabaseQueryResponse rfind = mpc.send(new Find(Find.Special.FILE, "w1.ogg"));
         assertThat(rfind.isOk()).isTrue();
-        java.util.List<DatabaseQueryResponse.DatabaseSongMetadata> songInfo = rfind.getMetadata();
+        final java.util.List<DatabaseQueryResponse.DatabaseSongMetadata> songInfo = rfind.getMetadata();
         assertThat(songInfo.size()).isEqualTo(1);
-        assertThat(songInfo.get(0).getFile().get()).isEqualTo("w1.ogg");
+        assertThat(songInfo.get(0).getFile().orElse(null)).isEqualTo("w1.ogg");
 
 
     }

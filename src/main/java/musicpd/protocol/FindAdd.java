@@ -8,7 +8,8 @@ import java.util.function.Consumer;
 
 /**
  * findadd command from
- * <a href='https://www.musicpd.org/doc/protocol/database.html'>MPD Document: The music database.</a>
+ * <a href='https://www.musicpd.org/doc/protocol/database.html'>
+ *     MPD Document: The music database.</a>
  * <p>
  *     On this command, mpd returns database metadata for each song.
  * </p>
@@ -21,7 +22,7 @@ public class FindAdd extends DatabaseQuery {
      * @param type name of field to match
      * @param what value to match
      */
-    public FindAdd(Tag type, String what) {
+    public FindAdd(final Tag type, final String what) {
         super(new FilterParameter(type, what));
     }
     /**
@@ -29,11 +30,11 @@ public class FindAdd extends DatabaseQuery {
      * @param type name of field to match
      * @param what value to match
      */
-    public FindAdd(Find.Special type, String what) {
+    public FindAdd(final Find.Special type, final String what) {
         super(new FilterParameter(type, what));
     }
 
-    private FindAdd(java.util.List<FilterParameter> filters) {
+    private FindAdd(final java.util.List<FilterParameter> filters) {
         super(new ArrayList<>(filters));
     }
 
@@ -44,8 +45,8 @@ public class FindAdd extends DatabaseQuery {
         }
     }
 
-    public static FindAdd build(Consumer<Builder> c) {
-        Builder b = new Builder();
+    public static FindAdd build(final Consumer<Builder> c) {
+        final Builder b = new Builder();
         c.accept(b);
         return b.build();
     }

@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.*;
 public class UpdateTest {
     @Test
     public void text() {
-        Update command = new Update();
+        final Update command = new Update();
         assertThat(command.text()).as("wrong command").isEqualTo("update");
     }
 }

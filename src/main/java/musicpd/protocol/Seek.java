@@ -4,11 +4,12 @@ import java.math.BigDecimal;
 
 /**
  * seek command from
- * <a href='https://www.musicpd.org/doc/protocol/playback_commands.html'>MPD Document: Control playback.</a>
- * @Author jfraney
+ * <a href='https://www.musicpd.org/doc/protocol/playback_commands.html'>
+ *     MPD Document: Control playback.</a>
+ * @author jfraney
  */
 public class Seek extends Simple {
-    private Seek(Integer songpos, Number time) {
+    private Seek(final Integer songpos, final Number time) {
         super(adapt(songpos), adapt(time));
     }
 
@@ -16,21 +17,21 @@ public class Seek extends Simple {
      * @param songpos of selected song
      * @param time offset into selected song
      */
-    public Seek(Integer songpos, Integer time) {
+    public Seek(final Integer songpos, final Integer time) {
         this(songpos, (Number)time);
     }
     /**
      * @param songpos of selected song
      * @param time offset into selected song
      */
-    public Seek(Integer songpos, BigDecimal time) {
+    public Seek(final Integer songpos, final BigDecimal time) {
         this(songpos, (Number)time);
     }
     /**
      * @param songpos of selected song
      * @param time offset into selected song
      */
-    public Seek(Integer songpos, Float time) {
+    public Seek(final Integer songpos, final Float time) {
         this(songpos, (Number)time);
     }
 }

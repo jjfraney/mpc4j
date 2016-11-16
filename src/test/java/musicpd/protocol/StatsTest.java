@@ -17,7 +17,7 @@ public class StatsTest {
 
     @Test
     public void response() {
-        Stats.Response r = new Stats().response(Arrays.asList(
+        final Stats.Response r = new Stats().response(Arrays.asList(
                 "uptime: 10",
                 "playtime: 20",
                 "artists: 30",
@@ -27,13 +27,13 @@ public class StatsTest {
                 "db_update: 900"
 
         ), "OK MPD 0.19.0");
-        assertThat(r.getUptime().get().intValue()).as("wrong ").isEqualTo(10);
-        assertThat(r.getPlaytime().get().intValue()).as("wrong ").isEqualTo(20);
-        assertThat(r.getArtists().get().intValue()).as("wrong ").isEqualTo(30);
-        assertThat(r.getAlbums().get().intValue()).as("wrong ").isEqualTo(40);
-        assertThat(r.getSongs().get().intValue()).as("wrong ").isEqualTo(50);
-        assertThat(r.getDbPlaytime().get().intValue()).as("wrong ").isEqualTo(600);
-        assertThat(r.getDbUpdate().get().longValue()).as("wrong ").isEqualTo(900L);
+        assertThat(r.getUptime().orElse(null).intValue()).as("wrong ").isEqualTo(10);
+        assertThat(r.getPlaytime().orElse(null).intValue()).as("wrong ").isEqualTo(20);
+        assertThat(r.getArtists().orElse(null).intValue()).as("wrong ").isEqualTo(30);
+        assertThat(r.getAlbums().orElse(null).intValue()).as("wrong ").isEqualTo(40);
+        assertThat(r.getSongs().orElse(null).intValue()).as("wrong ").isEqualTo(50);
+        assertThat(r.getDbPlaytime().orElse(null).intValue()).as("wrong ").isEqualTo(600);
+        assertThat(r.getDbUpdate().orElse(null).longValue()).as("wrong ").isEqualTo(900L);
     }
 
 }

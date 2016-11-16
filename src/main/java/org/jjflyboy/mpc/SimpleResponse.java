@@ -6,7 +6,7 @@ package org.jjflyboy.mpc;
  */
 public final class SimpleResponse extends HealthResponse {
 
-    public SimpleResponse(java.util.List<String> responseLines, String connectResponse) {
+    public SimpleResponse(final java.util.List<String> responseLines, final String connectResponse) {
         super(responseLines, connectResponse);
     }
 }

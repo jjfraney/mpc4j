@@ -9,18 +9,16 @@ import java.util.Optional;
 
 /**
  * status command
- * from <a href='https://www.musicpd.org/doc/protocol/command_reference.html#status_commands'>MPD document</a>
+ * from <a href='https://www.musicpd.org/doc/protocol/command_reference.html#status_commands'>
+ *     MPD document</a>
  * <p>
- *     The response of this command is custom and contains the status of several playback controls.
+ *     The response of this command is custom and contains
+ *     the status of several playback controls.
  * </p>
- * @Author jfraney
+ * @author jfraney
  */
 
 public class Status extends AbstractCommand<Status.Response> {
-
-    public Status() {
-        super();
-    }
 
     /**
      * provides access to data in the response to 'status' command.
@@ -159,7 +157,7 @@ public class Status extends AbstractCommand<Status.Response> {
         /**
          * @param responseLines lines read from socket including 'OK' or 'ACK...."
          */
-        Response(java.util.List<String> responseLines, String connectResponse) {
+        Response(final java.util.List<String> responseLines, final String connectResponse) {
             super(responseLines, connectResponse);
         }
     }
@@ -169,7 +167,7 @@ public class Status extends AbstractCommand<Status.Response> {
      * @return access response data.
      */
     @Override
-    public Response response(java.util.List<String> responseLines, String connectResponse ) {
+    public Response response(final java.util.List<String> responseLines, final String connectResponse ) {
         return new Response(responseLines, connectResponse);
     }
 }

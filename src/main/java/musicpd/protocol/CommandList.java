@@ -1,49 +1,67 @@
 package musicpd.protocol;
 
-import org.jjflyboy.mpc.AbstractCommand;
 import org.jjflyboy.mpc.Command;
 import org.jjflyboy.mpc.HealthResponse;
 import org.jjflyboy.mpc.ResponseContentParser;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 /**
  * implements MPD protocol's
- * <a href='https://www.musicpd.org/doc/protocol/command_lists.html'>aggregation of commands.</a>
+ * <a href='https://www.musicpd.org/doc/protocol/command_lists.html'>
+ *     aggregation of commands.</a>
  * <p>
- *     We use 'command_list_ok_begin' because it puts 'list_OK' separator in response.
+ *     We use 'command_list_ok_begin' because it puts 'list_OK'
+ *     separator in response.
  * </p>
  * @author jfraney
  * @see ResponseContentParser
  */
-public class CommandList extends AbstractCommand<CommandList.Response> {
+public class CommandList implements Command<CommandList.Response> {
 
     private final List<Command> commands;
-    public CommandList(Command ... commands) {
+
+    /**
+     * @param commands to send as a commandlist
+     */
+    public CommandList(final Command ... commands) {
         this.commands = Collections.unmodifiableList(Arrays.asList(commands));
     }
+
+    /**
+     * @return commandlist text
+     */
     @Override
     public String text() {
-        String list =  commands.stream()
+        final String list =  commands.stream()
                 .map(Command::text)
                 .collect(Collectors.joining("\n"));
-        return new StringBuilder()
-                .append("command_list_ok_begin\n")
-                .append(list)
-                .append("\ncommand_list_end")
-                .toString();
+        return "command_list_ok_begin\n" +
+                list +
+                "\ncommand_list_end";
     }
 
+    /**
+     *
+     * @param responseLines given by mpd server in response to this command.
+     * @param connectResponse of the MPD source of the response.
+     * @return response to commandlist
+     */
     @Override
-    public Response response(List<String> responseLines, String connectResponse) {
+    public Response response(final List<String> responseLines, final String connectResponse) {
         return new Response(responseLines, connectResponse, commands);
     }
 
+    /**
+     * command list response to access response to each of the commands
+     */
     public static class Response extends HealthResponse {
         private final List<Command> commands;
-        public Response(List<String> responseLines, String connectResponse, List<Command> commands) {
+        public Response(final List<String> responseLines, final String connectResponse, final List<Command> commands) {
             super(responseLines, connectResponse);
             this.commands = commands;
         }
@@ -87,9 +105,9 @@ public class CommandList extends AbstractCommand<CommandList.Response> {
          * @return individual responses per command
          */
         public List<Command.Response> getResponses() {
-            List<List<String>> responses = segments();
+            final List<List<String>> responses = segments();
 
-            List<Command.Response> result = new ArrayList<>();
+            final List<Command.Response> result = new ArrayList<>();
             for(int i = 0; i < responses.size(); i++ ) {
                 result.add(commands.get(i).response(responses.get(i), getConnectResponse()));
             }
@@ -102,19 +120,19 @@ public class CommandList extends AbstractCommand<CommandList.Response> {
          *     This algorithm is much like {@link ResponseContentParser#segments(List, String...)}.
          *     Here, the marker is at the END of the segment, not the beginning.
          * </p>
-         * @return
+         * @return list of segments (i.e., list of lines), each ending with 'list_OK'
          */
         private List<List<String>> segments() {
-            List<List<String>> result = new ArrayList<>();
-            List<String> segment = new ArrayList();
-            for(String line: getResponseLines()) {
+            final List<List<String>> result = new ArrayList<>();
+            List<String> segment = new ArrayList<>();
+            for(final String line: getResponseLines()) {
                 if(line.startsWith("OK") || line.startsWith("ACK")) {
                     continue;
                 }
 
                 segment.add(line);
 
-                if(line.equals("list_OK")) {
+                if("list_OK".equals(line)) {
                     result.add(Collections.unmodifiableList(segment));
                     segment = new ArrayList<>();
                 }

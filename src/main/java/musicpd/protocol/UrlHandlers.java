@@ -7,18 +7,15 @@ import java.util.stream.Collectors;
 
 /**
  * urlhandlers command
- * from <a href='https://www.musicpd.org/doc/protocol/reflection_commands.html'>MPD document: Reflection</a>
- * @Author jfraney
+ * from <a href='https://www.musicpd.org/doc/protocol/reflection_commands.html'>
+ *     MPD document: Reflection</a>
+ * @author jfraney
  */
 
 public class UrlHandlers extends AbstractCommand<UrlHandlers.Response> {
 
-    public UrlHandlers() {
-        super();
-    }
-
     public static class Response extends HealthResponse {
-        Response(java.util.List<String> responseLines, String connectResponse) {
+        Response(final java.util.List<String> responseLines, final String connectResponse) {
             super(responseLines, connectResponse);
         }
 
@@ -33,7 +30,7 @@ public class UrlHandlers extends AbstractCommand<UrlHandlers.Response> {
     }
 
     @Override
-    public Response response(java.util.List<String> responseLines, String connectResponse) {
+    public Response response(final java.util.List<String> responseLines, final String connectResponse) {
         return new Response(responseLines, connectResponse);
     }
 }

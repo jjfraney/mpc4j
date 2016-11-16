@@ -13,7 +13,7 @@ public class Move extends Simple {
      * @param from current position of song
      * @param to new position of song
      */
-    public Move(Integer from, Integer to) {
+    public Move(final Integer from, final Integer to) {
         super(adapt(from), adapt(to));
     }
 
@@ -22,7 +22,7 @@ public class Move extends Simple {
      * @param end last position of range of songs
      * @param to new position of the above range of songs
      */
-    public Move(Integer start, Integer end, Integer to) {
+    public Move(final Integer start, final Integer end, final Integer to) {
         super(new RangeParameter(start, end), adapt(to));
     }
 }

@@ -1,10 +1,7 @@
 package musicpd.protocol;
 
 /**
- * @Author jfraney
+ * @author jfraney
  */
 public class Ping extends Simple {
-    public Ping() {
-        super();
-    }
 }

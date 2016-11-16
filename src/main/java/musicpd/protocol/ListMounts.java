@@ -9,19 +9,17 @@ import java.util.stream.Collectors;
 
 /**
  * listmounts command from
- * <a href='https://www.musicpd.org/doc/protocol/mount.html'>MPD Document: Mounts and neighbors.</a>
+ * <a href='https://www.musicpd.org/doc/protocol/mount.html'>
+ *     MPD Document: Mounts and neighbors.</a>
  * <p>
  *     On this command, mpd returns a list of files and directories.
  * </p>
  * @author jfraney
  */
 public class ListMounts extends AbstractCommand<ListMounts.Response> {
-    public ListMounts() {
-        super();
-    }
 
     @Override
-    public Response response(java.util.List<String> responseLines, String connectResponse) {
+    public Response response(final java.util.List<String> responseLines, final String connectResponse) {
         return new Response(responseLines, connectResponse);
     }
 
@@ -29,12 +27,12 @@ public class ListMounts extends AbstractCommand<ListMounts.Response> {
      * provides access to the list of file names returned by mpd by the listplaylist command.
      */
     public static class Response extends HealthResponse {
-        Response(java.util.List<String> responseLines, String connectResponse) {
+        Response(final java.util.List<String> responseLines, final String connectResponse) {
             super(responseLines, connectResponse);
         }
 
         public class Mount extends ResponseContent {
-            Mount(java.util.List<String> responseLines) {
+            Mount(final java.util.List<String> responseLines) {
                 super(responseLines);
             }
 
@@ -53,7 +51,7 @@ public class ListMounts extends AbstractCommand<ListMounts.Response> {
          */
         public java.util.List<Mount> getMounts() {
             return segments("mount").stream()
-                    .map(sg -> new Mount(sg))
+                    .map(Mount::new)
                     .collect(Collectors.toList());
         }
     }

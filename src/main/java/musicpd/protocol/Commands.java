@@ -5,21 +5,21 @@ import org.jjflyboy.mpc.HealthResponse;
 
 /**
  * commands command
- * from <a href='https://www.musicpd.org/doc/protocol/reflection_commands.html'>MPD document: Reflection</a>
+ * from <a href='https://www.musicpd.org/doc/protocol/reflection_commands.html'>
+ *     MPD document: Reflection</a>
  * <p>
  *     The response of this command is list of strings (allowed commands).
  * </p>
- * @Author jfraney
+ * @author jfraney
  */
 
 public class Commands extends AbstractCommand<Commands.Response> {
 
-    public Commands() {
-        super();
-    }
-
+    /**
+     * response to commands
+     */
     public static class Response extends HealthResponse {
-        Response(java.util.List<String> responseLines, String connectResponse) {
+        Response(final java.util.List<String> responseLines, final String connectResponse) {
             super(responseLines, connectResponse);
         }
 
@@ -28,8 +28,14 @@ public class Commands extends AbstractCommand<Commands.Response> {
         }
     }
 
+    /**
+     *
+     * @param responseLines given by mpd server in response to this command.
+     * @param connectResponse of the MPD source of the response.
+     * @return commands response
+     */
     @Override
-    public Response response(java.util.List<String> responseLines, String connectResponse) {
+    public Response response(final java.util.List<String> responseLines, final String connectResponse) {
         return new Response(responseLines, connectResponse);
     }
 }

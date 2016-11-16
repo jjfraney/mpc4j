@@ -26,28 +26,28 @@ public class FindIT {
 
     @Test
     public void test() throws IOException {
-        DatabaseQueryResponse r = mpc.send(new Find(Tag.TITLE, "W2 Song"));
+        final DatabaseQueryResponse r = mpc.send(new Find(Tag.TITLE, "W2 Song"));
 
         assertThat(r.isOk()).isTrue();
 
         assertThat(r.getMetadata().size()).isEqualTo(1);
 
-        List<DatabaseQueryResponse.DatabaseSongMetadata> songs = r.getMetadata();
-        DatabaseQueryResponse.DatabaseSongMetadata songInfo = songs.stream().filter(s -> s.getFile().get().equals("w2.ogg")).findAny().get();
-        assertThat(songInfo.getTag(Tag.ARTIST).get()).isEqualTo("Joe Mpc4J");
+        final List<DatabaseQueryResponse.DatabaseSongMetadata> songs = r.getMetadata();
+        final DatabaseQueryResponse.DatabaseSongMetadata songInfo = songs.stream().filter(s -> s.getFile().orElse(null).equals("w2.ogg")).findAny().orElse(null);
+        assertThat(songInfo.getTag(Tag.ARTIST).orElse(null)).isEqualTo("Joe Mpc4J");
 
     }
     @Test
     public void testWithAny() throws IOException {
-        DatabaseQueryResponse r = mpc.send(new Find(Find.Special.ANY, "W2 Song"));
+        final DatabaseQueryResponse r = mpc.send(new Find(Find.Special.ANY, "W2 Song"));
 
         assertThat(r.isOk()).isTrue();
 
         assertThat(r.getMetadata().size()).isEqualTo(1);
 
-        List<DatabaseQueryResponse.DatabaseSongMetadata> songs = r.getMetadata();
-        DatabaseQueryResponse.DatabaseSongMetadata songInfo = songs.stream().filter(s -> s.getFile().get().equals("w2.ogg")).findAny().get();
-        assertThat(songInfo.getTag(Tag.ARTIST).get()).isEqualTo("Joe Mpc4J");
+        final List<DatabaseQueryResponse.DatabaseSongMetadata> songs = r.getMetadata();
+        final DatabaseQueryResponse.DatabaseSongMetadata songInfo = songs.stream().filter(s -> s.getFile().orElse(null).equals("w2.ogg")).findAny().orElse(null);
+        assertThat(songInfo.getTag(Tag.ARTIST).orElse(null)).isEqualTo("Joe Mpc4J");
 
     }
 

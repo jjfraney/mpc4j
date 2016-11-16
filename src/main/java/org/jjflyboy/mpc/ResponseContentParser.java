@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -17,7 +16,7 @@ public class ResponseContentParser {
      * @param name of field of interest
      * @return the value of the first field in 'responseLines' with 'name', if present.
      */
-    public static Optional<String> findFieldValue(java.util.List<String> responseLines, String name) {
+    public static Optional<String> findFieldValue(final List<String> responseLines, final String name) {
         final String search = name + ": ";
         return responseLines.stream()
                 .filter((x) -> x.startsWith(search))
@@ -31,8 +30,8 @@ public class ResponseContentParser {
      * @param name of field of interest
      * @return the value, as Integer, of the first field in 'responseLines' with 'name', if present.
      */
-    public static Optional<Integer> getIntegerValue(List<String> responseLines, String name) {
-        return findFieldValue(responseLines, name).map((s) -> Integer.decode(s));
+    public static Optional<Integer> getIntegerValue(final List<String> responseLines, final String name) {
+        return findFieldValue(responseLines, name).map(Integer::decode);
     }
 
     /**
@@ -40,8 +39,8 @@ public class ResponseContentParser {
      * @param name of field of interest
      * @return the value, as Long, of the first field in 'responseLines' with 'name', if present.
      */
-    public static Optional<Long> getLongValue(List<String> responseLines, String name) {
-        return findFieldValue(responseLines, name).map((s) -> Long.decode(s));
+    public static Optional<Long> getLongValue(final List<String> responseLines, final String name) {
+        return findFieldValue(responseLines, name).map(Long::decode);
     }
 
     /**
@@ -49,8 +48,8 @@ public class ResponseContentParser {
      * @param name of field of interest
      * @return the value, as Toggle, of the first field in 'responseLines' with 'name', if present.
      */
-    public static Optional<Toggle> getToggleValue(List<String> responseLines, String name) {
-        return findFieldValue(responseLines, name).map(s -> Toggle.decode(s));
+    public static Optional<Toggle> getToggleValue(final List<String> responseLines, final String name) {
+        return findFieldValue(responseLines, name).map(Toggle::decode);
     }
 
     /**
@@ -58,8 +57,8 @@ public class ResponseContentParser {
      * @param name of field of interest
      * @return the value, as BigDecimal, of the first field in 'responseLines' with 'name', if present.
      */
-    public static Optional<BigDecimal> getBigDecimalValue(List<String> responseLines, String name) {
-        return findFieldValue(responseLines, name).map(s -> new BigDecimal(s));
+    public static Optional<BigDecimal> getBigDecimalValue(final List<String> responseLines, final String name) {
+        return findFieldValue(responseLines, name).map(BigDecimal::new);
     }
 
     /**
@@ -67,7 +66,7 @@ public class ResponseContentParser {
      * @param name of field of interest
      * @return the value, as ZonedDateTime, of the first field in 'responseLines' with 'name', if present.
      */
-    public static Optional<ZonedDateTime> getZonedDateTimeValue(List<String> responseLines, String name) {
+    public static Optional<ZonedDateTime> getZonedDateTimeValue(final List<String> responseLines, final String name) {
         return findFieldValue(responseLines, name).map(s -> ZonedDateTime.parse(s, DateTimeFormatter.ISO_ZONED_DATE_TIME));
     }
 
@@ -76,7 +75,7 @@ public class ResponseContentParser {
      * @param name of field of interest
      * @return the value, as String, of the first field in 'responseLines' with 'name', if present.
      */
-    public static Optional<String> getStringValue(List<String> responseLines, String name) {
+    public static Optional<String> getStringValue(final List<String> responseLines, final String name) {
         return findFieldValue(responseLines, name);
     }
     /**
@@ -84,7 +83,7 @@ public class ResponseContentParser {
      * @param metadata of field of interest
      * @return the value, as String, of the first field in 'responseLines' with 'name', if present.
      */
-    public static Optional<String> getStringValue(List<String> responseLines, LineMetadata metadata) {
+    public static Optional<String> getStringValue(final List<String> responseLines, final LineMetadata metadata) {
         return findFieldValue(responseLines, metadata.toLabel());
     }
 
@@ -93,7 +92,7 @@ public class ResponseContentParser {
      * @param name of field of interest
      * @return the values, as List<String>, of the first field in 'responseLines' with 'name', if present.
      */
-    public static List<String> getListOfStringValue(List<String> responseLines, String name) {
+    public static List<String> getListOfStringValue(final List<String> responseLines, final String name) {
         return responseLines.stream()
                 .filter(l -> l.startsWith(name + ": "))
                 .map(l -> l.split(": "))
@@ -138,15 +137,15 @@ public class ResponseContentParser {
      * @param markers that identify the first line of each segment
      * @return list of identified segments in 'responseLines'
      */
-    public static List<List<String>> segments(List<String> responseLines, java.util.List<String> markers) {
-        List<List<String>> result = new ArrayList<>();
+    public static List<List<String>> segments(final List<String> responseLines, final List<String> markers) {
+        final List<List<String>> result = new ArrayList<>();
         List<String> segment = null;
-        for(String line: responseLines) {
+        for(final String line: responseLines) {
             if(line.startsWith("OK") || line.startsWith("ACK")) {
                 continue;
             }
 
-            Optional<String> match = markers.stream().filter(m -> isLabelMatch(m, line)).findFirst();
+            final Optional<String> match = markers.stream().filter(m -> isLabelMatch(m, line)).findFirst();
             if(match.isPresent()) {
                 segment = new ArrayList<>();
                 result.add(Collections.unmodifiableList(segment));
@@ -164,7 +163,7 @@ public class ResponseContentParser {
      * @param markers that identify the first line of each segment
      * @return list of identified segments in 'responseLines'
      */
-    public static List<List<String>> segments(List<String> responseLines, String ... markers) {
+    public static List<List<String>> segments(final List<String> responseLines, final String ... markers) {
         return segments(responseLines, Arrays.asList(markers));
     }
 
@@ -175,8 +174,8 @@ public class ResponseContentParser {
      * @param metadata that identify the first line of each segment
      * @return list of identified segments in 'responseLines'
      */
-    public static List<List<String>> segments(List<String> responseLines, LineMetadata ... metadata) {
-        java.util.List<String> m = Arrays.stream(metadata).map(LineMetadata::toLabel).collect(Collectors.toList());
+    public static List<List<String>> segments(final List<String> responseLines, final LineMetadata ... metadata) {
+        final List<String> m = Arrays.stream(metadata).map(LineMetadata::toLabel).collect(Collectors.toList());
         return segments(responseLines, m);
     }
 
@@ -186,10 +185,10 @@ public class ResponseContentParser {
      * @param line to compare
      * @return true if the line has the required label
      */
-    public static boolean isLabelMatch(String label, String line) {
+    public static boolean isLabelMatch(final String label, final String line) {
         // match only: 'label: ' or 'label:'
-        return (line.length() > label.length()
-                    && line.charAt(label.length()) == ':')
+        return line.length() > label.length()
+                    && line.charAt(label.length()) == ':'
                 && (line.length() == label.length() + 1
                     || line.charAt(label.length() + 1) == ' ')
                 && line.startsWith(label);
@@ -201,7 +200,7 @@ public class ResponseContentParser {
      * @param line to compare
      * @return true if the line has the label specified by metadata
      */
-    public static boolean isLabelMatch(LineMetadata metadata, String line) {
+    public static boolean isLabelMatch(final LineMetadata metadata, final String line) {
         return isLabelMatch(metadata.toLabel(), line);
     }
 
@@ -211,10 +210,9 @@ public class ResponseContentParser {
      * @see QueueQueryResponse
      * @author jfraney
      */
-    public static interface LineMetadata {
+    public interface LineMetadata {
         /**
-         * returns the label of the response for this data.
-         * @return
+         * @return the label of the response for this data.
          */
         String toLabel();
     }

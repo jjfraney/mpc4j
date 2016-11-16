@@ -5,12 +5,14 @@ import org.jjflyboy.mpc.HealthResponse;
 import org.jjflyboy.mpc.ResponseContent;
 
 import java.time.ZonedDateTime;
-import java.util.*;
+import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.List;
 
 /**
  * listfiles command from
- * <a href='https://www.musicpd.org/doc/protocol/database.html'>MPD Document: The music database.</a>
+ * <a href='https://www.musicpd.org/doc/protocol/database.html'>
+ *     MPD Document: The music database.</a>
  * <p>
  *     On this command, mpd returns a list of files and directories.
  * </p>
@@ -20,12 +22,12 @@ public class ListFiles extends AbstractCommand<ListFiles.Response> {
     /**
      * @param uri of directory to list
      */
-    public ListFiles(String uri) {
+    public ListFiles(final String uri) {
         super(adapt(uri));
     }
 
     @Override
-    public Response response(java.util.List<String> responseLines, String connectResponse) {
+    public Response response(final List<String> responseLines, final String connectResponse) {
         return new Response(responseLines, connectResponse);
     }
 
@@ -33,12 +35,12 @@ public class ListFiles extends AbstractCommand<ListFiles.Response> {
      * provides access to the list of file names returned by mpd by the listplaylist command.
      */
     public static class Response extends HealthResponse {
-        Response(java.util.List<String> responseLines, String connectResponse) {
+        Response(final List<String> responseLines, final String connectResponse) {
             super(responseLines, connectResponse);
         }
 
         public class Entry extends ResponseContent {
-            Entry(java.util.List<String> responseLines) {
+            Entry(final List<String> responseLines) {
                 super(responseLines);
             }
 
@@ -76,9 +78,9 @@ public class ListFiles extends AbstractCommand<ListFiles.Response> {
          * access the response to get the entries from the response.  An entry is either a 'file' or a 'directory'.
          * @return a list of entries.
          */
-        public java.util.List<Entry> getEntries() {
+        public List<Entry> getEntries() {
             return segments("file", "directory").stream()
-                    .map(sg -> new Entry(sg))
+                    .map(Entry::new)
                     .collect(Collectors.toList());
         }
     }

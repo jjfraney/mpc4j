@@ -11,7 +11,7 @@ public class MoveIdTest {
 
     @Test
     public void moveWithFrom() {
-        String text = new MoveId(10, 30).text();
+        final String text = new MoveId(10, 30).text();
         assertThat(text).isEqualTo("moveid 10 30");
     }
 }

@@ -13,13 +13,13 @@ public class CommandsTest {
 
     @Test
     public void commands() {
-        Commands.Response r = new Commands().response(Arrays.asList(
+        final Commands.Response r = new Commands().response(Arrays.asList(
                 "command: add",
                 "command: addid",
                 "command: addtagid",
                 "OK"
         ), "OK MPD 0.19.0");
-        java.util.List<String> commands = r.getCommands();
+        final java.util.List<String> commands = r.getCommands();
         assertThat(commands.size()).isEqualTo(3);
         assertThat(commands.get(2)).isEqualTo("addtagid");
     }

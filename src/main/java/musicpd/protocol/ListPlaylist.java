@@ -7,7 +7,8 @@ import java.util.stream.Collectors;
 
 /**
  * listplaylist command from
- * <a href='https://www.musicpd.org/doc/protocol/playlist_files.html'>MPD Document: Stored playlists.</a>
+ * <a href='https://www.musicpd.org/doc/protocol/playlist_files.html'>
+ *     MPD Document: Stored playlists.</a>
  * <p>
  *     On this command, mpd returns a list of files that comprise the named playlist.
  * </p>
@@ -17,12 +18,12 @@ public class ListPlaylist extends AbstractCommand<ListPlaylist.Response> {
     /**
      * @param name of playlist
      */
-    public ListPlaylist(String name) {
+    public ListPlaylist(final String name) {
         super(adapt(name));
     }
 
     @Override
-    public Response response(java.util.List<String> responseLines, String connectResponse) {
+    public Response response(final java.util.List<String> responseLines, final String connectResponse) {
         return new Response(responseLines, connectResponse);
     }
 
@@ -30,7 +31,7 @@ public class ListPlaylist extends AbstractCommand<ListPlaylist.Response> {
      * provides access to the list of file names returned by mpd by the listplaylist command.
      */
     public static class Response extends HealthResponse {
-        Response(java.util.List<String> responseLines, String connectResponse) {
+        Response(final java.util.List<String> responseLines, final String connectResponse) {
             super(responseLines, connectResponse);
         }
 

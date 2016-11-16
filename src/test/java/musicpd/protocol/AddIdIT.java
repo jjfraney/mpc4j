@@ -22,7 +22,7 @@ public class AddIdIT {
 
     @Test
     public void addW1NoPos() throws IOException {
-        AddId.Response r = mpc.send(new AddId("w1.ogg", 0));
+        final AddId.Response r = mpc.send(new AddId("w1.ogg", 0));
         assertThat(r.isOk()).isTrue();
         assertThat(r.getId()).isPresent();
     }

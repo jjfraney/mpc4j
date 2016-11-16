@@ -11,13 +11,13 @@ public class PrioIdTest {
 
     @Test
     public void textA() {
-        String text = new PrioId(10, 3).text();
+        final String text = new PrioId(10, 3).text();
         assertThat(text).isEqualTo("prioid 10 3");
     }
 
     @Test
     public void textB() {
-        String text = new PrioId(10, 3, 30, 60, 20).text();
+        final String text = new PrioId(10, 3, 30, 60, 20).text();
         assertThat(text).isEqualTo("prioid 10 3 30 60 20");
     }
 }

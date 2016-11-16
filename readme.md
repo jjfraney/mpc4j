@@ -103,15 +103,15 @@ class MPC {
      * @param command to send
      * @return MPD's response to the command 
      */
-    public <R extends Command.Response> R send(Command command) throws IOException {
-        List<String> result;
+    public <R extends Command.Response> R send(final Command command) throws IOException {
+        final List<String> result;
         // try-with-resource: opens socket, a a writer toMpd, and a reader fromMpd
-        SocketAddress address = new InetSocketAddress(host, port);
+        final SocketAddress address = new InetSocketAddress(host, port);
         try (SocketChannel channel = SocketChannel.open()) {
 
             channel.connect(address);
 
-            BufferedReader fromMpd = new BufferedReader(Channels.newReader(channel, UTF_8.newDecoder(), -1));
+            final BufferedReader fromMpd = new BufferedReader(Channels.newReader(channel, UTF_8.newDecoder(), -1));
 
             String connectResponse;
             // first, expect the connect status
@@ -122,11 +122,11 @@ class MPC {
             }
 
             // now send the command as text
-            ByteBuffer outGoing = ByteBuffer.wrap((command.text() + "\n").getBytes(UTF_8));
+            final ByteBuffer outGoing = ByteBuffer.wrap((command.text() + "\n").getBytes(UTF_8));
             channel.write(outGoing);
 
             // then read response into a List
-            List<String> lines = new ArrayList<>();
+            final List<String> lines = new ArrayList<>();
             String responseSegment;
             while ((responseSegment = fromMpd.readLine()) != null) {
                 lines.add(responseSegment);
@@ -143,7 +143,7 @@ class MPC {
     /**
      * @return true if this is the last line of a command's response. 
      */
-    private static boolean responseComplete(String response) {
+    private static boolean responseComplete(final String response) {
         return response.startsWith("OK") || response.startsWith("ACK");
     }
 

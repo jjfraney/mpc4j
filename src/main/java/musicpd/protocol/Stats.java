@@ -7,16 +7,15 @@ import java.util.Optional;
 
 /**
  * stats command
- * from <a href='https://www.musicpd.org/doc/protocol/command_reference.html#status_commands'>MPD document</a>
+ * from <a href='https://www.musicpd.org/doc/protocol/command_reference.html#status_commands'>
+ *     MPD document</a>
  * <p>
- *     The response to this command is custom and contains several metrics of the database.
+ *     The response to this command is custom and contains
+ *     several metrics of the database.
  * </p>
- * @Author jfraney
+ * @author jfraney
  */
 public class Stats extends AbstractCommand<Stats.Response> {
-    public Stats() {
-        super();
-    }
 
     /**
      * provides access to data in the response to 'stats' command.
@@ -51,13 +50,13 @@ public class Stats extends AbstractCommand<Stats.Response> {
          */
         public Optional<Integer> getDbUpdate() {return getIntegerValue("db_update");}
 
-        Response(java.util.List<String> responseLines, String connectResponse) {
+        Response(final java.util.List<String> responseLines, final String connectResponse) {
             super(responseLines, connectResponse);
         }
     }
 
     @Override
-    public Response response(java.util.List<String> responseLines, String connectResponse) {
+    public Response response(final java.util.List<String> responseLines, final String connectResponse) {
         return new Response(responseLines, connectResponse);
     }
 }

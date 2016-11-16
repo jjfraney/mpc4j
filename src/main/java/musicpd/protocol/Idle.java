@@ -8,8 +8,10 @@ import java.util.Optional;
 
 /**
  * idle command
- * from <a href='https://www.musicpd.org/doc/protocol/command_reference.html#status_commands'>MPD document</a>
- * @Author jfraney
+ * from
+ * <a href='https://www.musicpd.org/doc/protocol/command_reference.html#status_commands'>
+ *     MPD document</a>
+ * @author jfraney
  */
 public class Idle extends AbstractCommand<Idle.Response> {
     /**
@@ -18,7 +20,7 @@ public class Idle extends AbstractCommand<Idle.Response> {
     public enum Subsystem implements Parameter {
         DATABASE, UPDATE, STORED_PLAYLIST, PLAYLIST, PLAYER, MIXER, OUTPUT, OPTIONS, STICKER, SUBSCRIPTION, MESSAGE;
 
-        public static Subsystem decode(String v) {
+        public static Subsystem decode(final String v) {
             return valueOf(v.toUpperCase());
         }
         public String encode() {
@@ -32,8 +34,8 @@ public class Idle extends AbstractCommand<Idle.Response> {
     /**
      * @param subsystems list of subsystems of interest; if empty: all subsystems.
      */
-    public Idle(Subsystem ... subsystems) {
-        super(subsystems);
+    public Idle(final Subsystem ... subsystems) {
+        super((Parameter[]) subsystems);
     }
 
     /**
@@ -41,7 +43,7 @@ public class Idle extends AbstractCommand<Idle.Response> {
      * @return response to 'idle' command
      */
     @Override
-    public Response response(java.util.List<String> responseLines, String connectResponse) {
+    public Response response(final java.util.List<String> responseLines, final String connectResponse) {
         return new Response(responseLines, connectResponse);
     }
 
@@ -55,9 +57,9 @@ public class Idle extends AbstractCommand<Idle.Response> {
          * @return subsystem of 'changed: ' line
          */
         public Optional<Subsystem> getChanged() {
-            return getStringValue("changed").map(s->Subsystem.decode(s));
+            return getStringValue("changed").map(Subsystem::decode);
         }
-        Response(java.util.List<String> responseLines, String connectResponse) {
+        Response(final java.util.List<String> responseLines, final String connectResponse) {
             super(responseLines, connectResponse);
         }
     }

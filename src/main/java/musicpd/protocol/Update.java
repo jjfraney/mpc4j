@@ -2,14 +2,15 @@ package musicpd.protocol;
 
 /**
  * update command from
- * <a href='https://www.musicpd.org/doc/protocol/database.html'>MPD Document: The music database.</a>
- * @Author jfraney
+ * <a href='https://www.musicpd.org/doc/protocol/database.html'>
+ *     MPD Document: The music database.</a>
+ * @author jfraney
  */
 public class Update extends Simple {
     public Update() {
         super();
     }
-    public Update(String uri) {
+    public Update(final String uri) {
         super(adapt(uri));
     }
 }

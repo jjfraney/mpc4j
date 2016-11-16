@@ -3,6 +3,7 @@ package musicpd.protocol;
 import org.jjflyboy.mpc.MPC;
 import org.jjflyboy.mpc.SimpleResponse;
 import org.junit.Before;
+import org.junit.Test;
 
 import java.io.IOException;
 
@@ -22,18 +23,19 @@ public class PlaybackControlIT {
         mpc = new MPC();
     }
 
+    @Test
     public void testPlay() throws IOException {
-        Play playCommand = new Play();
-        Stop stopCommand = new Stop();
+        final Play playCommand = new Play();
+        final Stop stopCommand = new Stop();
 
-        SimpleResponse playResponse = mpc.send(playCommand);
-        SimpleResponse stopResponse = mpc.send(stopCommand);
+        final SimpleResponse playResponse = mpc.send(playCommand);
+        final SimpleResponse stopResponse = mpc.send(stopCommand);
 
         assertThat(playResponse.isOk()).as("play starts").isTrue();
         assertThat(stopResponse.isOk()).as("play stopped").isTrue();
 
-        Status.Response statusResponse = mpc.send(new Status());
-        assertThat(statusResponse.getState().get()).as("is not playing").isEqualTo("stop");
+        final Status.Response statusResponse = mpc.send(new Status());
+        assertThat(statusResponse.getState().orElse(null)).as("is not playing").isEqualTo("stop");
     }
 
 }

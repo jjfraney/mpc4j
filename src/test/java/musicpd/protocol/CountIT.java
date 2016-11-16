@@ -24,29 +24,29 @@ public class CountIT {
     }
     @Test
     public void textCountWithGroup() throws IOException {
-        Count cmd = new Count(Tag.ARTIST, "Joe Mpc4J", Tag.TITLE);
+        final Count cmd = new Count(Tag.ARTIST, "Joe Mpc4J", Tag.TITLE);
 
-        Count.Response r = mpc.send(cmd);
+        final Count.Response r = mpc.send(cmd);
         assertThat(r.isOk()).isTrue();
 
         // group is specified
         assertThat(r.getSongs()).isNotPresent();
         assertThat(r.getPlaytime()).isNotPresent();
 
-        List<Count.Response.Group> groups = r.getGroups();
+        final List<Count.Response.Group> groups = r.getGroups();
         assertThat(groups.size()).isEqualTo(3);
 
-        Count.Response.Group first = r.getGroups().get(0);
+        final Count.Response.Group first = r.getGroups().get(0);
         assertThat(first.getTag(Tag.TITLE)).isPresent();
-        assertThat(first.getTag(Tag.TITLE).get()).isEqualTo("W1 Song");
+        assertThat(first.getTag(Tag.TITLE).orElse(null)).isEqualTo("W1 Song");
     }
 
     @Test
     public void textNoGroup() throws IOException {
-        Count cmd = new Count(Tag.ARTIST, "Joe Mpc4J");
-        Count.Response r = mpc.send(cmd);
+        final Count cmd = new Count(Tag.ARTIST, "Joe Mpc4J");
+        final Count.Response r = mpc.send(cmd);
         assertThat(r.isOk()).isTrue();
-        assertThat(r.getSongs().get()).isEqualTo(3);
+        assertThat(r.getSongs().orElse(null)).isEqualTo(3);
 
         // group is not specified.
         assertThat(r.getGroups().size()).isEqualTo(0);

@@ -22,18 +22,18 @@ public class MPC {
 
     public MPC() {
     }
-    public MPC(String host, int port) {
+    public MPC(final String host, final int port) {
         this.host = host;
         this.port = port;
     }
 
-    public void idle(Function<String [], Boolean> callback) throws IOException {
-        SocketAddress address = new InetSocketAddress(host, port);
+    public void idle(final Function<String [], Boolean> callback) throws IOException {
+        final SocketAddress address = new InetSocketAddress(host, port);
         try (SocketChannel channel = SocketChannel.open()) {
 
             channel.connect(address);
 
-            BufferedReader fromMpd = new BufferedReader(Channels.newReader(channel, "UTF-8"));
+            final BufferedReader fromMpd = new BufferedReader(Channels.newReader(channel, "UTF-8"));
 
             String connectResponse;
             // first, expect the connect status
@@ -46,10 +46,10 @@ public class MPC {
             // then read response into a List
             String [] event;
             do {
-                ByteBuffer outGoing = ByteBuffer.wrap("idle\n".getBytes(UTF_8));
+                final ByteBuffer outGoing = ByteBuffer.wrap("idle\n".getBytes(UTF_8));
                 channel.write(outGoing);
 
-                List<String> lines = new ArrayList<>();
+                final List<String> lines = new ArrayList<>();
                 String responseSegment;
                 while ((responseSegment = fromMpd.readLine()) != null) {
                     lines.add(responseSegment);
@@ -62,17 +62,18 @@ public class MPC {
         }
     }
 
-    public <R extends Command.Response> R send(Command command) throws IOException {
-        List<String> result;
+    @SuppressWarnings("unchecked")
+    public <R extends Command.Response> R send(final Command command) throws IOException {
+        final List<String> result;
         String connectResponse;
 
         // try-with-resource: opens socket, a a writer toMpd, and a reader fromMpd
-        SocketAddress address = new InetSocketAddress(host, port);
+        final SocketAddress address = new InetSocketAddress(host, port);
         try (SocketChannel channel = SocketChannel.open()) {
 
             channel.connect(address);
 
-            BufferedReader fromMpd = new BufferedReader(Channels.newReader(channel, UTF_8.newDecoder(), -1));
+            final BufferedReader fromMpd = new BufferedReader(Channels.newReader(channel, UTF_8.newDecoder(), -1));
 
             // first, expect the connect status
             while ((connectResponse = fromMpd.readLine()) != null) {
@@ -82,11 +83,11 @@ public class MPC {
             }
 
             // now send the command as text
-            ByteBuffer outGoing = ByteBuffer.wrap((command.text() + "\n").getBytes(UTF_8));
+            final ByteBuffer outGoing = ByteBuffer.wrap((command.text() + "\n").getBytes(UTF_8));
             channel.write(outGoing);
 
             // then read response into a List
-            List<String> lines = new ArrayList<>();
+            final List<String> lines = new ArrayList<>();
             String responseSegment;
             while ((responseSegment = fromMpd.readLine()) != null) {
                 lines.add(responseSegment);
@@ -100,7 +101,7 @@ public class MPC {
         return (R) command.response(result, connectResponse);
     }
 
-    private static boolean responseComplete(String response) {
+    private static boolean responseComplete(final String response) {
         return response.startsWith("OK") || response.startsWith("ACK");
     }
 }

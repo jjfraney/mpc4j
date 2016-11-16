@@ -9,17 +9,14 @@ import java.util.stream.Collectors;
 
 /**
  * list command from
- * <a href='https://www.musicpd.org/doc/protocol/database.html'>MPD Document: The music database.</a>
+ * <a href='https://www.musicpd.org/doc/protocol/database.html'>
+ *     MPD Document: The music database.</a>
  * <p>
  *     TODO: the response to this command is not wrapped yet.
  * </p>
  * @author jfraney
  */
 public class List extends AbstractCommand<List.Response> {
-
-    /**
-     * TYPE: can be any tag or 'file'.
-     */
 
     /**
      * List command allows also for 'file'.
@@ -59,12 +56,12 @@ public class List extends AbstractCommand<List.Response> {
     }
 
     @Override
-    public Response response(java.util.List<String> responseLines, String connectResponse) {
+    public Response response(final java.util.List<String> responseLines, final String connectResponse) {
         return new Response(responseLines, connectResponse);
     }
 
     public class Response extends HealthResponse {
-        Response(java.util.List<String> responseLines, String connectResponse) {
+        Response(final java.util.List<String> responseLines, final String connectResponse) {
             super(responseLines, connectResponse);
         }
 
@@ -78,7 +75,7 @@ public class List extends AbstractCommand<List.Response> {
          */
         public class Metadata extends ResponseContent {
 
-            Metadata(java.util.List<String> responseLines) {
+            Metadata(final java.util.List<String> responseLines) {
                 super(responseLines);
             }
 
@@ -92,7 +89,7 @@ public class List extends AbstractCommand<List.Response> {
              * @return the value of the string with the label matching 'type'
              * @see musicpd.protocol.Tag
              */
-            public Optional<String> getType(Tag type) {
+            public Optional<String> getType(final Tag type) {
                 return getStringValue(type);
             }
             /**
@@ -105,7 +102,7 @@ public class List extends AbstractCommand<List.Response> {
              * @return the value of the string with the label matching 'type'
              * @see musicpd.protocol.List.Special
              */
-            public Optional<String> getType(Special type) {
+            public Optional<String> getType(final Special type) {
                 return getStringValue(type);
             }
         }
@@ -128,17 +125,17 @@ public class List extends AbstractCommand<List.Response> {
         private final Tag typeAsTag;
         private final Special typeAsSpecial;
 
-        private java.util.List<FilterParameter> filters = new ArrayList<>();
-        private java.util.List<Tag> groups = new ArrayList<>();
+        private final java.util.List<FilterParameter> filters = new ArrayList<>();
+        private final java.util.List<Tag> groups = new ArrayList<>();
 
-        private Builder(Tag type) {
+        private Builder(final Tag type) {
             this.typeAsTag = type;
             this.typeAsSpecial = null;
             if(type == null) {
                 throw new IllegalArgumentException("at least one {TYPE} is required.");
             }
         }
-        private Builder(Special type) {
+        private Builder(final Special type) {
             this.typeAsTag = null;
             this.typeAsSpecial = type;
             if(type == null) {
@@ -152,7 +149,7 @@ public class List extends AbstractCommand<List.Response> {
          * @return this builder
          * @see musicpd.protocol.Tag
          */
-        public Builder with(Tag filterType, String filterWhat) {
+        public Builder with(final Tag filterType, final String filterWhat) {
             filters.add(new FilterParameter(filterType, filterWhat));
             return this;
         }
@@ -162,7 +159,7 @@ public class List extends AbstractCommand<List.Response> {
          * @return this builder
          * @see musicpd.protocol.List.Special
          */
-        public Builder with(Find.Special filterType, String filterWhat) {
+        public Builder with(final Find.Special filterType, final String filterWhat) {
             filters.add(new FilterParameter(filterType, filterWhat));
             return this;
         }
@@ -172,25 +169,27 @@ public class List extends AbstractCommand<List.Response> {
          * @param tag to group by
          * @return this builder
          */
-        public Builder groupBy(Tag tag) {
+        public Builder groupBy(final Tag tag) {
             groups.add(tag);
             return this;
         }
 
         public List build() {
+            final List result;
             if(typeAsSpecial == null) {
-                return new List(typeAsTag, filters, groups);
+                result = new List(typeAsTag, filters, groups);
             } else {
-                return new List(typeAsSpecial, filters, groups);
+                result = new List(typeAsSpecial, filters, groups);
             }
+            return result;
         }
     }
 
-    private List(Tag type, java.util.List<FilterParameter> filters, java.util.List<Tag> tags) {
+    private List(final Tag type, final java.util.List<FilterParameter> filters, final java.util.List<Tag> tags) {
         super(type, adapt(new ArrayList<>(filters)), new GroupParameter(tags));
         this.type = type;
     }
-    private List(Special type, java.util.List<FilterParameter> filters, java.util.List<Tag> tags) {
+    private List(final Special type, final java.util.List<FilterParameter> filters, final java.util.List<Tag> tags) {
         super(type, adapt(new ArrayList<>(filters)), new GroupParameter(tags));
         this.type = type;
     }
@@ -202,7 +201,7 @@ public class List extends AbstractCommand<List.Response> {
      * @return a List command
      * @see musicpd.protocol.Tag
      */
-    public static List build(Tag type, Consumer<Builder> builder ) {
+    public static List build(final Tag type, final Consumer<Builder> builder ) {
         return build(new Builder(type), builder);
     }
     /**
@@ -212,11 +211,11 @@ public class List extends AbstractCommand<List.Response> {
      * @return a List command
      * @see musicpd.protocol.List.Special
      */
-    public static List build(Special type, Consumer<Builder> builder ) {
+    public static List build(final Special type, final Consumer<Builder> builder ) {
         return build(new Builder(type), builder);
     }
 
-    private static List build(Builder b, Consumer<Builder> c) {
+    private static List build(final Builder b, final Consumer<Builder> c) {
         c.accept(b);
         return b.build();
     }

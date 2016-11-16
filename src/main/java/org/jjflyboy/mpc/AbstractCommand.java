@@ -25,7 +25,7 @@ public abstract class AbstractCommand<R extends Command.Response> implements Com
      * supplied from concrete command classes.
      * @param parameters from which the command parameters are generated.
      */
-    protected AbstractCommand(Parameter... parameters) {
+    protected AbstractCommand(final Parameter... parameters) {
         this(Arrays.asList(parameters));
     }
 
@@ -34,10 +34,10 @@ public abstract class AbstractCommand<R extends Command.Response> implements Com
      * supplied from concrete command classes.
      * @param parameters from which the command parameters are generated.
      */
-    protected AbstractCommand(java.util.List<Parameter> parameters) {
-        StringBuilder b = new StringBuilder(command());
+    protected AbstractCommand(final java.util.List<Parameter> parameters) {
+        final StringBuilder b = new StringBuilder(command());
         if(parameters.size() > 0) {
-            b.append(" ").append(
+            b.append(' ').append(
                     parameters.stream()
                             .map(Parameter::toParameter)
                             .filter(s -> s.length() > 0)
@@ -50,10 +50,12 @@ public abstract class AbstractCommand<R extends Command.Response> implements Com
     /**
      * return only the spelling of this command...the first verb.
      * <p>
-     *     This base implementation returns the simple name of this class in lower case.
-     *     Override this method if the command name cannot match the class name, like replay_gain_mode.
+     *     This base implementation returns the simple name
+     *     of this class in lower case.
+     *     Override this method if the command name cannot
+     *     match the class name, like replay_gain_mode.
      * </p>
-     * @return
+     * @return the command's verb
      */
     protected String command() {
         return this.getClass().getSimpleName().toLowerCase();
@@ -64,19 +66,12 @@ public abstract class AbstractCommand<R extends Command.Response> implements Com
      * <p>
      *     This method is a utility for concrete command classes.
      * </p>
-     * @param array
-     * @param <T>
-     * @return
+     * @param array to adapt
+     * @param <T> generic for multiple binding
+     * @return a Parameter wrapping the array
      */
     protected static <T> Parameter adapt(final T[] array) {
-        return new Parameter() {
-            @Override
-            public String toParameter() {
-                return new StringBuilder()
-                        .append(Arrays.stream(array).map(Object::toString).collect(Collectors.joining(" ")))
-                        .toString();
-            }
-        };
+        return () -> Arrays.stream(array).map(Object::toString).collect(Collectors.joining(" "));
     }
 
     /**
@@ -84,38 +79,24 @@ public abstract class AbstractCommand<R extends Command.Response> implements Com
      * <p>
      *     This method is a utility for concrete command classes.
      * </p>
-     * @param array
-     * @param <T>
-     * @return
+     * @param array to adapt
+     * @param <T> generic for multiple binding
+     * @return a Parameter wrapping the array
      */
     protected static <T extends Parameter> Parameter adapt(final T[] array) {
-        return new Parameter() {
-            @Override
-            public String toParameter() {
-                return new StringBuilder()
-                        .append(Arrays.stream(array).map(Parameter::toParameter).collect(Collectors.joining(" ")))
-                        .toString();
-            }
-        };
+        return () -> Arrays.stream(array).map(Parameter::toParameter).collect(Collectors.joining(" "));
     }
     /**
-     * adapt an collection of Parameters to a Parameter
+     * adapt an list of Parameters to a Parameter
      * <p>
      *     This method is a utility for concrete command classes.
      * </p>
-     * @param collection
-     * @param <T>
-     * @return
+     * @param list to adapt
+     * @param <T> generic for multiple binding
+     * @return a Parameter wrapping the list
      */
-    protected static <T extends Parameter> Parameter adapt(java.util.List<? extends Parameter> collection) {
-        return new Parameter() {
-            @Override
-            public String toParameter() {
-                return new StringBuilder()
-                        .append(collection.stream().map(Parameter::toParameter).collect(Collectors.joining(" ")))
-                        .toString();
-            }
-        };
+    protected static <T extends Parameter> Parameter adapt(final java.util.List<? extends Parameter> list) {
+        return () -> list.stream().map(Parameter::toParameter).collect(Collectors.joining(" "));
     }
 
 
@@ -125,15 +106,12 @@ public abstract class AbstractCommand<R extends Command.Response> implements Com
      * <p>
      *     This method is a utility for concrete command classes.
      * </p>
-     * @param object
-     * @param <T>
-     * @return
+     * @param object to adapt to a Parameter
+     * @param <T> generic for multiple binding
+     * @return a Parameter wrapping the object
      */
     protected static <T> Parameter adapt(final T object) {
-        return new Parameter() {
-            @Override
-            public String toParameter() { return object.toString();}
-        };
+        return object::toString;
     }
 
 }

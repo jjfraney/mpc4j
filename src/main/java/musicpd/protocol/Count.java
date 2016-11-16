@@ -11,7 +11,8 @@ import java.util.stream.Collectors;
 
 /**
  * count command from
- * <a href='https://www.musicpd.org/doc/protocol/database.html'>MPD Document: The music database.</a>
+ * <a href='https://www.musicpd.org/doc/protocol/database.html'>
+ *     MPD Document: The music database.</a>
  * @author jfraney
  */
 public class Count extends AbstractCommand<Count.Response> {
@@ -23,7 +24,7 @@ public class Count extends AbstractCommand<Count.Response> {
      * @param tag name of tag to match
      * @param needle value to match
      */
-    public Count(Tag tag, String needle) {
+    public Count(final Tag tag, final String needle) {
         super(new FilterParameter(tag, needle));
         group = null;
     }
@@ -34,7 +35,7 @@ public class Count extends AbstractCommand<Count.Response> {
      * @param needle value to match
      * @param group optional value to group results by, null if none.
      */
-    public Count(Tag tag, String needle, musicpd.protocol.Tag group) {
+    public Count(final Tag tag, final String needle, final musicpd.protocol.Tag group) {
         super(new FilterParameter(tag, needle), new GroupParameter(group));
         this.group = group;
     }
@@ -43,42 +44,53 @@ public class Count extends AbstractCommand<Count.Response> {
         return group != null;
     }
 
+    /**
+     * @param responseLines given by mpd server in response to this command.
+     * @param connectResponse of the MPD source of the response.
+     * @return response to count
+     */
     @Override
-    public Response response(java.util.List<String> responseLines, String connectResponse) {
+    public Response response(final List<String> responseLines, final String connectResponse) {
         return new Response(responseLines, connectResponse);
     }
 
+    /**
+     * response to count
+     */
     public class Response extends HealthResponse {
-        Response(java.util.List<String> responseLines, String connectResponse) {
+        Response(final List<String> responseLines, final String connectResponse) {
             super(responseLines, connectResponse);
         }
 
         /**
-         * @return if group was not specified, empty Optional, else the value for the 'songs' responseline.
+         * @return if group was not specified, empty Optional, else the value for the
+         * 'songs' response line.
          */
         public Optional<Integer> getSongs() {
-            if(isGrouped()) {
-                return Optional.empty();
-            } else {
-              return getIntegerValue("songs");
+            Optional result = Optional.empty();
+            if(! isGrouped()) {
+              result =  getIntegerValue("songs");
             }
+            return result;
         }
         /**
-         * @return if group was not specified, empty Optional, else the value for the 'songs' responseline.
+         * @return if group was not specified, empty Optional, else the value for the 'playtime' response line.
          */
         public Optional<Integer> getPlaytime() {
-            if(isGrouped()) {
-                return Optional.empty();
+            final Optional result;
+            if(! isGrouped()) {
+                result = getIntegerValue("playtime");
             } else {
-                return getIntegerValue("playtime");
+                result = Optional.empty();
             }
+            return result;
         }
 
         public class Group extends ResponseContent {
             /**
              * @param responseLines limited to a single group
              */
-            public Group(java.util.List<String> responseLines) {
+            public Group(final List<String> responseLines) {
                 super(responseLines);
             }
 
@@ -90,7 +102,7 @@ public class Count extends AbstractCommand<Count.Response> {
                 return getIntegerValue("playtime");
             }
 
-            public Optional<String> getTag(musicpd.protocol.Tag tag) {
+            public Optional<String> getTag(final musicpd.protocol.Tag tag) {
                 return getStringValue(tag);
             }
         }
@@ -99,26 +111,26 @@ public class Count extends AbstractCommand<Count.Response> {
          * @return if group not specified, empty list, else groups of response lines as GroupParameter.
          */
         public List<Group> getGroups() {
+            List<Group> result = Collections.emptyList();
             if(isGrouped()) {
-                return segments(group)
+                result = segments(group)
                         .stream()
                         .map(Group::new)
                         .collect(Collectors.toList());
-            } else {
-                return Collections.emptyList();
             }
+            return result;
         }
     }
 
     public static class Builder {
-        private final java.util.List<FilterParameter> filters = new ArrayList<>();
+        private final List<FilterParameter> filters = new ArrayList<>();
         private musicpd.protocol.Tag group;
 
-        public Builder with(Tag tag, String needle) {
+        public Builder with(final Tag tag, final String needle) {
             filters.add(new FilterParameter(tag, needle));
             return this;
         }
-        public Builder groupBy(musicpd.protocol.Tag group) {
+        public Builder groupBy(final musicpd.protocol.Tag group) {
             this.group = group;
             return this;
         }
@@ -126,13 +138,13 @@ public class Count extends AbstractCommand<Count.Response> {
             return new Count(filters, group);
         }
     }
-    private Count(java.util.List<FilterParameter> filters, musicpd.protocol.Tag group) {
+    private Count(final List<FilterParameter> filters, final musicpd.protocol.Tag group) {
         super(adapt(new ArrayList<>(filters)), new GroupParameter(group));
         this.group = group;
     }
 
-    public static Count build(Consumer<Builder> builder) {
-        Builder b = new Builder();
+    public static Count build(final Consumer<Builder> builder) {
+        final Builder b = new Builder();
         builder.accept(b);
         return b.build();
     }

@@ -18,29 +18,25 @@ import java.util.stream.Collectors;
  */
 public class LsInfo extends AbstractCommand<LsInfo.Response> {
 
-    public LsInfo() {
-        super();
-    }
-
     // TODO: this command also returns a list of playlists
     @Override
-    public Response response(java.util.List<String> responseLines, String connectResponse) {
+    public Response response(final java.util.List<String> responseLines, final String connectResponse) {
         return new Response(responseLines, connectResponse);
     }
 
     public static class Response extends DatabaseQueryResponse {
 
-        Response(java.util.List<String> responseLines, String connectResponse) {
+        Response(final java.util.List<String> responseLines, final String connectResponse) {
             super(responseLines, connectResponse);
         }
 
         public class PlaylistInfo extends ResponseContent {
 
-            PlaylistInfo(java.util.List<String> responseLines) {
+            PlaylistInfo(final java.util.List<String> responseLines) {
                 super(responseLines);
             }
 
-            public Optional<String> getPlaylist() {return getStringValue("playlist");}
+            public Optional<String> getPlaylist() {return getStringValue("playlist");}//NOPMD
             public Optional<ZonedDateTime> getLastModified() {return getZonedDateTimeValue("Last-Modified");}
         }
 

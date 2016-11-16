@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
  * @author jfraney
  */
 public class DatabaseQueryResponse extends HealthResponse {
-    public DatabaseQueryResponse(java.util.List<String> responseLines, String protcolVersion) {
+    public DatabaseQueryResponse(final java.util.List<String> responseLines, final String protcolVersion) {
         super(responseLines, protcolVersion);
     }
 
@@ -25,7 +25,7 @@ public class DatabaseQueryResponse extends HealthResponse {
         /**
          * @param responseLines limited to a single song
          */
-        public DatabaseSongMetadata(java.util.List<String> responseLines) {
+        public DatabaseSongMetadata(final java.util.List<String> responseLines) {
             super(responseLines);
         }
 

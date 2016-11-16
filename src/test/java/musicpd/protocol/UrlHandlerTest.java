@@ -13,13 +13,13 @@ public class UrlHandlerTest {
 
     @Test
     public void commands() {
-        UrlHandlers.Response r = new UrlHandlers().response(Arrays.asList(
+        final UrlHandlers.Response r = new UrlHandlers().response(Arrays.asList(
                 "handler: http://",
                 "handler: https://",
                 "handler: smb://",
                 "OK"
         ), "OK MPD 0.19.0");
-        java.util.List<String> commands = r.getHandlers();
+        final java.util.List<String> commands = r.getHandlers();
         assertThat(commands.size()).isEqualTo(3);
         assertThat(commands.get(2)).isEqualTo("smb://");
     }

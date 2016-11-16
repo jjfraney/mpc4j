@@ -17,7 +17,7 @@ public class SeekCurTest {
     }
     @Test
     public void textInteger() {
-        assertThat(new SeekCur(Integer.valueOf(20)).text()).as("wrong command").isEqualTo("seekcur 20");
+        assertThat(new SeekCur(20).text()).as("wrong command").isEqualTo("seekcur 20");
     }
     @Test
     public void textFloat() {

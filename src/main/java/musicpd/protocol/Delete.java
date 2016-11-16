@@ -4,7 +4,8 @@ import org.jjflyboy.mpc.RangeParameter;
 
 /**
  * delete command from
- * <a href='https://www.musicpd.org/doc/protocol/queue.html'>MPD Document: The current playlist.</a>
+ * <a href='https://www.musicpd.org/doc/protocol/queue.html'>
+ *     MPD Document: The current playlist.</a>
  * @author jfraney
  */
 public class Delete extends Simple {
@@ -13,7 +14,7 @@ public class Delete extends Simple {
      * deletes a song from the queue.
      * @param pos the position of the song to delete
      */
-    public Delete(Integer pos) {
+    public Delete(final Integer pos) {
         super(adapt(pos));
     }
 
@@ -22,7 +23,7 @@ public class Delete extends Simple {
      * @param start position of first song in range
      * @param end position of last song in the range
      */
-    public Delete(Integer start, Integer end) {
+    public Delete(final Integer start, final Integer end) {
         super(new RangeParameter(start, end));
     }
 }

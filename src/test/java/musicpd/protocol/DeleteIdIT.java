@@ -25,9 +25,9 @@ public class DeleteIdIT {
 
     @Test
     public void delete() throws IOException {
-        AddId.Response addResponse = mpc.send(new AddId("w1.ogg"));
-        Integer id = addResponse.getId().get();
-        SimpleResponse deleteResponse = mpc.send(new DeleteId(id));
+        final AddId.Response addResponse = mpc.send(new AddId("w1.ogg"));
+        final Integer id = addResponse.getId().orElse(null);
+        final SimpleResponse deleteResponse = mpc.send(new DeleteId(id));
         assertThat(deleteResponse.isOk()).isTrue();
     }
 }

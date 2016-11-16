@@ -18,7 +18,7 @@ public class ListFilesTest {
 
     @Test
     public void response() {
-        ListFiles.Response r = new ListFiles("dummy").response(Arrays.asList(
+        final ListFiles.Response r = new ListFiles("dummy").response(Arrays.asList(
                 "file: aaa.ogg",
                 "Last-Modified: 2016-10-19T00:33:30Z",
                 "size: 100",
@@ -31,17 +31,17 @@ public class ListFilesTest {
                 "OK"
         ), "OK MPD 0.19.0");
         assertThat(r.isOk()).as("no parse").isTrue();
-        List<ListFiles.Response.Entry> entries = r.getEntries();
+        final List<ListFiles.Response.Entry> entries = r.getEntries();
         assertThat(entries.size()).as("song count").isEqualTo(3);
 
         assertThat(entries.get(0).isFile()).isTrue();
-        assertThat(entries.get(0).getFile().get()).isEqualTo("aaa.ogg");
+        assertThat(entries.get(0).getFile().orElse(null)).isEqualTo("aaa.ogg");
 
         assertThat(entries.get(1).isDirectory()).isTrue();
-        assertThat(entries.get(1).getDirectory().get()).isEqualTo("xxx");
+        assertThat(entries.get(1).getDirectory().orElse(null)).isEqualTo("xxx");
 
         assertThat(entries.get(2).isFile()).isTrue();
-        assertThat(entries.get(2).getFile().get()).isEqualTo("xxx/bbb.ogg");
-        assertThat(entries.get(2).getSize().get()).isEqualTo(3100);
+        assertThat(entries.get(2).getFile().orElse(null)).isEqualTo("xxx/bbb.ogg");
+        assertThat(entries.get(2).getSize().orElse(null)).isEqualTo(3100);
     }
 }

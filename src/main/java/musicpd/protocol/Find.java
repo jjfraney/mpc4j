@@ -9,7 +9,8 @@ import java.util.function.Consumer;
 
 /**
  * find command from
- * <a href='https://www.musicpd.org/doc/protocol/database.html'>MPD Document: The music database.</a>
+ * <a href='https://www.musicpd.org/doc/protocol/database.html'>
+ *     MPD Document: The music database.</a>
  * <p>
  *     On this command, mpd returns database metadata for each song.
  * </p>
@@ -33,12 +34,16 @@ public class Find extends DatabaseQuery {
 
         @Override
         public String toParameter() {
+            final String result;
             switch(this) {
                 case MODIFIED_SINCE:
-                    return "modified-since";
+                    result = "modified-since";
+                    break;
                 default:
-                    return name().toLowerCase();
+                    result = name().toLowerCase();
+                    break;
             }
+            return result;
         }
     }
 
@@ -48,7 +53,7 @@ public class Find extends DatabaseQuery {
      * @param what value to match
      * @see musicpd.protocol.Tag
      */
-    public Find(Tag type, String what) {
+    public Find(final Tag type, final String what) {
         super(new FilterParameter(type, what));
     }
     /**
@@ -57,13 +62,18 @@ public class Find extends DatabaseQuery {
      * @param what value to match
      * @see musicpd.protocol.Find.Special
      */
-    public Find(Special type, String what) {
+    public Find(final Special type, final String what) {
         super(new FilterParameter(type, what));
     }
 
+    /**
+     * common builder for find commands
+     * @param <B> extends {@link AbstractBuilder}
+     * @param <T> extends {@link DatabaseQuery}
+     */
     public static abstract class AbstractBuilder<B extends AbstractBuilder, T extends DatabaseQuery> {
         private final java.util.List<FilterParameter> filters = new ArrayList<>();
-        protected AbstractBuilder() {};
+        protected AbstractBuilder() {}
 
         /**
          * with a tag as {TYPE}
@@ -71,7 +81,8 @@ public class Find extends DatabaseQuery {
          * @param what value to match
          * @see musicpd.protocol.Tag
          */
-        public B with(Tag type, String what) {
+        @SuppressWarnings("unchecked")
+        public B with(final Tag type, final String what) {
             filters.add(new FilterParameter(type, what));
             return (B)this;
         }
@@ -81,7 +92,8 @@ public class Find extends DatabaseQuery {
          * @param what value to match
          * @see musicpd.protocol.Tag
          */
-        public B with(Special type, String what) {
+        @SuppressWarnings("unchecked")
+        public B with(final Special type, final String what) {
             filters.add(new FilterParameter(type, what));
             return (B)this;
         }
@@ -90,7 +102,7 @@ public class Find extends DatabaseQuery {
         protected abstract T build();
     }
 
-    private Find(java.util.List<FilterParameter> filters) {
+    private Find(final java.util.List<FilterParameter> filters) {
         super(new ArrayList<>(filters));
     }
 
@@ -101,8 +113,8 @@ public class Find extends DatabaseQuery {
         }
     }
 
-    public static Find build(Consumer<Builder> c) {
-        Builder b = new Builder();
+    public static Find build(final Consumer<Builder> c) {
+        final Builder b = new Builder();
         c.accept(b);
         return b.build();
     }
