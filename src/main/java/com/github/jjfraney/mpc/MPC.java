@@ -1,4 +1,4 @@
-package org.jjflyboy.mpc;
+package com.github.jjfraney.mpc;
 
 import java.io.BufferedReader;
 import java.io.IOException;

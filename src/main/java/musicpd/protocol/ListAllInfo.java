@@ -1,8 +1,8 @@
 package musicpd.protocol;
 
-import org.jjflyboy.mpc.AbstractCommand;
-import org.jjflyboy.mpc.Command;
-import org.jjflyboy.mpc.MpcRuntimeException;
+import com.github.jjfraney.mpc.AbstractCommand;
+import com.github.jjfraney.mpc.Command;
+import com.github.jjfraney.mpc.MpcRuntimeException;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package musicpd.protocol;
 
-import org.jjflyboy.mpc.Toggle;
+import com.github.jjfraney.mpc.Toggle;
 
 /**
  * random command from

@@ -1,6 +1,6 @@
 package musicpd.protocol;
 
-import org.jjflyboy.mpc.Parameter;
+import com.github.jjfraney.mpc.Parameter;
 
 /**
  * mixrampdelay command from

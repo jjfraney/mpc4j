@@ -1,8 +1,8 @@
 package musicpd.protocol;
 
-import org.jjflyboy.mpc.AbstractCommand;
-import org.jjflyboy.mpc.HealthResponse;
-import org.jjflyboy.mpc.Toggle;
+import com.github.jjfraney.mpc.AbstractCommand;
+import com.github.jjfraney.mpc.HealthResponse;
+import com.github.jjfraney.mpc.Toggle;
 
 import java.math.BigDecimal;
 import java.util.Optional;

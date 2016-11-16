@@ -1,4 +1,4 @@
-package org.jjflyboy.mpc;
+package com.github.jjfraney.mpc;
 
 import java.util.stream.Collectors;
 

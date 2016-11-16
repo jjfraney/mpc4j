@@ -1,7 +1,7 @@
 package musicpd.protocol;
 
-import org.jjflyboy.mpc.QueueQuery;
-import org.jjflyboy.mpc.RangeParameter;
+import com.github.jjfraney.mpc.QueueQuery;
+import com.github.jjfraney.mpc.RangeParameter;
 
 /**
  * playlistinfo command from

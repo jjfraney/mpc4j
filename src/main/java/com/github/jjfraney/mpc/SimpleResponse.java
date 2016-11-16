@@ -1,4 +1,4 @@
-package org.jjflyboy.mpc;
+package com.github.jjfraney.mpc;
 
 /**
  * Class to access the last line of every mpd response..

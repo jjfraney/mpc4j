@@ -1,8 +1,8 @@
 package musicpd.protocol;
 
-import org.jjflyboy.mpc.AbstractCommand;
-import org.jjflyboy.mpc.Parameter;
-import org.jjflyboy.mpc.SimpleResponse;
+import com.github.jjfraney.mpc.AbstractCommand;
+import com.github.jjfraney.mpc.Parameter;
+import com.github.jjfraney.mpc.SimpleResponse;
 
 /**
  * Common base class defining a simple response.

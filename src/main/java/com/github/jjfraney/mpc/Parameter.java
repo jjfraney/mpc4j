@@ -1,4 +1,4 @@
-package org.jjflyboy.mpc;
+package com.github.jjfraney.mpc;
 
 /**
  * @author <a href="http://github.com/jjfraney">John J. Franey</a>

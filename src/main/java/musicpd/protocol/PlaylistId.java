@@ -1,6 +1,6 @@
 package musicpd.protocol;
 
-import org.jjflyboy.mpc.QueueQuery;
+import com.github.jjfraney.mpc.QueueQuery;
 
 /**
  * playlistid command from

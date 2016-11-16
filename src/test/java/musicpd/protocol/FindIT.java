@@ -1,7 +1,7 @@
 package musicpd.protocol;
 
-import org.jjflyboy.mpc.DatabaseQueryResponse;
-import org.jjflyboy.mpc.MPC;
+import com.github.jjfraney.mpc.DatabaseQueryResponse;
+import com.github.jjfraney.mpc.MPC;
 import org.junit.Before;
 import org.junit.Test;
 

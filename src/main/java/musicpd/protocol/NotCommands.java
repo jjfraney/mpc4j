@@ -1,6 +1,6 @@
 package musicpd.protocol;
 
-import org.jjflyboy.mpc.AbstractCommand;
+import com.github.jjfraney.mpc.AbstractCommand;
 
 /**
  * notcommands command

@@ -1,7 +1,7 @@
 package musicpd.protocol;
 
-import org.jjflyboy.mpc.Command;
-import org.jjflyboy.mpc.SimpleResponse;
+import com.github.jjfraney.mpc.Command;
+import com.github.jjfraney.mpc.SimpleResponse;
 import org.junit.Test;
 
 import java.util.Collections;

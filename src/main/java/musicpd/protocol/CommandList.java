@@ -1,8 +1,8 @@
 package musicpd.protocol;
 
-import org.jjflyboy.mpc.Command;
-import org.jjflyboy.mpc.HealthResponse;
-import org.jjflyboy.mpc.ResponseContentParser;
+import com.github.jjfraney.mpc.Command;
+import com.github.jjfraney.mpc.HealthResponse;
+import com.github.jjfraney.mpc.ResponseContentParser;
 
 import java.util.ArrayList;
 import java.util.Arrays;

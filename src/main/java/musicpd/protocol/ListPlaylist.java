@@ -1,7 +1,7 @@
 package musicpd.protocol;
 
-import org.jjflyboy.mpc.AbstractCommand;
-import org.jjflyboy.mpc.HealthResponse;
+import com.github.jjfraney.mpc.AbstractCommand;
+import com.github.jjfraney.mpc.HealthResponse;
 
 import java.util.stream.Collectors;
 

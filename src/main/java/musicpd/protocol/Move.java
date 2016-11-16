@@ -1,6 +1,6 @@
 package musicpd.protocol;
 
-import org.jjflyboy.mpc.RangeParameter;
+import com.github.jjfraney.mpc.RangeParameter;
 
 /**
  * move command from

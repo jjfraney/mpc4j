@@ -1,8 +1,8 @@
 package musicpd.protocol;
 
-import org.jjflyboy.mpc.AbstractCommand;
-import org.jjflyboy.mpc.HealthResponse;
-import org.jjflyboy.mpc.ResponseContent;
+import com.github.jjfraney.mpc.AbstractCommand;
+import com.github.jjfraney.mpc.HealthResponse;
+import com.github.jjfraney.mpc.ResponseContent;
 
 import java.time.ZonedDateTime;
 import java.util.Optional;

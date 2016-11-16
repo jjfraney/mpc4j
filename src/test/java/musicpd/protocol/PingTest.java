@@ -1,6 +1,6 @@
 package musicpd.protocol;
 
-import org.jjflyboy.mpc.SimpleResponse;
+import com.github.jjfraney.mpc.SimpleResponse;
 import org.junit.Before;
 import org.junit.Test;
 

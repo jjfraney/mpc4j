@@ -1,6 +1,6 @@
 package musicpd.protocol;
 
-import org.jjflyboy.mpc.Toggle;
+import com.github.jjfraney.mpc.Toggle;
 import org.junit.Before;
 import org.junit.Test;
 

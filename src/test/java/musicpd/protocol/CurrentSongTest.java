@@ -1,6 +1,6 @@
 package musicpd.protocol;
 
-import org.jjflyboy.mpc.QueueQueryResponse;
+import com.github.jjfraney.mpc.QueueQueryResponse;
 import org.junit.Test;
 
 import java.io.IOException;

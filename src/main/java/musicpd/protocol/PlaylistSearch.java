@@ -1,7 +1,7 @@
 package musicpd.protocol;
 
-import org.jjflyboy.mpc.FilterParameter;
-import org.jjflyboy.mpc.QueueQuery;
+import com.github.jjfraney.mpc.FilterParameter;
+import com.github.jjfraney.mpc.QueueQuery;
 
 /**
  * playlistsearch command from

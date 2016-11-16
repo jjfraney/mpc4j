@@ -1,6 +1,6 @@
 package musicpd.protocol;
 
-import org.jjflyboy.mpc.*;
+import com.github.jjfraney.mpc.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
