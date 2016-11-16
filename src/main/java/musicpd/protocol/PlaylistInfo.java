@@ -10,7 +10,7 @@ import org.jjflyboy.mpc.RangeParameter;
  * <p>
  *     This command's response contains metadata of a queued song.
  * </p>
- * @author jfraney
+ * @author <a href="http://github.com/jjfraney">John J. Franey</a>
  */
 public class PlaylistInfo extends QueueQuery {
     /**

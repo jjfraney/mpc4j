@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
  * <p>
  *     On this command, mpd returns a list of files that comprise the named playlist.
  * </p>
- * @author jfraney
+ * @author <a href="http://github.com/jjfraney">John J. Franey</a>
  */
 public class ListPlaylist extends AbstractCommand<ListPlaylist.Response> {
     /**

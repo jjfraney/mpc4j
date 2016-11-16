@@ -5,7 +5,7 @@ import org.junit.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * @author jfraney
+ * @author <a href="http://github.com/jjfraney">John J. Franey</a>
  */
 public class SearchAddPlTest {
     @Test

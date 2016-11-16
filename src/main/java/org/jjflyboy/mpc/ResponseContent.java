@@ -6,7 +6,7 @@ import java.util.*;
 
 /**
  * base class for holding and parsing a complete or a segment of response content.
- * @author jfraney
+ * @author <a href="http://github.com/jjfraney">John J. Franey</a>
  */
 public abstract class ResponseContent {
 

@@ -1,7 +1,7 @@
 package org.jjflyboy.mpc;
 
 /**
- * @author jfraney
+ * @author <a href="http://github.com/jjfraney">John J. Franey</a>
  */
 public abstract class DatabaseQuery extends AbstractCommand<DatabaseQueryResponse> {
     public DatabaseQuery(final Parameter... parameters) {

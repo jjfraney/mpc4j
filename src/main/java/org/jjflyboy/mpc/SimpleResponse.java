@@ -2,7 +2,7 @@ package org.jjflyboy.mpc;
 
 /**
  * Class to access the last line of every mpd response..
- * @author jfraney
+ * @author <a href="http://github.com/jjfraney">John J. Franey</a>
  */
 public final class SimpleResponse extends HealthResponse {
 

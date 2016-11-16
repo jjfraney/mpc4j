@@ -11,7 +11,7 @@ import java.util.Optional;
  *     MPD Document: The current playlist.
  * </a>
  * <p>This command returns the added file's song id.</p>
- * @author jfraney
+ * @author <a href="http://github.com/jjfraney">John J. Franey</a>
  */
 public class AddId extends AbstractCommand<AddId.Response> {
     /**

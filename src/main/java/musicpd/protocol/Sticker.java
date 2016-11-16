@@ -19,7 +19,7 @@ import java.util.List;
  *     Therefore, this command is intentionally disabled.
  *     It is left here as a placeholder to document this decision.
  * </p>
- * @author jfraney
+ * @author <a href="http://github.com/jjfraney">John J. Franey</a>
  */
 public class Sticker extends AbstractCommand<Command.Response> {
 

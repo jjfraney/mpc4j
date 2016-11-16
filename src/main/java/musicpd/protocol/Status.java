@@ -15,7 +15,7 @@ import java.util.Optional;
  *     The response of this command is custom and contains
  *     the status of several playback controls.
  * </p>
- * @author jfraney
+ * @author <a href="http://github.com/jjfraney">John J. Franey</a>
  */
 
 public class Status extends AbstractCommand<Status.Response> {

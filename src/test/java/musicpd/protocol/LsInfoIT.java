@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  *     Requires an mpd server, running on localhsot:6600.  See mpc4j/docker/mpd.
  * </p>
  * Tests the playback control type commands
- * @author jfraney
+ * @author <a href="http://github.com/jjfraney">John J. Franey</a>
  */
 public class LsInfoIT {
     private MPC mpc;

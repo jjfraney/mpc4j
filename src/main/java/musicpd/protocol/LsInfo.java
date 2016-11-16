@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
  * <p>
  *     On this command, mpd returns database metadata for each song.
  * </p>
- * @author jfraney
+ * @author <a href="http://github.com/jjfraney">John J. Franey</a>
  */
 public class LsInfo extends AbstractCommand<LsInfo.Response> {
 

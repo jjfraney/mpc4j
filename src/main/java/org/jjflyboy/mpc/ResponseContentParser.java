@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 /**
  * Utility methods for 'parsing' mpd response lines.
- * @author jfraney
+ * @author <a href="http://github.com/jjfraney">John J. Franey</a>
  */
 public class ResponseContentParser {
     /**
@@ -208,7 +208,7 @@ public class ResponseContentParser {
      * Interface to describe any line in response data, for example, the line's label.
      * @see DatabaseQueryResponse
      * @see QueueQueryResponse
-     * @author jfraney
+     * @author <a href="http://github.com/jjfraney">John J. Franey</a>
      */
     public interface LineMetadata {
         /**

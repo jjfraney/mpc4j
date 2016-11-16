@@ -8,7 +8,7 @@ package musicpd.protocol;
  *     On this command, mpd returns a list of arbitrary name-values.
  *     Use Response.getResponseLines() to access them.
  * </p>
- * @author jfraney
+ * @author <a href="http://github.com/jjfraney">John J. Franey</a>
  */
 public class ReadComments extends Simple {
     /**

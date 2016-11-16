@@ -9,7 +9,7 @@ import org.jjflyboy.mpc.AbstractCommand;
  * <p>
  *     The response of this command is list of strings (disallowed commands).
  * </p>
- * @author jfraney
+ * @author <a href="http://github.com/jjfraney">John J. Franey</a>
  */
 
 public class NotCommands extends AbstractCommand<Commands.Response> {

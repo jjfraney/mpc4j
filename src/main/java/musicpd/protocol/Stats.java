@@ -13,7 +13,7 @@ import java.util.Optional;
  *     The response to this command is custom and contains
  *     several metrics of the database.
  * </p>
- * @author jfraney
+ * @author <a href="http://github.com/jjfraney">John J. Franey</a>
  */
 public class Stats extends AbstractCommand<Stats.Response> {
 

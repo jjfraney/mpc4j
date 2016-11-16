@@ -15,7 +15,7 @@ import java.util.List;
  *     This command is intentionally inoperable.
  *     This class serves as placeholder to document such.
  * </p>
- * @author jfraney
+ * @author <a href="http://github.com/jjfraney">John J. Franey</a>
  */
 public class ListAllInfo extends AbstractCommand<Command.Response> {
 

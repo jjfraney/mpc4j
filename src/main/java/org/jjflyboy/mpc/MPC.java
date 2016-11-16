@@ -14,7 +14,7 @@ import java.util.function.Function;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
- * @author jfraney
+ * @author <a href="http://github.com/jjfraney">John J. Franey</a>
  */
 public class MPC {
     private String host = "localhost";

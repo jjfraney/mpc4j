@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 /**
  * The tags implemented by MPD.  They appear in
  * command parameters and response labels.
- * @author jfraney
+ * @author <a href="http://github.com/jjfraney">John J. Franey</a>
  */
 public enum Tag implements Parameter, ResponseContentParser.LineMetadata {
     ARTIST,

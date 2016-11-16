@@ -4,7 +4,7 @@ package musicpd.protocol;
  * disableoutput command from
  * <a href='https://www.musicpd.org/doc/protocol/output_commands.html'>
  *     MPD Document: Audio output devices.</a>
- * @author jfraney
+ * @author <a href="http://github.com/jjfraney">John J. Franey</a>
  */
 public class DisableOutput extends Simple {
     /**

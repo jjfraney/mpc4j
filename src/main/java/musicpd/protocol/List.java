@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
  * <p>
  *     TODO: the response to this command is not wrapped yet.
  * </p>
- * @author jfraney
+ * @author <a href="http://github.com/jjfraney">John J. Franey</a>
  */
 public class List extends AbstractCommand<List.Response> {
 

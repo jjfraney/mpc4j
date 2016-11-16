@@ -1,7 +1,7 @@
 package org.jjflyboy.mpc;
 
 /**
- * @author jfraney
+ * @author <a href="http://github.com/jjfraney">John J. Franey</a>
  */
 public abstract class QueueQuery extends AbstractCommand<QueueQueryResponse> {
     public QueueQuery(final Parameter... parameters) {

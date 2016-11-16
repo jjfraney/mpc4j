@@ -8,7 +8,7 @@ import org.jjflyboy.mpc.SimpleResponse;
  * Common base class defining a simple response.
  * Many commands return only OK or ACK and
  * would use this base class.
- * @author jfraney
+ * @author <a href="http://github.com/jjfraney">John J. Franey</a>
  */
 public abstract class Simple extends AbstractCommand<SimpleResponse> {
 

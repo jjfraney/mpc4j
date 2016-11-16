@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
  *     We use 'command_list_ok_begin' because it puts 'list_OK'
  *     separator in response.
  * </p>
- * @author jfraney
+ * @author <a href="http://github.com/jjfraney">John J. Franey</a>
  * @see ResponseContentParser
  */
 public class CommandList implements Command<CommandList.Response> {

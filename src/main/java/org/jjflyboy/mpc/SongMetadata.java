@@ -7,7 +7,7 @@ import java.util.*;
 
 /**
  * the metatdata in the response of a database or playlist query.
- * @author jfraney
+ * @author <a href="http://github.com/jjfraney">John J. Franey</a>
  */
 public abstract class SongMetadata extends ResponseContent {
     /**

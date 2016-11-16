@@ -5,7 +5,7 @@ package musicpd.protocol;
  * <a href='https://www.musicpd.org/doc/protocol/queue.html'>
  *     MPD Document: The current playlist.
  * </a>
- * @author jfraney
+ * @author <a href="http://github.com/jjfraney">John J. Franey</a>
  */
 public class AddTagId extends Simple {
     /**

@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 /**
  * Represents the 'group' parameter for the 'count' and 'list'-ish commands.
- * @author jfraney
+ * @author <a href="http://github.com/jjfraney">John J. Franey</a>
  */
 public class GroupParameter implements Parameter {
     private final String parameter;

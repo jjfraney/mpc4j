@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
  * <p>
  *     The response of this command is list of strings (existing tagtypes).
  * </p>
- * @author jfraney
+ * @author <a href="http://github.com/jjfraney">John J. Franey</a>
  */
 
 public class TagTypes extends AbstractCommand<TagTypes.Response> {

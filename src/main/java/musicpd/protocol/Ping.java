@@ -1,7 +1,7 @@
 package musicpd.protocol;
 
 /**
- * @author jfraney
+ * @author <a href="http://github.com/jjfraney">John J. Franey</a>
  */
 public class Ping extends Simple {
 }

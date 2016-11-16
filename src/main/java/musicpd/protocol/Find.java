@@ -22,7 +22,7 @@ import java.util.function.Consumer;
  *     So, there is not support for 'window' option here.
  *
  * </p>
- * @author jfraney
+ * @author <a href="http://github.com/jjfraney">John J. Franey</a>
  */
 public class Find extends DatabaseQuery {
 

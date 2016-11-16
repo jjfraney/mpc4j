@@ -14,7 +14,7 @@ import java.util.Optional;
  *     arguments. An implementation of 'Command.Response' can define instance
  *     fields for response data.
  * </p>
- * @author jfraney
+ * @author <a href="http://github.com/jjfraney">John J. Franey</a>
  */
 public interface Command<R extends Command.Response> extends Serializable {
     /**

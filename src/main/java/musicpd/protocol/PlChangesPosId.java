@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
  *     This command's response contains the new position,
  *     and id for each changed song.
  * </p>
- * @author jfraney
+ * @author <a href="http://github.com/jjfraney">John J. Franey</a>
  */
 public class PlChangesPosId extends AbstractCommand<PlChangesPosId.Response> {
 

@@ -12,7 +12,7 @@ import java.util.Optional;
  * <p>
  *     This command returns the current replay gain mode in its response.
  * </p>
- * @author jfraney
+ * @author <a href="http://github.com/jjfraney">John J. Franey</a>
  */
 public class ReplayGainStatus extends AbstractCommand<ReplayGainStatus.Response> {
 

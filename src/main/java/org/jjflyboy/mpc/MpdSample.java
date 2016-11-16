@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import java.util.stream.Stream;
 
 /**
- * @author jfraney
+ * @author <a href="http://github.com/jjfraney">John J. Franey</a>
  */
 public class MpdSample {
     private static MPC mpc = new MPC();

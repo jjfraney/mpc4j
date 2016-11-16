@@ -8,7 +8,7 @@ package musicpd.protocol;
  * <p>
  *     This command has a simple response, 'OK' or 'ACK...'
  * </p>
- * @author jfraney
+ * @author <a href="http://github.com/jjfraney">John J. Franey</a>
  */
 public class ClearError extends Simple {
 }

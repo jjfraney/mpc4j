@@ -6,7 +6,7 @@ import java.math.BigDecimal;
  * seek command from
  * <a href='https://www.musicpd.org/doc/protocol/playback_commands.html'>
  *     MPD Document: Control playback.</a>
- * @author jfraney
+ * @author <a href="http://github.com/jjfraney">John J. Franey</a>
  */
 public class Seek extends Simple {
     private Seek(final Integer songpos, final Number time) {

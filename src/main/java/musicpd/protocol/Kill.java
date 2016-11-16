@@ -7,7 +7,7 @@ package musicpd.protocol;
  * <p>
  *     The kill command's response has no content.
  * </p>
- * @author jfraney
+ * @author <a href="http://github.com/jjfraney">John J. Franey</a>
  */
 public class Kill extends Simple {
 }

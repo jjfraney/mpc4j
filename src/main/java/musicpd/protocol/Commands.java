@@ -10,7 +10,7 @@ import org.jjflyboy.mpc.HealthResponse;
  * <p>
  *     The response of this command is list of strings (allowed commands).
  * </p>
- * @author jfraney
+ * @author <a href="http://github.com/jjfraney">John J. Franey</a>
  */
 
 public class Commands extends AbstractCommand<Commands.Response> {

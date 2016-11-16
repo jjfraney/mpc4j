@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 /**
  * Class to access the last line of every mpd response..
- * @author jfraney
+ * @author <a href="http://github.com/jjfraney">John J. Franey</a>
  */
 public abstract class HealthResponse extends ResponseContent implements Command.Response {
 

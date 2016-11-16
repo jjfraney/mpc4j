@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
  * urlhandlers command
  * from <a href='https://www.musicpd.org/doc/protocol/reflection_commands.html'>
  *     MPD document: Reflection</a>
- * @author jfraney
+ * @author <a href="http://github.com/jjfraney">John J. Franey</a>
  */
 
 public class UrlHandlers extends AbstractCommand<UrlHandlers.Response> {

@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
  * <p>
  *     On this command, mpd returns a list of playlist names with their last modified date.
  * </p>
- s* @author jfraney
+ s* @author <a href="http://github.com/jjfraney">John J. Franey</a>
  */
 public class ListPlaylists extends AbstractCommand<ListPlaylists.Response> {
 

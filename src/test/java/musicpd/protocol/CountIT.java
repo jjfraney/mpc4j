@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * <p>
  *     Requires an mpd server, running on localhsot:6600.  See mpc4j/docker/mpd.
  * </p>
- * @author jfraney
+ * @author <a href="http://github.com/jjfraney">John J. Franey</a>
  */
 public class CountIT {
 

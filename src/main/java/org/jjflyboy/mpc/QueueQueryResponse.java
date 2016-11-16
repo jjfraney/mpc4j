@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
  *     distinct from the 'database' category
  *     (see {@link DatabaseQueryResponse}).
  * </p>
- * @author jfraney
+ * @author <a href="http://github.com/jjfraney">John J. Franey</a>
  */
 public class QueueQueryResponse extends HealthResponse {
     protected QueueQueryResponse(final java.util.List<String> responseLines, final String connectResponse) {

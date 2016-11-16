@@ -16,7 +16,7 @@ import java.util.List;
  * <p>
  *     On this command, mpd returns a list of files and directories.
  * </p>
- * @author jfraney
+ * @author <a href="http://github.com/jjfraney">John J. Franey</a>
  */
 public class ListFiles extends AbstractCommand<ListFiles.Response> {
     /**

@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 /**
  * base abstract class for most, if not all, commmands.
- * @author jfraney
+ * @author <a href="http://github.com/jjfraney">John J. Franey</a>
  */
 public abstract class AbstractCommand<R extends Command.Response> implements Command<R> {
 

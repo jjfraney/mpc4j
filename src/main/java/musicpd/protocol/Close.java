@@ -7,7 +7,7 @@ package musicpd.protocol;
  * <p>
  *     The close command's response has no content.
  * </p>
- * @author jfraney
+ * @author <a href="http://github.com/jjfraney">John J. Franey</a>
  */
 public class Close extends Simple {
     public Close() {

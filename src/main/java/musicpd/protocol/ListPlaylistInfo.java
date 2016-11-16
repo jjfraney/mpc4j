@@ -10,7 +10,7 @@ import org.jjflyboy.mpc.DatabaseQueryResponse;
  * <p>
  *     On this command, mpd returns database metadata for each song on the named playlist.
  * </p>
- * @author jfraney
+ * @author <a href="http://github.com/jjfraney">John J. Franey</a>
  */
 public class ListPlaylistInfo extends AbstractCommand<DatabaseQueryResponse> {
     /**

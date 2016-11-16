@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
  *     distinct from the 'queue' category
  *     (see {@link QueueQueryResponse}).
  * </p>
- * @author jfraney
+ * @author <a href="http://github.com/jjfraney">John J. Franey</a>
  */
 public class DatabaseQueryResponse extends HealthResponse {
     public DatabaseQueryResponse(final java.util.List<String> responseLines, final String protcolVersion) {
