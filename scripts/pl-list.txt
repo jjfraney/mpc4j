@@ -1,4 +1,0 @@
-command_list_begin
-find artist "Joe Mpc4J"
-close
-command_list_end
