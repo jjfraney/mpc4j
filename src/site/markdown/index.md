@@ -1,10 +1,9 @@
-A library of Java immutable value objects representing text commands and responses of the
-Media Player Daemon (MPD, https://www.musicpd.org/)
-protocol.
+A Java library of components that represent text commands and responses of the
+Media Player Daemon's protocol.
 
  
 #Background
-MPD [(Music Player Daemon)](http://www.musicpd.org)is a media player on linux.
+MPD [(Music Player Daemon)](http://www.musicpd.org) is a media player on linux.
 It can be controlled remotely and so offers a control protocol.
 The protocol is text based.  A client (e.g., the mpc command line utility)
 would send UTF-8 encoded text terminated by a newline (i.e., a line)
@@ -12,11 +11,10 @@ to the MPD which would respond
 with one or more lines of UTF-8 encoded text.
  
 #Goals
-This library provides classes that represent the commands
+This library provides components that represent the commands
 and responses of the MPD protocol.
-It presents the text-based MPD protocol as Java classes.
-Like in Java's JAXB, where Javabeans are mapped to xml text, this library's classes
-are mapped to the music player daemons's text commands and response.
+The intent is to provide a programming model like in Java's JAXB,
+where Javabeans are mapped to xml text.
 
 This library has no external dependencies.
 Java Standard Edition (java se) 8+ runtime is required for applications that use this library.
@@ -34,12 +32,12 @@ For example:
 * response parsing does not fail in presence of unexpected fields (new fields).
 * unexpected fields (new fields) can be accessed by later applications, and generic access method are provided.
 * new commands can easily be added, and command base classes are available for reuse.
+* the library does not implement behavior for the case of an absent field; the library returns an Optional.
 
 The classes are intentionally immutable so they
-can be used in environments where immutability is an advantage (e.g., reactive environments).
-The classes do not support methods that can change private data.
+can be used in environments where immutability is an advantage.
 They do not conform to the JavaBean convention.
-The lack of setters is a consequence of the immutability goal and is by design.
+The lack of setters is a consequence of the immutability goal.
 
 #Design
 For each MPD command, two classes are provided.  One is a Command;
@@ -60,4 +58,3 @@ This library's Command instance has a factory method for its Response class.
 After the response lines are received, the factory method is called to
 build the Response instance appropriate for the Command.
 The sender can retain the last command sent and assume the next received response matches.
-
